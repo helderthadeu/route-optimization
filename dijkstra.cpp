@@ -6,8 +6,10 @@
 using namespace std;
 using json = nlohmann::json;
 
+// const int num_of_lines = INT_MAX;
 const int num_of_lines = INT_MAX;
-const int INF = INT_MAX;
+
+const int64_t INF = LONG_MAX;
 
 struct route
 {
@@ -15,10 +17,10 @@ struct route
     string name;
     string ref;
     int maxspeed;
-    vector<int> nodes;
+    vector<int64_t> nodes;
     double length;
-    int start_node;
-    int end_node;
+    int64_t start_node;
+    int64_t end_node;
 };
 
 json load_data(const string &file_path)
@@ -38,22 +40,22 @@ json load_data(const string &file_path)
     return data;
 }
 
-double calc_distance(double lat_initial, double long_initial, double lat_final, double long_final)
+double calc_distance(double lat_initial, double int64_t_initial, double lat_final, double int64_t_final)
 {
 
     double d2r = 0.017453292519943295769236;
 
-    double dlong = (long_final - long_initial) * d2r;
+    double dint64_t = (int64_t_final - int64_t_initial) * d2r;
     double dlat = (lat_final - lat_initial) * d2r;
 
     double temp_sin = sin(dlat / 2.0);
     double temp_cos = cos(lat_initial * d2r);
-    double temp_sin2 = sin(dlong / 2.0);
+    double temp_sin2 = sin(dint64_t / 2.0);
 
     double a = (temp_sin * temp_sin) + (temp_cos * temp_cos) * (temp_sin2 * temp_sin2);
     double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
 
-    return 6368.1 * c;
+    return 6368100 * c;
 }
 
 double calc_geometry(json nodes, int size)
@@ -68,7 +70,7 @@ double calc_geometry(json nodes, int size)
     return total_distance;
 }
 
-bool has_element(const vector<int> &vec, int element)
+bool has_element(const vector<int64_t> &vec, int element)
 {
     for (int i = 0; i < vec.size(); i++)
     {
@@ -80,7 +82,7 @@ bool has_element(const vector<int> &vec, int element)
     return false;
 }
 
-vector<route> define_routes(json data, vector<int> &vertices)
+vector<route> define_routes(json data, vector<int64_t> &vertices)
 {
     vector<route> routes;
 
@@ -94,10 +96,11 @@ vector<route> define_routes(json data, vector<int> &vertices)
             auto nodes = data[i]["nodes"];
             for (int j = 0; j < nodes.size(); j++)
             {
-                r.nodes.push_back(nodes[j]);
-                if (!has_element(vertices, nodes[j]))
+                int64_t node_value = nodes[j].get<int64_t>();
+                r.nodes.push_back(node_value);
+                if (!has_element(vertices, node_value))
                 {
-                    vertices.push_back(nodes[j]);
+                    vertices.push_back(node_value);
                 }
             }
         }
@@ -158,7 +161,7 @@ vector<route> define_routes(json data, vector<int> &vertices)
     return routes;
 }
 
-vector<vector<route>> get_graph(vector<route> routes, vector<int> &vertices)
+vector<vector<route>> get_graph(vector<route> routes, vector<int64_t> &vertices)
 {
     cout << "Getting graph..." << endl;
 
@@ -187,6 +190,75 @@ vector<vector<route>> get_graph(vector<route> routes, vector<int> &vertices)
 
     cout << "Graph generated!" << endl;
     return graph;
+}
+
+vector<vector<int>> dijkstra(vector<vector<route>> graph, vector<int64_t> vertices, int64_t start)
+{
+    cout << "Dijkstra algorithm..." << endl;
+    vector<vector<int>> result(2, vector<int>(vertices.size()));
+    vector<bool> visited(vertices.size(), false);
+    for (int i = 0; i < vertices.size(); i++)
+    {
+        result[0][i] = INF;
+        result[1][i] = -1;
+    }
+
+    int start_idx = -1;
+    for (int i = 0; i < vertices.size(); i++)
+    {
+        // cout << "Vertex: " << vertices[i] << " - Start: " << start << " - Equal: " <<  (vertices[i] == start)<< endl;
+        if (vertices[i] == start)
+        {
+            cout << "Start index: " << i << endl;
+            start_idx = i;
+            visited[i] = true;
+            result[0][i] = 0;
+            break;
+        }
+    }
+
+    if (start_idx == -1)
+        return result;
+
+    for (int count = 0; count < vertices.size()-1; count++)
+    {
+        int min = INF;
+        int min_index = -1, pred = -1;
+
+
+        for (int i = 0; i < visited.size(); i++)
+        {
+            // cout <<i << " - Visited: " << visited[i]  << endl;
+            if (visited[i])
+            {
+
+                // continue;
+                // cout << "Visited: " << visited[i] << endl;
+                for (int j = 0; j < vertices.size(); j++)
+                {
+
+                    // cout << j << " - Visited: " << i << " - Graph: " << graph[i][j].id << " - Length: " << graph[i][j].length << endl;
+                    if (graph[i][j].id != 0 && result[0][i] + graph[i][j].length < min && !visited[j])
+                    {
+
+                        min_index = j;
+                        pred = i;
+                        min = result[0][i] + graph[i][j].length;
+                        // cout << "Graph lenght: " << graph[i][j].length << " - Min: " << min << " - Min index: " << min_index << endl;
+                    }
+                }
+            }
+        }
+        if (min_index == -1)
+        {
+            break; // Encerra se não houver nó válido para visitar
+        }
+        result[0][min_index] = min;
+        result[1][min_index] = vertices[pred];
+        // cout << "Min index: " << min_index << " - Min: " << min << endl;
+        visited[min_index] = true;
+    }
+    return result;
 }
 
 void print_route(vector<route> routes)
@@ -225,13 +297,32 @@ int main()
     auto data = raw["elements"];
 
     // cout << data[10];
-    vector<int> vertices;
+    vector<int64_t> vertices;
     vector<route> routes = define_routes(data, vertices);
 
     vector<vector<route>> graph;
     cout << "Vertices size: " << vertices.size() << endl;
     graph = get_graph(routes, vertices);
 
+    vector<vector<int>> graph_result = dijkstra(graph, vertices, 30064124);
+    cout << endl
+         << endl;
+    for (int i = 0; i < graph_result.size(); i++)
+    {
+        for (int j = 0; j < graph_result[i].size(); j++)
+        {
+            if (graph_result[i][j] == INF)
+            {
+                cout << "INF ";
+            }
+            else
+            {
+                cout << graph_result[i][j] << " ";
+            }
+        }
+        cout << endl
+             << endl;
+    }
     save_graph(graph, vertices.size());
     // print_route(routes);
 
