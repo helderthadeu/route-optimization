@@ -6,21 +6,23 @@
 using namespace std;
 using json = nlohmann::json;
 
-// const int num_of_lines = INT_MAX;
 const int num_of_lines = INT_MAX;
+// const int num_of_lines = 20;
 
 const int64_t INF = LONG_MAX;
 
 struct route
 {
     int id;
+    int64_t id_street;
     string name;
     string ref;
     int maxspeed;
-    vector<int64_t> nodes;
     double length;
     int64_t start_node;
     int64_t end_node;
+    double cordinates_start[2];
+    double cordinates_end[2];
 };
 
 json load_data(const string &file_path)
@@ -40,17 +42,18 @@ json load_data(const string &file_path)
     return data;
 }
 
-double calc_distance(double lat_initial, double int64_t_initial, double lat_final, double int64_t_final)
+double calc_distance(double lat_initial, double long_initial, double lat_final, double long_final)
 {
 
     double d2r = 0.017453292519943295769236;
 
-    double dint64_t = (int64_t_final - int64_t_initial) * d2r;
+    double dlong_t = (long_final - long_initial) * d2r;
+
     double dlat = (lat_final - lat_initial) * d2r;
 
     double temp_sin = sin(dlat / 2.0);
     double temp_cos = cos(lat_initial * d2r);
-    double temp_sin2 = sin(dint64_t / 2.0);
+    double temp_sin2 = sin(dlong_t / 2.0);
 
     double a = (temp_sin * temp_sin) + (temp_cos * temp_cos) * (temp_sin2 * temp_sin2);
     double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
@@ -58,15 +61,13 @@ double calc_distance(double lat_initial, double int64_t_initial, double lat_fina
     return 6368100 * c;
 }
 
-double calc_geometry(json nodes, int size)
+double calc_geometry(double cordinates_start[], double cordinates_end[])
 {
     double total_distance = 0.0;
-    for (int i = 0; i < size - 1; i++)
-    {
 
-        total_distance += calc_distance(nodes[i]["lat"], nodes[i]["lon"], nodes[i + 1]["lat"], nodes[i + 1]["lon"]);
-        // cout << "Distance: " << total_distance << endl;
-    }
+    total_distance += calc_distance(cordinates_start[0], cordinates_start[1], cordinates_end[0], cordinates_end[1]);
+    // cout << "Distance: " << total_distance << endl;
+
     return total_distance;
 }
 
@@ -84,12 +85,17 @@ bool has_element(const vector<int64_t> &vec, int element)
 
 vector<route> define_routes(json data, vector<int64_t> &vertices)
 {
+    cout << "Defining routes..." << endl;
     vector<route> routes;
+    int id = 1;
 
     for (int i = 0; i < data.size() && i < num_of_lines; i++)
     {
         route r;
-        r.id = data[i].value("id", 0);
+        r.id = id++;
+        r.id_street = data[i].value("id", 0);
+        vector<int64_t> nodes_temp;
+        vector<vector<double>> cordinates(2);
 
         if (data[i].contains("nodes"))
         {
@@ -97,16 +103,12 @@ vector<route> define_routes(json data, vector<int64_t> &vertices)
             for (int j = 0; j < nodes.size(); j++)
             {
                 int64_t node_value = nodes[j].get<int64_t>();
-                r.nodes.push_back(node_value);
+                nodes_temp.push_back(node_value);
                 if (!has_element(vertices, node_value))
                 {
                     vertices.push_back(node_value);
                 }
             }
-        }
-        else
-        {
-            r.nodes.clear();
         }
         if (data[i].contains("tags"))
         {
@@ -149,13 +151,34 @@ vector<route> define_routes(json data, vector<int64_t> &vertices)
         if (data[i].contains("geometry"))
         {
             json geometry = data[i]["geometry"];
-            r.length = calc_geometry(geometry, geometry.size());
+
+            for (int j = 0; j < geometry.size(); j++)
+            {
+                // cout << "Geometry: " << geometry[j]["lat"].get<double>() << endl;
+
+                cordinates[0].push_back(geometry[j]["lat"].get<double>());
+                cordinates[1].push_back(geometry[j]["lon"].get<double>());
+            }
         }
         else
         {
             r.length = 0;
         }
-        routes.push_back(r);
+
+        for (int j = 0; j < nodes_temp.size() - 1; j++)
+        {
+
+            // cout << j<< " - Node: " << nodes_temp[j] << " - Node: " << nodes_temp[j + 1] << endl;
+            r.start_node = nodes_temp[j];
+            r.end_node = nodes_temp[j + 1];
+            r.cordinates_start[0] = cordinates[0][j];
+            r.cordinates_start[1] = cordinates[1][j];
+            r.cordinates_end[0] = cordinates[0][j + 1];
+            r.cordinates_end[1] = cordinates[1][j + 1];
+            r.length = calc_geometry(r.cordinates_start, r.cordinates_end);
+
+            routes.push_back(r);
+        }
     }
 
     return routes;
@@ -166,14 +189,13 @@ vector<vector<route>> get_graph(vector<route> routes, vector<int64_t> &vertices)
     cout << "Getting graph..." << endl;
 
     int size = vertices.size();
-    vector<vector<route>> graph(size, vector<route>(size)); // Grafo V x V
+    vector<vector<route>> graph(size, vector<route>(size));
 
     for (const auto &r : routes)
     {
-        int start = r.nodes.front();
-        int end = r.nodes.back();
+        int64_t start = r.start_node;
+        int64_t end = r.end_node;
 
-        // Encontra os índices de start e end nos vértices
         // cout << "Route ID: " << r.id << " - Name: " << r.name << " - Start: " << start << " - End: " << end << endl;
         auto it_start = find(vertices.begin(), vertices.end(), start);
         auto it_end = find(vertices.begin(), vertices.end(), end);
@@ -192,10 +214,10 @@ vector<vector<route>> get_graph(vector<route> routes, vector<int64_t> &vertices)
     return graph;
 }
 
-vector<vector<int>> dijkstra(vector<vector<route>> graph, vector<int64_t> vertices, int64_t start)
+vector<vector<int64_t>> dijkstra(vector<vector<route>> graph, vector<int64_t> vertices, int64_t start)
 {
     cout << "Dijkstra algorithm..." << endl;
-    vector<vector<int>> result(2, vector<int>(vertices.size()));
+    vector<vector<int64_t>> result(2, vector<int64_t>(vertices.size()));
     vector<bool> visited(vertices.size(), false);
     for (int i = 0; i < vertices.size(); i++)
     {
@@ -220,11 +242,10 @@ vector<vector<int>> dijkstra(vector<vector<route>> graph, vector<int64_t> vertic
     if (start_idx == -1)
         return result;
 
-    for (int count = 0; count < vertices.size()-1; count++)
+    for (int count = 0; count < vertices.size() - 1; count++)
     {
-        int min = INF;
-        int min_index = -1, pred = -1;
-
+        int64_t min = INF;
+        int64_t min_index = -1, pred = -1;
 
         for (int i = 0; i < visited.size(); i++)
         {
@@ -232,7 +253,6 @@ vector<vector<int>> dijkstra(vector<vector<route>> graph, vector<int64_t> vertic
             if (visited[i])
             {
 
-                // continue;
                 // cout << "Visited: " << visited[i] << endl;
                 for (int j = 0; j < vertices.size(); j++)
                 {
@@ -257,6 +277,17 @@ vector<vector<int>> dijkstra(vector<vector<route>> graph, vector<int64_t> vertic
         result[1][min_index] = vertices[pred];
         // cout << "Min index: " << min_index << " - Min: " << min << endl;
         visited[min_index] = true;
+        int counter = 0;
+        for(int i = 0; i < visited.size(); i++)
+        {
+            
+            if (visited[i])
+            {
+                counter++;
+            }
+            
+        }
+        cout << "Visited: " << counter << " - Total: " << visited.size() << endl;
     }
     return result;
 }
@@ -269,19 +300,34 @@ void print_route(vector<route> routes)
     }
 }
 
-void save_graph(vector<vector<route>> graph, int size)
+void save_graph(vector<vector<route>> graph, int size, vector<int64_t> vertices)
 {
-    cout << "Saving graph..." << endl;
+    cout << "Saving graph and vertices..." << endl;
     ofstream file("files\\graph.txt");
+    if (!file.is_open())
+    {
+        cerr << "Error to open file!";
+        cout << "Error to open file!";
+        return;
+    }
+
     for (int i = 0; i < size; i++)
     {
+        file << vertices[i];
+        if (i < size - 1)
+            file << " ";
+    }
+    file << "\n";
+    for (int i = 0; i < size; i++)
+    {
+
         for (int j = 0; j < size; j++)
         {
             file << graph[i][j].id;
             if (j < size - 1)
-                file << " "; // separa com espaço
+                file << " ";
         }
-        file << "\n"; // nova linha após cada linha da matriz
+        file << "\n";
     }
     cout << "Graph saved!" << endl;
 }
@@ -303,8 +349,9 @@ int main()
     vector<vector<route>> graph;
     cout << "Vertices size: " << vertices.size() << endl;
     graph = get_graph(routes, vertices);
+    save_graph(graph, vertices.size(), vertices);
 
-    vector<vector<int>> graph_result = dijkstra(graph, vertices, 30064124);
+    vector<vector<int64_t>> graph_result = dijkstra(graph, vertices, 62994618);
     cout << endl
          << endl;
     for (int i = 0; i < graph_result.size(); i++)
@@ -313,7 +360,7 @@ int main()
         {
             if (graph_result[i][j] == INF)
             {
-                cout << "INF ";
+                cout << "-1 ";
             }
             else
             {
@@ -323,7 +370,7 @@ int main()
         cout << endl
              << endl;
     }
-    save_graph(graph, vertices.size());
+
     // print_route(routes);
 
     return 0;
