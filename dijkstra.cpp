@@ -268,6 +268,7 @@ vector<vector<int64_t>> dijkstra(vector<vector<route>> graph, vector<int64_t> ve
                     }
                 }
             }
+
         }
         if (min_index == -1)
         {
@@ -277,18 +278,18 @@ vector<vector<int64_t>> dijkstra(vector<vector<route>> graph, vector<int64_t> ve
         result[1][min_index] = vertices[pred];
         // cout << "Min index: " << min_index << " - Min: " << min << endl;
         visited[min_index] = true;
-        int counter = 0;
-        for(int i = 0; i < visited.size(); i++)
-        {
-            
-            if (visited[i])
-            {
-                counter++;
-            }
-            
-        }
-        cout << "Visited: " << counter << " - Total: " << visited.size() << endl;
     }
+    int counter = 0;
+    for(int i = 0; i < visited.size(); i++)
+    {
+        
+        if (visited[i])
+        {
+            counter++;
+        }
+        
+    }
+    cout << "Visited: " << counter << " - Total: " << visited.size() << endl;
     return result;
 }
 
