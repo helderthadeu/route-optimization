@@ -334,6 +334,29 @@ void save_graph(vector<set<route, compare_routes>> graph, int size, vector<int64
     cout << "Graph saved!" << endl;
 }
 
+int64_t search_nearest(vector<set<route, compare_routes>> graph, double lat, double lon)
+{
+
+    cout << "Searching nearest..." << endl;
+
+    int64_t min_index = -1;
+    double min_distance = 0x7FFFFFFFFFFFFFFF; // Initialize to a very large value
+    for (const auto &origin : graph)
+    {
+        for (const auto &r : origin)
+        {
+            double distance = calc_distance(r.cordinates_start[0], r.cordinates_start[1], lat, lon);
+            if (distance < min_distance)
+            {
+                min_distance = distance;
+                min_index = r.id_street; // Store the ID of the route
+            }
+        }
+    }
+
+    return min_index;
+}
+
 int main()
 {
     // json raw = load_data("files\\data.json");
@@ -372,6 +395,8 @@ int main()
         cout << endl
              << endl;
     }
+
+    cout << "Start node: " << search_nearest(graph, -19.931642127520806, -43.99641440308367) << endl;
 
     // print_route(routes);
 
