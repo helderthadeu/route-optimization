@@ -1,9 +1,10 @@
 import chardet
 import numpy
+import json
 
-num_of_lines = 10
+num_of_lines = 50
 
-def load_data(file_path):
+def load_data_csv(file_path):
     raw = []
     data = []
     print("Loading data...")
@@ -26,6 +27,23 @@ def load_data(file_path):
         data.append(values)
     
     return data
+
+def load_data_json(file_path):
+    json_file = []
+    
+    print("Loading data...")
+    try:
+        with open(file_path, 'rb') as file:
+            result = chardet.detect(file.read())
+
+        with open(file_path, 'r', encoding=result['encoding']) as file:
+            json_file = json.load(file)
+
+    except FileNotFoundError:
+        print(f"Error: The file {file_path} was not found.")
+        return []
+    
+    return json_file
 
 def floyd_warshall(graph, vertices):
     subgraphs = graph
@@ -84,13 +102,13 @@ def get_graph(vertices, data):
 
 if __name__=="__main__":
     # Load the data from the file
-    data = load_data("data.csv")
+    data = load_data_csv("files\\PadreEustaquio.csv")
     vertices =  define_vertice(data)
     # Print the loaded data
     
     # for vertice in vertices:
     graph = get_graph(vertices, data)
-    print(vertices)
+    # print(vertices)
     with open("output.txt", "w") as file:
         # for index, line in enumerate(graph):
         for row in graph:
@@ -104,17 +122,17 @@ if __name__=="__main__":
         minimum = floyd_warshall_result[0]
         predecessors = floyd_warshall_result[1]
         for index, row in enumerate(minimum):
-            print(f"{vertices[index]} | {row}")
+            # print(f"{vertices[index]} | {row}")
             for element in row:
                 file.write(f"{element} | ")
             file.write(f"\n")
             
         
         file.write(f"\n\n\n\n")
-        print("\n\n")
-        print(vertices)
+        # print("\n\n")
+        # print(vertices)
         for index, row in enumerate(predecessors):
-            print(f"{vertices[index]} | {row}")
+            # print(f"{vertices[index]} | {row}")
             for element in row:
                 file.write(f"{element} | ")
             file.write(f"\n")

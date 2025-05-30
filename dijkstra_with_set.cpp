@@ -81,8 +81,9 @@ double calc_geometry(double cordinates_start[], double cordinates_end[])
     return total_distance;
 }
 
-bool has_element(const vector<int64_t> &vec, int element)
+bool has_element(const vector<int64_t> &vec, int64_t element)
 {
+
     for (int i = 0; i < vec.size(); i++)
     {
         if (vec[i] == element)
@@ -357,9 +358,51 @@ int64_t search_nearest(vector<set<route, compare_routes>> graph, double lat, dou
     return min_index;
 }
 
+// vector<int64_t> invert_vector(vector<int64_t> vec){
+//     vector<int64_t> inverted_vector;
+//     for(auto &v:vec){
+//         inverted_vector.push_back(vec.pop_back());
+//     }
+// }
+
+vector<int64_t> get_short_path(vector<int64_t> vertices, vector<vector<int64_t>> dijkstra_result, int64_t destiny)
+{
+
+    int v_pos = 0;
+    vector<int64_t> shortest_path;
+    int64_t shortest_lenght = 0;
+    for (size_t i = 0; i < vertices.size(); i++)
+    {
+        if (vertices[i] == destiny)
+        {
+            v_pos = i;
+        }
+    }
+
+    while (dijkstra_result[0][v_pos] > 0)
+    {
+
+        shortest_lenght += dijkstra_result[0][v_pos];
+        shortest_path.push_back(dijkstra_result[1][v_pos]);
+
+        for (size_t i = 0; i < vertices.size(); i++)
+        {
+            if (vertices[i] == dijkstra_result[1][v_pos])
+            {
+                v_pos = i;
+            }
+        }
+    }
+
+    // shortest_path = invert_vector(shortest_path);
+
+    cout << "Shortest lenght: " << shortest_lenght << endl;
+
+    return shortest_path;
+}
+
 int main()
 {
-    // json raw = load_data("files\\data.json");
     json raw = load_data("files\\PadreEustaquio.json");
     if (raw.empty())
     {
@@ -367,12 +410,12 @@ int main()
     }
     auto data = raw["elements"];
 
-    // cout << data[10];
     vector<int64_t> vertices;
     vector<route> routes = define_routes(data, vertices);
 
     vector<set<route, compare_routes>> graph;
-    cout << "Vertices size: " << vertices.size() << endl;
+    cout << "Vertices size: " << vertices.size() << " - Routes size: " << routes.size() << endl;
+
     graph = get_graph(routes, vertices);
     save_graph(graph, vertices.size(), vertices);
 
@@ -385,20 +428,26 @@ int main()
         {
             if (graph_result[i][j] == INF)
             {
-                cout << "-1 ";
+                // cout << "-1 ";
             }
             else
             {
-                cout << graph_result[i][j] << " ";
+                // cout << graph_result[i][j] << " ";
             }
         }
-        cout << endl
-             << endl;
+        // cout << endl
+            //  << endl;
     }
 
-    cout << "Start node: " << search_nearest(graph, -19.931642127520806, -43.99641440308367) << endl;
 
-    // print_route(routes);
+    vector<int64_t> short_path = get_short_path(vertices,graph_result, 61851591);
+
+    for(auto &s:short_path){
+        cout << s << endl;
+    }
+
+    // cout << "Start node: " << search_nearest(graph, -19.931642127520806, -43.99641440308367) << endl;
+
 
     return 0;
 }
