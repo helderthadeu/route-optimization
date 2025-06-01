@@ -49,22 +49,26 @@ for element in subway_lines:
         lats.append(element["lat"])
         lons.append(element["long"])
 
+center_lat = sum(lats) / len(lats)
+center_lon = sum(lons) / len(lons)
+
 
 # Criar o mapa (Scattermap corrigido)
 fig = go.Figure(go.Scattermap(
-    mode="markers",  # Corrigido: "markers" (não "markers")
+    mode="markers+lines",  # Corrigido: "markers" (não "markers")
     lon=lons,
     lat=lats,
     marker={'size': 5},
     showlegend=False  # Opcional: remove a legenda
 ))
 
+
 # Configurar layout do mapa (tudo em uma única chamada)
 fig.update_layout(
     mapbox=dict(
         zoom=14,
         style="open-street-map",
-        center=dict(lon=-43.95, lat=-19.92),
+        center=dict(lon=center_lon, lat=center_lat),
         uirevision="constant"  # Mantém o estado do zoom/pan durante atualizações,
         
     )
@@ -97,4 +101,13 @@ def update_output(n_clicks, input_text):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8051, threaded=True)
+    app.run(debug=True, port=8051)
+    # for index, l in enumerate(lats[1:]):
+    #     print("another added")
+    #     fig.add_trace(
+    #         mode = "markers+lines",
+    #         lon = l,
+    #         lat = lons[index],
+    #         marker = {'size': 5}
+    #     )
+    
