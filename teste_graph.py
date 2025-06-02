@@ -159,7 +159,8 @@ def get_lib_graph(routes:list[list[vertice, vertice]]):
 
         # Reconstruir o caminho entre 13 e 79
         path = nx.reconstruct_path(13, 79, predecessors)
-        print(f"Caminho entre 13 e 79: {path}")
+        for i in path:
+            print(f"{i}")
 
         # for i in distance[1][0]:
         # print(f"Menor distância: {distance[1][0]}")

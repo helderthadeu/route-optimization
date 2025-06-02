@@ -135,15 +135,16 @@ def floyd_warshall(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
     predecessor = [[None] * n for _ in range(n)]
     for i in range(n):
         subgraphs[i][i] = 0
-
+        predecessor[i][i] = vertices[i] 
+        
     for index_i, i in enumerate(vertices):
         for index_j, j in enumerate(vertices):
 
             if i in graph.keys() and j in graph[i]:
                 dis_ij = calc_distance(vertices[index_i].lat,vertices[index_i].lon,vertices[index_j].lat, vertices[index_j].lon)
                 dis_ji = calc_distance(vertices[index_j].lat,vertices[index_j].lon,vertices[index_i].lat, vertices[index_i].lon)
-                predecessor[index_i][index_j] = j 
-                predecessor[index_j][index_i] = i 
+                predecessor[index_i][index_j] = i 
+                predecessor[index_j][index_i] = j 
                 subgraphs[index_i][index_j] = dis_ij 
                 subgraphs[index_j][index_i] = dis_ji
 
@@ -151,16 +152,16 @@ def floyd_warshall(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
     for index_k in range(size):
         for index_i in range(size):
             for index_j in range(size):                
-                # print(f"Tamanho: {len(subgraphs[index_i])} | IndexI: {index_i} | IndexJ: {index_j}")
                 if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
                     subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
-                    # print(subgraphs[index_i][index_k] + subgraphs[index_k][index_j])
-                    predecessor[index_i][index_j] = vertices[index_k]
-            # print(subgraphs)
+                    subgraphs[index_j][index_i] = subgraphs[index_i][index_j]  # Mantém a simetria da distância
+                    
+                    predecessor[index_i][index_j] = predecessor[index_k][index_j]  # Atualiza predecessor
+                    predecessor[index_j][index_i] = predecessor[index_k][index_i]
+                # print(subgraphs)
     return [subgraphs, predecessor]
-  
-if __name__=="__main__":
-    
+
+def generate_floyd_washal():
     file_path = path.join("subway_files", "Lines", "*")
     
     id_counter = 1
@@ -173,57 +174,91 @@ if __name__=="__main__":
             routes.append(route)
         vertices.extend(v for v in vertices_local if v not in vertices)
         id_counter = max(v.id for v in vertices) + 1
-    # for route in routes:
-    #     print(f"1- {route[0].id} 2- {route[1].id}")
-    # for v in vertices:
-    #     v.print()
+
     graph = get_graph(routes)
     
-    # for key, neighbors in graph.items():
-    #     print(f"{key.id} -> ", end='')  # imprime o vértice
-    # for neighbor in neighbors:
-    #     print(neighbor.id, end=' ')  # imprime os vizinhos na mesma linha
-    # print()  # quebra de linha depois de cada vértice
-    
     floyd_warshall_result, predecessors = floyd_warshall(graph, vertices) 
-    # for i in floyd_warshall_result[0]:
-    #     print(i)
-    # print(floyd_warshall_result)
-    # for i in range(5):
-    #         for j in  range(5):
-    # print(f"Shortest distance: {floyd_warshall_result[1][4]}")
-    with open("files\\ofc.txt", "w") as file:
+
+    with open("files\\floyd_washal_lenght.txt", "w") as file:
         for i in floyd_warshall_result:
             for j in i:
                 file.write(f"{j} ")
-        file.write("\n")
+            file.write("\n")
+    with open("files\\predecessors.txt", "w") as file:
+        for i in predecessors:
+            for j in i:
+                if j is None:
+                    file.write(f"{j}@")
+                else:
+                    file.write(f"{j.id};{j.lat};{j.lon}@")
+            file.write("\n")
+    with open("files\\vertices.txt", "w") as file:
+        for i in vertices:
+            file.write(f"{i.id};{i.lat};{i.lon}@")
+        
+def get_short_path(vertices: list[vertice], predecessors: list[list[vertice]], origin: vertice, destiny: vertice):
+    path = []
+    try:
+        i = next(idx for idx, v in enumerate(vertices) if v.id == origin.id)
+        j = next(idx for idx, v in enumerate(vertices) if v.id == destiny.id)
+    except StopIteration:
+        print("Erro: origem ou destino não está na lista de vértices.")
+        return []
+
+    if predecessors[i][j] is None and origin.id != destiny.id:
+        print("Nenhum caminho entre os vértices.")
+        return []
+
+    current = destiny
+    while current.id != origin.id:
+        
+        path.insert(0, current)
+        current_idx = next(idx for idx, v in enumerate(vertices) if v.id == current.id)
+        pred = predecessors[i][current_idx]
+        if pred is None:
+            print("Caminho incompleto — predecessor ausente.")
+            return []
+        current = pred
+        if len(path) > len(vertices):
+            print("Possível ciclo no caminho.")
+            return []
+    path.insert(0, origin)
+    return path
+
+
+
+
+if __name__=="__main__":
+    if path.isfile("files\\predecessors.txt") and path.isfile("files\\floyd_washal_lenght.txt"):
+        predecessors = []
+        vertices = []
+        with open("files\\predecessors.txt", "r") as file:
+            for index, line in enumerate(file):
+                values = line.split("@")
+                predecessors.append([])
+                for v in values:
+                    if v == "None":
+                        predecessors[index].append(None)
+                    elif v.split(";")[0].isnumeric():
+                        
+                        temp = v.split(";")
+                        # print(temp[0])
+                        values = vertice(temp[0], temp[1], temp[2])
+                        predecessors[index].append(values)
+        with open("files\\vertices.txt", "r") as file:
+            for index, line in enumerate(file):
+                values = line.strip().split("@")
+                for v in values:    
+                    if v.split(";")[0].isnumeric():
+                        temp = v.split(";")
+                        # print(temp[0])
+                        values = vertice(temp[0], temp[1], temp[2])
+                        vertices.append(values)
     
-    # with open("output.txt", "w") as file:
-    #     # for index, line in enumerate(graph):
-    #     for row in graph:
-    #         for element in row:
-    #             # print(f"{vertices[index]} | {element}")
-    #             file.write(f"{element}\t|")
-    #         file.write(f"\n")
         
-    #     file.write(f"\n\n\n\n")
-    #     floyd_warshall_result = floyd_warshall(graph, vertices)
-    #     minimum = floyd_warshall_result[0]
-    #     predecessors = floyd_warshall_result[1]
-    #     for index, row in enumerate(minimum):
-    #         # print(f"{vertices[index]} | {row}")
-    #         for element in row:
-    #             file.write(f"{element} | ")
-    #         file.write(f"\n")
-            
-        
-    #     file.write(f"\n\n\n\n")
-    #     # print("\n\n")
-    #     # print(vertices)
-    #     for index, row in enumerate(predecessors):
-    #         # print(f"{vertices[index]} | {row}")
-    #         for element in row:
-    #             file.write(f"{element} | ")
-    #         file.write(f"\n")
-            
+        # get_short_path(vertices, predecessors, vertices[0],vertices[1])
+        for i in get_short_path(vertices, predecessors, vertices[12],vertices[78]):
+            print(i.id)
+    else:
+        generate_floyd_washal()    
     
