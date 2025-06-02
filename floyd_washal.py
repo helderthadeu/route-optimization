@@ -1,5 +1,6 @@
 import chardet
 import numpy
+import math
 import json
 from os import path
 from glob import glob
@@ -78,57 +79,83 @@ def define_vertice(data: list, id_start: int, vertices: list[vertice]) -> list[v
             current_id += 1
     return new_vertices
 
-def define_routes(vertices:list)->list[list[vertice,vertice]]:
+def define_routes(vertices:list) -> list[list[vertice,vertice]]:
     routes = []
     for index,  vertice in enumerate(vertices[:-1]):
-        routes.append([vertices[index], vertices[index+1]])
+        lenght = calc_distance(vertices[index].lat,vertices[index].lon, vertices[index+1].lat,vertices[index+1].lon )
+        routes.append([vertices[index], vertices[index+1],lenght])
 
     return routes
 
-def get_graph(vertices, data):
+def get_graph(routes:list[list[vertice, vertice]]) -> dict[vertice:list[vertice]]:
     print("Getting graph...")
-    graph = []
-    for index_i, i in enumerate(vertices):
-        graph.append([])
-        for index, j in enumerate(vertices):
-            founded = False
-            for k in data[1:]:
-                if (i == k[4] and j == k[8]) or (i == k[8] and j == k[4]):
-                    graph[index_i].append(int(k[12]))
-                    founded = True
-                    break
-            if not founded:
-                graph[index_i].append(0)
-              
+    graph = {}
+    for route in routes:
+        if not route[0] in graph.keys():
+            graph[route[0]] = [route[1]]
+        elif not route[1] in graph[route[0]]:
+            graph[route[0]].append(route[1])
+        
             
     return graph
 
-def floyd_warshall(graph, vertices):
-    subgraphs = graph
-    predecessor = []
-    for index_i, i in enumerate(graph):
-        predecessor.append([])
-        for index_j, j in enumerate(graph):
-            if i == j:
-                subgraphs[index_i][index_j] = 0
-                predecessor[index_i].append(0)
-            elif subgraphs[index_i][index_j] == 0:
-                predecessor[index_i].append(0)
-                subgraphs[index_i][index_j] = numpy.inf
-            else:
-                predecessor[index_i].append(vertices[index_j])
-                
-    # for index_i, i in enumerate(predecessor):
-    #     print(f"{i}")
+def calc_distance(lat_initial, long_initial, lat_final, long_final):
+    """Calculate the distance between two geographic points using Haversine formula.
+    
+    Args:
+        lat_initial (float): Starting latitude in degrees.
+        long_initial (float): Starting longitude in degrees.
+        lat_final (float): Ending latitude in degrees.
+        long_final (float): Ending longitude in degrees.
         
-                
-    for l in subgraphs:
-        for index_k, k in enumerate(subgraphs):
-            for index_i, i in enumerate(subgraphs):
-                for index_j, j in enumerate(subgraphs):
-                    if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
-                        subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
-                        predecessor[index_i][index_j] = vertices[index_k]
+    Returns:
+        float: Distance between the points in meters.
+    """
+    # Convert degrees to radians
+    d2r = math.pi / 180.0
+    lat1, lon1 = lat_initial * d2r, long_initial * d2r
+    lat2, lon2 = lat_final * d2r, long_final * d2r
+    
+    # Haversine formula
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    
+    return 6371000 * c  # Earth radius in meters
+
+def floyd_warshall(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
+    subgraphs = []
+    predecessor = []
+    print("Getting Floyd Washal...")
+    
+    v_null = vertice(-1,-1,-1)
+    n = len(vertices)
+    subgraphs = [[float('inf')] * n for _ in range(n)]
+    predecessor = [[None] * n for _ in range(n)]
+    for i in range(n):
+        subgraphs[i][i] = 0
+
+    for index_i, i in enumerate(vertices):
+        for index_j, j in enumerate(vertices):
+
+            if i in graph.keys() and j in graph[i]:
+                dis_ij = calc_distance(vertices[index_i].lat,vertices[index_i].lon,vertices[index_j].lat, vertices[index_j].lon)
+                dis_ji = calc_distance(vertices[index_j].lat,vertices[index_j].lon,vertices[index_i].lat, vertices[index_i].lon)
+                predecessor[index_i][index_j] = j 
+                predecessor[index_j][index_i] = i 
+                subgraphs[index_i][index_j] = dis_ij 
+                subgraphs[index_j][index_i] = dis_ji
+
+    size = len(subgraphs)
+    for index_k in range(size):
+        for index_i in range(size):
+            for index_j in range(size):                
+                # print(f"Tamanho: {len(subgraphs[index_i])} | IndexI: {index_i} | IndexJ: {index_j}")
+                if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
+                    subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
+                    # print(subgraphs[index_i][index_k] + subgraphs[index_k][index_j])
+                    predecessor[index_i][index_j] = vertices[index_k]
             # print(subgraphs)
     return [subgraphs, predecessor]
   
@@ -143,23 +170,34 @@ if __name__=="__main__":
         data = load_data_csv(file)
         vertices_local = define_vertice(data, id_counter, vertices)
         for route in define_routes(vertices_local):
-            routes.append(route )
+            routes.append(route)
         vertices.extend(v for v in vertices_local if v not in vertices)
         id_counter = max(v.id for v in vertices) + 1
-    
-    
-    
-    for route in routes:
-        print(f"1- {route[0].id} 2- {route[1].id}")
+    # for route in routes:
+    #     print(f"1- {route[0].id} 2- {route[1].id}")
     # for v in vertices:
     #     v.print()
+    graph = get_graph(routes)
     
-    # print(routes[0][0].id)
-    # Print the loaded data
+    # for key, neighbors in graph.items():
+    #     print(f"{key.id} -> ", end='')  # imprime o vértice
+    # for neighbor in neighbors:
+    #     print(neighbor.id, end=' ')  # imprime os vizinhos na mesma linha
+    # print()  # quebra de linha depois de cada vértice
     
-    # for vertice in vertices:
-    # graph = get_graph(vertices, data)
-    # # print(vertices)
+    floyd_warshall_result, predecessors = floyd_warshall(graph, vertices) 
+    # for i in floyd_warshall_result[0]:
+    #     print(i)
+    # print(floyd_warshall_result)
+    # for i in range(5):
+    #         for j in  range(5):
+    # print(f"Shortest distance: {floyd_warshall_result[1][4]}")
+    with open("files\\ofc.txt", "w") as file:
+        for i in floyd_warshall_result:
+            for j in i:
+                file.write(f"{j} ")
+        file.write("\n")
+    
     # with open("output.txt", "w") as file:
     #     # for index, line in enumerate(graph):
     #     for row in graph:
