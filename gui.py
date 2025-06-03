@@ -77,28 +77,56 @@ fig.update_layout(
 # Inicializar o app Dash
 app = dash.Dash(__name__)
 
+'''
 # Layout do app
 app.layout = html.Div([
     html.H1("Mapa Interativo com Dash"),
-    dcc.Input(id="input-text", type="text", placeholder="Digite algo..."),
-    html.Button("Clique aqui", id="btn-submit", n_clicks=0),
+    html.Div([
+        dcc.Input(id="input-text", type="text", placeholder="Digite algo..."),
+        html.Button("Clique aqui", id="btn-submit", n_clicks=0)
+    ], id= "header"),
     dcc.Graph(id="mapa", figure=fig,style={
         'height': '80vh',  # 80% da altura da tela
-        'width': '100%',   # Largura total do container
+        'width': '60%',   # Largura total do container
     }),
     html.Div(id="output-text")
 ])
+'''
+app.layout = html.Div([
+    html.H1("Mapa Interativo com Dash", className="title"),
 
+    html.Div([
+        html.Div([
+            html.Label("Origem:"),
+            dcc.Input(id="input-origem", type="text", placeholder="Digite a origem...", className="input-box"),
+
+            html.Label("Destino:"),
+            dcc.Input(id="input-destino", type="text", placeholder="Digite o destino...", className="input-box"),
+            html.Button("Buscar", id="btn-destino", n_clicks=0, className="btn"),
+
+            html.Div(id="output-1", className="output-box"),
+            html.Div(id="output-2", className="output-box"),
+            html.Div(id="output-3", className="output-box")
+        ], className="left-panel"),
+
+        html.Div([
+            dcc.Graph(id="mapa", figure=fig, className="mapa")
+        ], className="right-panel")
+    ], className="content")
+])
+
+
+'''
 # Callback para interação
 @app.callback(
     Output("output-text", "children"),
     Input("btn-submit", "n_clicks"),
     Input("input-text", "value")
 )
+'''
+
 def update_output(n_clicks, input_text):
     return f"Botão clicado {n_clicks} vezes. Texto: {input_text}"
-
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=8051)
