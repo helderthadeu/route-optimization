@@ -66,6 +66,7 @@ def define_vertice(data: list, id_start: int, vertices: list[vertice]) -> list[v
     
     for element in data[1:]:
         lat, lon = float(element[0]), float(element[1])
+        # print(lat)
         # Verifica se o vértice já existe na lista global (vertices)
         found = None
         for v in vertices:
@@ -73,6 +74,7 @@ def define_vertice(data: list, id_start: int, vertices: list[vertice]) -> list[v
                 found = v
                 break
         if found:
+            # continue
             new_vertices.append(found)
         else:
             new_vertices.append(vertice(id=current_id, lat=lat, lon=lon))
@@ -122,7 +124,7 @@ def calc_distance(lat_initial, long_initial, lat_final, long_final):
     a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
     
-    return 6371000 * c  # Earth radius in meters
+    return 6371 * c  # Earth radius in meters
 
 def floyd_warshall(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
     subgraphs = []
@@ -162,18 +164,27 @@ def floyd_warshall(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
     return [subgraphs, predecessor]
 
 def generate_floyd_washal():
-    file_path = path.join("subway_files", "Lines", "*")
+    # file_path = path.join("subway_files", "Lines", "*")
+    file_path = path.join("subway_files", "all_stations_results.csv")
     
     id_counter = 1
     vertices = []
     routes = []
-    for file in glob(file_path):
-        data = load_data_csv(file)
-        vertices_local = define_vertice(data, id_counter, vertices)
-        for route in define_routes(vertices_local):
-            routes.append(route)
-        vertices.extend(v for v in vertices_local if v not in vertices)
-        id_counter = max(v.id for v in vertices) + 1
+    # for file in glob(file_path):
+    #     data = load_data_csv(file)
+    #     vertices_local = define_vertice(data, id_counter, vertices)
+    #     for route in define_routes(vertices_local):
+    #         routes.append(route)
+    #     vertices.extend(v for v in vertices_local if v not in vertices)
+    #     id_counter = max(v.id for v in vertices) + 1
+    
+    data = load_data_csv(file_path)
+    # print(data)
+    vertices_local = define_vertice(data, id_counter, vertices)
+    for route in define_routes(vertices_local):
+        routes.append(route)
+    vertices.extend(v for v in vertices_local if v not in vertices)
+    id_counter = max(v.id for v in vertices) + 1
 
     graph = get_graph(routes)
     
@@ -225,13 +236,11 @@ def get_short_path(vertices: list[vertice], predecessors: list[list[vertice]], o
     path.insert(0, origin)
     return path
 
-
-
-
 if __name__=="__main__":
     if path.isfile("files\\predecessors.txt") and path.isfile("files\\floyd_washal_lenght.txt"):
         predecessors = []
         vertices = []
+        lengh_matrix = []
         with open("files\\predecessors.txt", "r") as file:
             for index, line in enumerate(file):
                 values = line.split("@")
@@ -254,11 +263,24 @@ if __name__=="__main__":
                         # print(temp[0])
                         values = vertice(temp[0], temp[1], temp[2])
                         vertices.append(values)
-    
+        with open("files\\floyd_washal_lenght.txt", 'r') as file:
+            for line in file:
+                # Remove espaços em branco no início/fim e quebra de linha
+                line = line.strip()
+                
+                # Converte os valores para float e ignora strings vazias
+                row = [float(x) for x in line.split() if x]
+                
+                if row:  # Só adiciona se a linha não estiver vazia
+                    lengh_matrix.append(row)
         
         # get_short_path(vertices, predecessors, vertices[0],vertices[1])
-        for i in get_short_path(vertices, predecessors, vertices[12],vertices[78]):
-            print(i.id)
+        temp = []
+        for i in get_short_path(vertices, predecessors, vertices[12],vertices[79]):
+            temp.append(i.id)
+        
+        print(f"Short lenght from 13 to 79: {lengh_matrix[12][79]}")
+        print(len(temp))
     else:
         generate_floyd_washal()    
     
