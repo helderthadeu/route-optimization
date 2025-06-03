@@ -42,7 +42,7 @@ body {
 
 .right-panel {
     flex-grow: 1;
-    
+
 }
 
 .input-box {
@@ -50,6 +50,7 @@ body {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 8px;
+    
 }
 
 .btn {

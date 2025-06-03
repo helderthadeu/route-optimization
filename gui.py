@@ -39,7 +39,7 @@ subway_lines = [
 with open("files/PadreEustaquio.json", "r", encoding="utf-8") as f:
     file = json.load(f)
 
-    
+
 
 # Extrair coordenadas
 lats, lons = [], []
@@ -115,6 +115,7 @@ app.layout = html.Div([
             dcc.Graph(id="mapa", figure=fig, className="mapa")
         ], className="right-panel")
     ], className="content")
+    
 ])
 
 
