@@ -38,6 +38,7 @@ subway_lines = [
 # Carregar dados do arquivo JSON
 with open("files/PadreEustaquio.json", "r", encoding="utf-8") as f:
     file = json.load(f)
+    
 
 # Extrair coordenadas
 lats, lons = [], []
