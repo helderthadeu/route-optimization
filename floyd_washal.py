@@ -1,6 +1,5 @@
 import chardet
 import numpy
-import math
 import json
 from os import path
 from glob import glob
@@ -81,23 +80,28 @@ def define_vertice(data: list, id_start: int, vertices: list[vertice]) -> list[v
             current_id += 1
     return new_vertices
 
-def define_routes(vertices:list) -> list[list[vertice,vertice]]:
+def define_routes(vertices:list)->list[list[vertice,vertice]]:
     routes = []
     for index,  vertice in enumerate(vertices[:-1]):
-        lenght = calc_distance(vertices[index].lat,vertices[index].lon, vertices[index+1].lat,vertices[index+1].lon )
-        routes.append([vertices[index], vertices[index+1],lenght])
+        routes.append([vertices[index], vertices[index+1]])
 
     return routes
 
-def get_graph(routes:list[list[vertice, vertice]]) -> dict[vertice:list[vertice]]:
+def get_graph(vertices, data):
     print("Getting graph...")
-    graph = {}
-    for route in routes:
-        if not route[0] in graph.keys():
-            graph[route[0]] = [route[1]]
-        elif not route[1] in graph[route[0]]:
-            graph[route[0]].append(route[1])
-        
+    graph = []
+    for index_i, i in enumerate(vertices):
+        graph.append([])
+        for index, j in enumerate(vertices):
+            founded = False
+            for k in data[1:]:
+                if (i == k[4] and j == k[8]) or (i == k[8] and j == k[4]):
+                    graph[index_i].append(int(k[12]))
+                    founded = True
+                    break
+            if not founded:
+                graph[index_i].append(0)
+              
             
     return graph
 
@@ -129,38 +133,30 @@ def calc_distance(lat_initial, long_initial, lat_final, long_final):
 def floyd_warshall(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
     subgraphs = []
     predecessor = []
-    print("Getting Floyd Washal...")
-    
-    v_null = vertice(-1,-1,-1)
-    n = len(vertices)
-    subgraphs = [[float('inf')] * n for _ in range(n)]
-    predecessor = [[None] * n for _ in range(n)]
-    for i in range(n):
-        subgraphs[i][i] = 0
-        predecessor[i][i] = vertices[i] 
+    for index_i, i in enumerate(graph):
+        predecessor.append([])
+        for index_j, j in enumerate(graph):
+            if i == j:
+                subgraphs[index_i][index_j] = 0
+                predecessor[index_i].append(0)
+            elif subgraphs[index_i][index_j] == 0:
+                predecessor[index_i].append(0)
+                subgraphs[index_i][index_j] = numpy.inf
+            else:
+                predecessor[index_i].append(vertices[index_j])
+                
+    # for index_i, i in enumerate(predecessor):
+    #     print(f"{i}")
         
-    for index_i, i in enumerate(vertices):
-        for index_j, j in enumerate(vertices):
-
-            if i in graph.keys() and j in graph[i]:
-                dis_ij = calc_distance(vertices[index_i].lat,vertices[index_i].lon,vertices[index_j].lat, vertices[index_j].lon)
-                dis_ji = calc_distance(vertices[index_j].lat,vertices[index_j].lon,vertices[index_i].lat, vertices[index_i].lon)
-                predecessor[index_i][index_j] = i 
-                predecessor[index_j][index_i] = j 
-                subgraphs[index_i][index_j] = dis_ij 
-                subgraphs[index_j][index_i] = dis_ji
-
-    size = len(subgraphs)
-    for index_k in range(size):
-        for index_i in range(size):
-            for index_j in range(size):                
-                if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
-                    subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
-                    subgraphs[index_j][index_i] = subgraphs[index_i][index_j]  # Mantém a simetria da distância
-                    
-                    predecessor[index_i][index_j] = predecessor[index_k][index_j]  # Atualiza predecessor
-                    predecessor[index_j][index_i] = predecessor[index_k][index_i]
-                # print(subgraphs)
+                
+    for l in subgraphs:
+        for index_k, k in enumerate(subgraphs):
+            for index_i, i in enumerate(subgraphs):
+                for index_j, j in enumerate(subgraphs):
+                    if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
+                        subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
+                        predecessor[index_i][index_j] = vertices[index_k]
+            # print(subgraphs)
     return [subgraphs, predecessor]
 
 def generate_floyd_washal():
