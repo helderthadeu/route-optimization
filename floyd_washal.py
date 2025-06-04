@@ -8,6 +8,7 @@ import math
 
 NUM_OF_LINES = 999999
 AVERAGE_SPEED = 30
+SUBWAY_TICKET = 2.9
 
 class vertice:
     def __init__(self, id:int, lat:float, lon:float, station_name:str, line:str, complex_id:int):
@@ -171,6 +172,17 @@ def calc_distance(lat_initial, long_initial, lat_final, long_final):
     
     return 6371 * c  # Earth radius in meters
 
+# def get_null_edge(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
+# 
+#     for node in  graph.keys():
+#         connections = graph[node]
+#         for vertice in vertices:
+#                 if vertice not in connections:
+#                     distace = geodesic((node.lat, node.lon), (vertice.lat, vertice.lon)).meters
+#                     if distace < 70:
+#                         pass
+    
+
 def floyd_warshall_by_distance(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
     subgraphs = []
     predecessor = []
@@ -189,46 +201,10 @@ def floyd_warshall_by_distance(graph:dict[vertice:list[vertice]], vertices:list[
             if i in graph.keys() and j in graph[i]:
                 # dis_ij = calc_distance(vertices[index_i].lat,vertices[index_i].lon,vertices[index_j].lat, vertices[index_j].lon)
                 # dis_ji = calc_distance(vertices[index_j].lat,vertices[index_j].lon,vertices[index_i].lat, vertices[index_i].lon)
-                dis = geodesic((i.lat, i.lon), (j.lat, j.lon)).kilometers
-                subgraphs[index_i][index_j] = dis
-                subgraphs[index_j][index_i] = dis
-                predecessor[index_i][index_j] = i
-                predecessor[index_j][index_i] = j
-
-    size = len(subgraphs)
-    for index_k in range(size):
-        for index_i in range(size):
-            for index_j in range(size):                
-
-                if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
-                    subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
-                    subgraphs[index_j][index_i] = subgraphs[index_i][index_j]  # Mantém a simetria da distância
-                    # print(f"Distance: {subgraphs[index_i][index_j]}")
-                    predecessor[index_i][index_j] = predecessor[index_k][index_j]  # Atualiza predecessor
-                    predecessor[index_j][index_i] = predecessor[index_k][index_i]
-                # print(subgraphs)
-    return [subgraphs, predecessor]
-
-def floyd_warshall_by_cost(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
-    subgraphs = []
-    predecessor = []
-    print("Getting Floyd Washal...")
-
-    
-    n = len(vertices)
-    subgraphs = [[float('inf')] * n for _ in range(n)]
-    predecessor = [[None] * n for _ in range(n)]
-    for i in range(n):
-        subgraphs[i][i] = 0
-        predecessor[i][i] = vertices[i] 
-        
-    for index_i, i in enumerate(vertices):
-        for index_j, j in enumerate(vertices):
-
-            if i in graph.keys() and j in graph[i]:
-                # dis_ij = calc_distance(vertices[index_i].lat,vertices[index_i].lon,vertices[index_j].lat, vertices[index_j].lon)
-                # dis_ji = calc_distance(vertices[index_j].lat,vertices[index_j].lon,vertices[index_i].lat, vertices[index_i].lon)
-                dis = geodesic((i.lat, i.lon), (j.lat, j.lon)).kilometers
+                if i.complex_id != j.complex_id:
+                    dis = geodesic((i.lat, i.lon), (j.lat, j.lon)).kilometers
+                else:
+                    dis = 0
                 subgraphs[index_i][index_j] = dis
                 subgraphs[index_j][index_i] = dis
                 predecessor[index_i][index_j] = i
@@ -376,7 +352,7 @@ if __name__=="__main__":
         
         print(f"Short lenght from 13 to 79: {lengh_matrix[12][79]/AVERAGE_SPEED}")
         for index, i in enumerate(get_short_path(vertices, predecessors, vertices[12],vertices[79])):
-            print(f"{index} - {i.to_string()}")
+            print(f"{index+1} - {i.to_string()}")
             
         # print(len(temp))
     else:
