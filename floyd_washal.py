@@ -7,19 +7,25 @@ from geopy.distance import geodesic
 import math
 
 NUM_OF_LINES = 999999
-AVERAGE_SPEED = 60
+AVERAGE_SPEED = 30
 
 class vertice:
-    def __init__(self, id:int, lat:float, lon:float, station_name:str):
+    def __init__(self, id:int, lat:float, lon:float, station_name:str, line:str, complex_id:int):
         self.id = id
         self.lat = lat
         self.lon = lon
         self.station_name = station_name
+        self.line = line
+        self.complex_id = complex_id
     
+    # def add_line(self, line):
+    #     if line not in self.lines:
+    #         self.lines.append(line)
+        
     def print(self):
-        print(f"ID: {self.id} Name: {self.station_name} Coordinates: {self.lat}, {self.lon}")
+        print(f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} ID: {self.id} Name: {self.station_name} Complex ID: {self.complex_id}")
     def to_string(self):
-        return f"ID: {self.id} Name: {self.station_name} Coordinates: {self.lat}, {self.lon}"
+        return f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} ID: {self.id} Name: {self.station_name} Complex ID: {self.complex_id}"
     
 def load_data_csv(file_path):
     raw = []
@@ -69,10 +75,13 @@ def define_vertice(data: list, id_start: int) -> list[vertice]:
     new_vertices = []
     current_id = id_start
     
+    
     for element in data[1:]:
         lat, lon = float(element[0]), float(element[1])
-        
         station_name = str(element[3])
+        line = str(element[4])
+    
+        complex_id = int(element[6])
         
         # print(lat)
         # Verifica se o vértice já existe na lista global (vertices)
@@ -87,26 +96,53 @@ def define_vertice(data: list, id_start: int) -> list[vertice]:
             new_vertices.append(found)
         else:
             
-            new_vertices.append(vertice(id=current_id, lat=lat, lon=lon, station_name=station_name))
+            new_vertices.append(vertice(id=current_id, lat=lat, lon=lon, station_name=station_name,line=line, complex_id=complex_id))
             current_id += 1
     return new_vertices
 
-def define_routes(vertices:list)->list[list[vertice,vertice]]:
+def define_routes(vertices:list[vertice])->list[list[vertice,vertice]]:
     routes = []
+    lines = []
+    for element in vertices:
+        if not element.line in lines:
+            lines.append(element.line)
+    
+    for line in lines:
+        previous_vertice = None
+        for index, vertice in enumerate(vertices):
+            if vertice.line == line:
+                if previous_vertice is None:
+                    previous_vertice = vertice
+                else:
+                    routes.append([previous_vertice, vertice])
+                    routes.append([vertice, previous_vertice])
+                    previous_vertice = vertice
+                    
+                
+    
     for index,  vertice in enumerate(vertices[:-1]):
-        routes.append([vertices[index], vertices[index+1]])
+        for index2, vertice2 in enumerate(vertices[:-1]):
+            if index2 == index:
+                continue
+            elif vertice.complex_id == vertice2.complex_id:
+                if vertice.id != vertice2.id:
+                    # print(f"Route: {vertice.to_string()} - {vertice2.to_string()}")
+                    routes.append([vertice, vertice2])
+            # elif vertices[index2] == vertices[index+1] and :
+            
 
     return routes
 
-def get_graph(routes:list[list[vertice, vertice]]) -> dict[vertice:list[vertice]]:
+def get_graph(routes:list[list[vertice, vertice]], vertices:list[vertice]) -> dict[vertice:list[vertice]]:
     print("Getting graph...")
     graph = {}
+    for vertice in vertices:
+        graph[vertice] = []   
     for route in routes:
-        if not route[0] in graph.keys():
-            graph[route[0]] = [route[1]]
-        elif not route[1] in graph[route[0]]:
+        if not route[1] in graph[route[0]]:
             graph[route[0]].append(route[1])
-
+        if not route[0] in graph[route[1]]:
+            graph[route[1]].append(route[0])
 
     return graph
 
@@ -135,12 +171,50 @@ def calc_distance(lat_initial, long_initial, lat_final, long_final):
     
     return 6371 * c  # Earth radius in meters
 
-def floyd_warshall(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
+def floyd_warshall_by_distance(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
     subgraphs = []
     predecessor = []
     print("Getting Floyd Washal...")
 
-    v_null = vertice(-1,-1,-1, "")
+    n = len(vertices)
+    subgraphs = [[float('inf')] * n for _ in range(n)]
+    predecessor = [[None] * n for _ in range(n)]
+    for i in range(n):
+        subgraphs[i][i] = 0
+        predecessor[i][i] = vertices[i] 
+        
+    for index_i, i in enumerate(vertices):
+        for index_j, j in enumerate(vertices):
+
+            if i in graph.keys() and j in graph[i]:
+                # dis_ij = calc_distance(vertices[index_i].lat,vertices[index_i].lon,vertices[index_j].lat, vertices[index_j].lon)
+                # dis_ji = calc_distance(vertices[index_j].lat,vertices[index_j].lon,vertices[index_i].lat, vertices[index_i].lon)
+                dis = geodesic((i.lat, i.lon), (j.lat, j.lon)).kilometers
+                subgraphs[index_i][index_j] = dis
+                subgraphs[index_j][index_i] = dis
+                predecessor[index_i][index_j] = i
+                predecessor[index_j][index_i] = j
+
+    size = len(subgraphs)
+    for index_k in range(size):
+        for index_i in range(size):
+            for index_j in range(size):                
+
+                if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
+                    subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
+                    subgraphs[index_j][index_i] = subgraphs[index_i][index_j]  # Mantém a simetria da distância
+                    # print(f"Distance: {subgraphs[index_i][index_j]}")
+                    predecessor[index_i][index_j] = predecessor[index_k][index_j]  # Atualiza predecessor
+                    predecessor[index_j][index_i] = predecessor[index_k][index_i]
+                # print(subgraphs)
+    return [subgraphs, predecessor]
+
+def floyd_warshall_by_cost(graph:dict[vertice:list[vertice]], vertices:list[vertice]):
+    subgraphs = []
+    predecessor = []
+    print("Getting Floyd Washal...")
+
+    
     n = len(vertices)
     subgraphs = [[float('inf')] * n for _ in range(n)]
     predecessor = [[None] * n for _ in range(n)]
@@ -200,10 +274,17 @@ def generate_floyd_washal():
         
     id_counter = max(v.id for v in vertices) + 1
 
-    graph = get_graph(routes)
+    graph = get_graph(routes, vertices)
     
-    floyd_warshall_result, predecessors = floyd_warshall(graph, vertices) 
-
+    floyd_warshall_result, predecessors = floyd_warshall_by_distance(graph, vertices) 
+    with open("files\\graph.txt", "w") as file:
+        for key in graph.keys():
+            temp = graph[key]
+            file.write(f"{key.id};{key.lat};{key.lon};{key.station_name};{key.line};{key.complex_id}@")
+            for v in temp:
+                file.write(f"{v.id};{v.lat};{v.lon};{v.station_name};{v.line};{v.complex_id}@")
+            file.write("\n")
+        
     with open("files\\floyd_washal_lenght.txt", "w") as file:
         for i in floyd_warshall_result:
             for j in i:
@@ -215,11 +296,11 @@ def generate_floyd_washal():
                 if j is None:
                     file.write(f"{j}@")
                 else:
-                    file.write(f"{j.id};{j.lat};{j.lon};{j.station_name}@")
+                    file.write(f"{j.id};{j.lat};{j.lon};{j.station_name};{j.line};{j.complex_id}@")
             file.write("\n")
     with open("files\\vertices.txt", "w") as file:
         for i in vertices:
-            file.write(f"{i.id};{i.lat};{i.lon};{i.station_name}@")
+            file.write(f"{i.id};{i.lat};{i.lon};{i.station_name};{i.line};{i.complex_id}@")
         
 def get_short_path(vertices: list[vertice], predecessors: list[list[vertice]], origin: vertice, destiny: vertice):
     path = []
@@ -259,6 +340,7 @@ if __name__=="__main__":
             for index, line in enumerate(file):
                 values = line.split("@")
                 predecessors.append([])
+                
                 for v in values:
                     if v == "None":
                         predecessors[index].append(None)
@@ -266,16 +348,17 @@ if __name__=="__main__":
                         
                         temp = v.split(";")
                         # print(temp[0])
-                        values = vertice(temp[0], temp[1], temp[2],temp[3])
+                        values = vertice(temp[0], temp[1], temp[2],temp[3],line=temp[4], complex_id=temp[5])
                         predecessors[index].append(values)
         with open("files\\vertices.txt", "r") as file:
             for index, line in enumerate(file):
                 values = line.strip().split("@")
+                print(values[13])
                 for v in values:    
                     if v.split(";")[0].isnumeric():
                         temp = v.split(";")
                         # print(temp[0])
-                        values = vertice(temp[0], temp[1], temp[2],temp[3])
+                        values = vertice(temp[0], temp[1], temp[2],temp[3],line=temp[4], complex_id= temp[5])
                         vertices.append(values)
         with open("files\\floyd_washal_lenght.txt", 'r') as file:
             for line in file:
@@ -291,7 +374,7 @@ if __name__=="__main__":
         # get_short_path(vertices, predecessors, vertices[0],vertices[1])
         temp = []
         
-        print(f"Short lenght from 13 to 79: {lengh_matrix[12][79]}")
+        print(f"Short lenght from 13 to 79: {lengh_matrix[12][79]/AVERAGE_SPEED}")
         for index, i in enumerate(get_short_path(vertices, predecessors, vertices[12],vertices[79])):
             print(f"{index} - {i.to_string()}")
             
