@@ -110,7 +110,7 @@ def get_graph(routes:list[list[vertice, vertice]], vertices:list[vertice]) -> di
     for v in vertices: 
         for w in vertices:
             disv_w = geodesic((v.lat, v.lon), (w.lat, w.lon)).meters
-            if v != w and v.complex_id != w.complex_id and v.line != w.line and disv_w <= 700:
+            if v != w and v.complex_id != w.complex_id and v.line != w.line and disv_w <= 100:
                 if [w, disv_w, f"{v.id}|{w.id}"] not in graph[v]:
                     graph[v].append([w, disv_w, f"{v.id}|{w.id}"])
                 if [v, disv_w, f"{w.id}|{v.id}"] not in graph[w]:

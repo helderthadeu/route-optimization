@@ -36,7 +36,7 @@ if __name__=="__main__":
         print(vertices[destino].to_string())
         
         # Print shortest path length (in minutes)
-        print(f"Short lenght from {origem+1} to {destino+1}: {lengh_matrix[origem][destino]/AVERAGE_SPEED}")
+        print(f"Short lenght from {origem+1} to {destino+1}: {lengh_matrix[origem][destino]/AVERAGE_SPEED*60:.2f} minutes")
         short_path = get_short_path(vertices, predecessors, vertices[origem],vertices[destino])
         for index, current_vertex in enumerate(short_path):
             if index == 0:

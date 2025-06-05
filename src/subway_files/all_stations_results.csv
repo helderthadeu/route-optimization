@@ -1,0 +1,822 @@
+Latitude,Longitude,Source File,Stop Name,Line,Distance (m), Complex ID
+40.707513,-74.013783,Subway_lines.csv,Rector St,1Line,0,329
+40.711835,-74.012188,Subway_lines.csv,WTC Cortlandt,1Line,0,328
+40.715478,-74.009266,Subway_lines.csv,Chambers St,1Line,0,327
+40.719318,-74.006886,Subway_lines.csv,Franklin St,1Line,0,326
+40.722854,-74.006277,Subway_lines.csv,Canal St,1Line,0,325
+40.728251,-74.005367,Subway_lines.csv,Houston St,1Line,0,324
+40.733422,-74.002906,Subway_lines.csv,Christopher St-Stonewall,1Line,0,323
+40.737826,-74.000201,Subway_lines.csv,14 St,1Line,0,601
+40.74104,-73.997871,Subway_lines.csv,18 St,1Line,0,321
+40.744081,-73.995657,Subway_lines.csv,23 St,1Line,0,320
+40.747215,-73.993365,Subway_lines.csv,28 St,1Line,0,319
+40.750373,-73.991057,Subway_lines.csv,34 St-Penn Station,1Line,0,318
+40.75529,-73.987495,Subway_lines.csv,Times Sq-42 St,1Line,0,611
+40.761728,-73.983849,Subway_lines.csv,50 St,1Line,0,316
+40.768247,-73.981929,Subway_lines.csv,59 St-Columbus Circle,1Line,0,614
+40.77344,-73.982209,Subway_lines.csv,66 St-Lincoln Center,1Line,0,314
+40.778453,-73.98197,Subway_lines.csv,72 St,1Line,0,313
+40.783934,-73.979917,Subway_lines.csv,79 St,1Line,0,312
+40.788644,-73.976218,Subway_lines.csv,86 St,1Line,0,311
+40.793919,-73.972323,Subway_lines.csv,96 St,1Line,0,310
+40.799446,-73.968379,Subway_lines.csv,103 St,1Line,0,309
+40.803967,-73.966847,Subway_lines.csv,Cathedral Pkwy (110 St),1Line,0,308
+40.807722,-73.96411,Subway_lines.csv,116 St-Columbia University,1Line,0,307
+40.815581,-73.958372,Subway_lines.csv,125 St,1Line,0,306
+40.822008,-73.953676,Subway_lines.csv,137 St-City College,1Line,0,305
+40.826551,-73.95036,Subway_lines.csv,145 St,1Line,0,304
+40.834041,-73.94489,Subway_lines.csv,157 St,1Line,0,303
+40.840556,-73.940133,Subway_lines.csv,168 St-Washington Hts,1Line,0,605
+40.849505,-73.933596,Subway_lines.csv,181 St,1Line,0,301
+40.855225,-73.929412,Subway_lines.csv,191 St,1Line,0,300
+40.860531,-73.925536,Subway_lines.csv,Dyckman St,1Line,0,299
+40.864621,-73.918822,Subway_lines.csv,207 St,1Line,0,298
+40.869444,-73.915279,Subway_lines.csv,215 St,1Line,0,297
+40.874561,-73.909831,Subway_lines.csv,Marble Hill-225 St,1Line,0,296
+40.878856,-73.904834,Subway_lines.csv,231 St,1Line,0,295
+40.884667,-73.90087,Subway_lines.csv,238 St,1Line,0,294
+40.889248,-73.898583,Subway_lines.csv,Van Cortlandt Park-242 St,1Line,0,293
+40.632836,-73.947642,Subway_lines.csv,Flatbush Av-Brooklyn College,2Line,0,359
+40.639967,-73.948411,Subway_lines.csv,Newkirk Av-Little Haiti,2Line,0,358
+40.645098,-73.948959,Subway_lines.csv,Beverly Rd,2Line,0,357
+40.650843,-73.949575,Subway_lines.csv,Church Av,2Line,0,356
+40.656652,-73.9502,Subway_lines.csv,Winthrop St,2Line,0,355
+40.662742,-73.95085,Subway_lines.csv,Sterling St,2Line,0,354
+40.667883,-73.950683,Subway_lines.csv,President St-Medgar Evers College,2Line,0,353
+40.670682,-73.958131,Subway_lines.csv,Franklin Av-Medgar Evers College,2Line,0,626
+40.671987,-73.964375,Subway_lines.csv,Eastern Pkwy-Brooklyn Museum,2Line,0,341
+40.675235,-73.971046,Subway_lines.csv,Grand Army Plaza,2Line,0,340
+40.680829,-73.975098,Subway_lines.csv,Bergen St,2Line,0,339
+40.684359,-73.977666,Subway_lines.csv,Atlantic Av-Barclays Ctr,2Line,0,617
+40.688246,-73.980492,Subway_lines.csv,Nevins St,2Line,0,337
+40.690545,-73.985065,Subway_lines.csv,Hoyt St,2Line,0,336
+40.693219,-73.989998,Subway_lines.csv,Borough Hall,2Line,0,620
+40.697466,-73.993086,Subway_lines.csv,Clark St,2Line,0,334
+40.706821,-74.0091,Subway_lines.csv,Wall St,2Line,0,333
+40.709416,-74.006571,Subway_lines.csv,Fulton St,2Line,0,628
+40.713051,-74.008811,Subway_lines.csv,Park Place,2Line,0,624
+40.715478,-74.009266,Subway_lines.csv,Chambers St,2Line,0,327
+40.719318,-74.006886,Subway_lines.csv,Franklin St,2Line,0,326
+40.722854,-74.006277,Subway_lines.csv,Canal St,2Line,0,325
+40.728251,-74.005367,Subway_lines.csv,Houston St,2Line,0,324
+40.733422,-74.002906,Subway_lines.csv,Christopher St-Stonewall,2Line,0,323
+40.737826,-74.000201,Subway_lines.csv,14 St,2Line,0,601
+40.74104,-73.997871,Subway_lines.csv,18 St,2Line,0,321
+40.744081,-73.995657,Subway_lines.csv,23 St,2Line,0,320
+40.747215,-73.993365,Subway_lines.csv,28 St,2Line,0,319
+40.750373,-73.991057,Subway_lines.csv,34 St-Penn Station,2Line,0,318
+40.75529,-73.987495,Subway_lines.csv,Times Sq-42 St,2Line,0,611
+40.761728,-73.983849,Subway_lines.csv,50 St,2Line,0,316
+40.768247,-73.981929,Subway_lines.csv,59 St-Columbus Circle,2Line,0,614
+40.77344,-73.982209,Subway_lines.csv,66 St-Lincoln Center,2Line,0,314
+40.778453,-73.98197,Subway_lines.csv,72 St,2Line,0,313
+40.783934,-73.979917,Subway_lines.csv,79 St,2Line,0,312
+40.788644,-73.976218,Subway_lines.csv,86 St,2Line,0,311
+40.793919,-73.972323,Subway_lines.csv,96 St,2Line,0,310
+40.799075,-73.951822,Subway_lines.csv,Central Park North (110 St),2Line,0,441
+40.802098,-73.949625,Subway_lines.csv,116 St,2Line,0,440
+40.807754,-73.945495,Subway_lines.csv,125 St,2Line,0,439
+40.814229,-73.94077,Subway_lines.csv,135 St,2Line,0,438
+40.81841,-73.926718,Subway_lines.csv,149 St-Grand Concourse,2Line,0,603
+40.816109,-73.917757,Subway_lines.csv,3 Av-149 St,2Line,0,434
+40.81649,-73.907807,Subway_lines.csv,Jackson Av,2Line,0,433
+40.819585,-73.90177,Subway_lines.csv,Prospect Av,2Line,0,432
+40.822181,-73.896736,Subway_lines.csv,Intervale Av,2Line,0,431
+40.824073,-73.893064,Subway_lines.csv,Simpson St,2Line,0,430
+40.829993,-73.891865,Subway_lines.csv,Freeman St,2Line,0,429
+40.837288,-73.887734,Subway_lines.csv,174 St,2Line,0,428
+40.840295,-73.880049,Subway_lines.csv,West Farms Sq-E Tremont Av,2Line,0,427
+40.841894,-73.873488,Subway_lines.csv,E 180 St,2Line,0,426
+40.848828,-73.868457,Subway_lines.csv,Bronx Park East,2Line,0,425
+40.857192,-73.867615,Subway_lines.csv,Pelham Pkwy,2Line,0,424
+40.865462,-73.867352,Subway_lines.csv,Allerton Av,2Line,0,423
+40.871356,-73.867164,Subway_lines.csv,Burke Av,2Line,0,422
+40.87785,-73.866256,Subway_lines.csv,Gun Hill Rd,2Line,0,421
+40.883895,-73.862633,Subway_lines.csv,219 St,2Line,0,420
+40.888022,-73.860341,Subway_lines.csv,225 St,2Line,0,419
+40.893193,-73.857473,Subway_lines.csv,233 St,2Line,0,418
+40.898379,-73.854376,Subway_lines.csv,Nereid Av,2Line,0,417
+40.903125,-73.85062,Subway_lines.csv,Wakefield-241 St,2Line,0,416
+40.666235,-73.884079,Subway_lines.csv,New Lots Av,3Line,0,352
+40.665449,-73.889395,Subway_lines.csv,Van Siclen Av,3Line,0,351
+40.664635,-73.894895,Subway_lines.csv,Pennsylvania Av,3Line,0,350
+40.663515,-73.902447,Subway_lines.csv,Junius St,3Line,0,349
+40.662549,-73.908946,Subway_lines.csv,Rockaway Av,3Line,0,348
+40.661453,-73.916327,Subway_lines.csv,Saratoga Av,3Line,0,347
+40.664717,-73.92261,Subway_lines.csv,Sutter Av-Rutland Rd,3Line,0,346
+40.668897,-73.932942,Subway_lines.csv,Crown Hts-Utica Av,3Line,0,345
+40.669399,-73.942161,Subway_lines.csv,Kingston Av,3Line,0,344
+40.669847,-73.950466,Subway_lines.csv,Nostrand Av,3Line,0,343
+40.670682,-73.958131,Subway_lines.csv,Franklin Av-Medgar Evers College,3Line,0,626
+40.671987,-73.964375,Subway_lines.csv,Eastern Pkwy-Brooklyn Museum,3Line,0,341
+40.675235,-73.971046,Subway_lines.csv,Grand Army Plaza,3Line,0,340
+40.680829,-73.975098,Subway_lines.csv,Bergen St,3Line,0,339
+40.684359,-73.977666,Subway_lines.csv,Atlantic Av-Barclays Ctr,3Line,0,617
+40.688246,-73.980492,Subway_lines.csv,Nevins St,3Line,0,337
+40.690545,-73.985065,Subway_lines.csv,Hoyt St,3Line,0,336
+40.693219,-73.989998,Subway_lines.csv,Borough Hall,3Line,0,620
+40.697466,-73.993086,Subway_lines.csv,Clark St,3Line,0,334
+40.706821,-74.0091,Subway_lines.csv,Wall St,3Line,0,333
+40.709416,-74.006571,Subway_lines.csv,Fulton St,3Line,0,628
+40.713051,-74.008811,Subway_lines.csv,Park Place,3Line,0,624
+40.715478,-74.009266,Subway_lines.csv,Chambers St,3Line,0,327
+40.737826,-74.000201,Subway_lines.csv,14 St,3Line,0,601
+40.750373,-73.991057,Subway_lines.csv,34 St-Penn Station,3Line,0,318
+40.75529,-73.987495,Subway_lines.csv,Times Sq-42 St,3Line,0,611
+40.778453,-73.98197,Subway_lines.csv,72 St,3Line,0,313
+40.793919,-73.972323,Subway_lines.csv,96 St,3Line,0,310
+40.799075,-73.951822,Subway_lines.csv,Central Park North (110 St),3Line,0,441
+40.802098,-73.949625,Subway_lines.csv,116 St,3Line,0,440
+40.807754,-73.945495,Subway_lines.csv,125 St,3Line,0,439
+40.814229,-73.94077,Subway_lines.csv,135 St,3Line,0,438
+40.820421,-73.936245,Subway_lines.csv,145 St,3Line,0,437
+40.82388,-73.93647,Subway_lines.csv,Harlem-148 St,3Line,0,436
+40.666235,-73.884079,Subway_lines.csv,New Lots Av,4Line,0,352
+40.665449,-73.889395,Subway_lines.csv,Van Siclen Av,4Line,0,351
+40.664635,-73.894895,Subway_lines.csv,Pennsylvania Av,4Line,0,350
+40.663515,-73.902447,Subway_lines.csv,Junius St,4Line,0,349
+40.662549,-73.908946,Subway_lines.csv,Rockaway Av,4Line,0,348
+40.661453,-73.916327,Subway_lines.csv,Saratoga Av,4Line,0,347
+40.664717,-73.92261,Subway_lines.csv,Sutter Av-Rutland Rd,4Line,0,346
+40.668897,-73.932942,Subway_lines.csv,Crown Hts-Utica Av,4Line,0,345
+40.669399,-73.942161,Subway_lines.csv,Kingston Av,4Line,0,344
+40.669847,-73.950466,Subway_lines.csv,Nostrand Av,4Line,0,343
+40.670682,-73.958131,Subway_lines.csv,Franklin Av-Medgar Evers College,4Line,0,626
+40.671987,-73.964375,Subway_lines.csv,Eastern Pkwy-Brooklyn Museum,4Line,0,341
+40.675235,-73.971046,Subway_lines.csv,Grand Army Plaza,4Line,0,340
+40.680829,-73.975098,Subway_lines.csv,Bergen St,4Line,0,339
+40.684359,-73.977666,Subway_lines.csv,Atlantic Av-Barclays Ctr,4Line,0,617
+40.688246,-73.980492,Subway_lines.csv,Nevins St,4Line,0,337
+40.692404,-73.990151,Subway_lines.csv,Borough Hall,4Line,0,620
+40.704817,-74.014065,Subway_lines.csv,Bowling Green,4Line,0,414
+40.707557,-74.011862,Subway_lines.csv,Wall St,4Line,0,413
+40.710368,-74.009509,Subway_lines.csv,Fulton St,4Line,0,628
+40.713065,-74.004131,Subway_lines.csv,Brooklyn Bridge-City Hall,4Line,0,622
+40.718803,-74.000193,Subway_lines.csv,Canal St,4Line,0,623
+40.722301,-73.997141,Subway_lines.csv,Spring St,4Line,0,409
+40.725915,-73.994659,Subway_lines.csv,Bleecker St,4Line,0,619
+40.730054,-73.99107,Subway_lines.csv,Astor Pl,4Line,0,407
+40.734673,-73.989951,Subway_lines.csv,14 St-Union Sq,4Line,0,602
+40.739864,-73.986599,Subway_lines.csv,23 St,4Line,0,405
+40.74307,-73.984264,Subway_lines.csv,28 St,4Line,0,404
+40.746081,-73.982076,Subway_lines.csv,33 St,4Line,0,403
+40.751776,-73.976848,Subway_lines.csv,Grand Central-42 St,4Line,0,610
+40.757107,-73.97192,Subway_lines.csv,51 St,4Line,0,612
+40.762526,-73.967967,Subway_lines.csv,59 St,4Line,0,613
+40.768141,-73.96387,Subway_lines.csv,68 St-Hunter College,4Line,0,399
+40.77362,-73.959874,Subway_lines.csv,77 St,4Line,0,398
+40.779492,-73.955589,Subway_lines.csv,86 St,4Line,0,397
+40.785672,-73.95107,Subway_lines.csv,96 St,4Line,0,396
+40.7906,-73.947478,Subway_lines.csv,103 St,4Line,0,395
+40.79502,-73.94425,Subway_lines.csv,110 St,4Line,0,394
+40.798629,-73.941617,Subway_lines.csv,116 St,4Line,0,393
+40.804138,-73.937594,Subway_lines.csv,125 St,4Line,0,392
+40.813224,-73.929849,Subway_lines.csv,138 St-Grand Concourse,4Line,0,391
+40.818375,-73.927351,Subway_lines.csv,149 St-Grand Concourse,4Line,0,603
+40.827994,-73.925831,Subway_lines.csv,161 St-Yankee Stadium,4Line,0,604
+40.835537,-73.9214,Subway_lines.csv,167 St,4Line,0,388
+40.840075,-73.917791,Subway_lines.csv,170 St,4Line,0,387
+40.844434,-73.914685,Subway_lines.csv,Mt Eden Av,4Line,0,386
+40.84848,-73.911794,Subway_lines.csv,176 St,4Line,0,385
+40.853453,-73.907684,Subway_lines.csv,Burnside Av,4Line,0,384
+40.858407,-73.903879,Subway_lines.csv,183 St,4Line,0,383
+40.862803,-73.901034,Subway_lines.csv,Fordham Rd,4Line,0,382
+40.86776,-73.897174,Subway_lines.csv,Kingsbridge Rd,4Line,0,381
+40.873412,-73.890064,Subway_lines.csv,Bedford Park Blvd-Lehman College,4Line,0,380
+40.87975,-73.884655,Subway_lines.csv,Mosholu Pkwy,4Line,0,379
+40.886037,-73.878751,Subway_lines.csv,Woodlawn,4Line,0,378
+40.632836,-73.947642,Subway_lines.csv,Flatbush Av-Brooklyn College,5Line,0,359
+40.639967,-73.948411,Subway_lines.csv,Newkirk Av-Little Haiti,5Line,0,358
+40.645098,-73.948959,Subway_lines.csv,Beverly Rd,5Line,0,357
+40.650843,-73.949575,Subway_lines.csv,Church Av,5Line,0,356
+40.656652,-73.9502,Subway_lines.csv,Winthrop St,5Line,0,355
+40.662742,-73.95085,Subway_lines.csv,Sterling St,5Line,0,354
+40.667883,-73.950683,Subway_lines.csv,President St-Medgar Evers College,5Line,0,353
+40.670682,-73.958131,Subway_lines.csv,Franklin Av-Medgar Evers College,5Line,0,626
+40.684359,-73.977666,Subway_lines.csv,Atlantic Av-Barclays Ctr,5Line,0,617
+40.688246,-73.980492,Subway_lines.csv,Nevins St,5Line,0,337
+40.692404,-73.990151,Subway_lines.csv,Borough Hall,5Line,0,620
+40.704817,-74.014065,Subway_lines.csv,Bowling Green,5Line,0,414
+40.707557,-74.011862,Subway_lines.csv,Wall St,5Line,0,413
+40.710368,-74.009509,Subway_lines.csv,Fulton St,5Line,0,628
+40.713065,-74.004131,Subway_lines.csv,Brooklyn Bridge-City Hall,5Line,0,622
+40.734673,-73.989951,Subway_lines.csv,14 St-Union Sq,5Line,0,602
+40.751776,-73.976848,Subway_lines.csv,Grand Central-42 St,5Line,0,610
+40.762526,-73.967967,Subway_lines.csv,59 St,5Line,0,613
+40.779492,-73.955589,Subway_lines.csv,86 St,5Line,0,397
+40.804138,-73.937594,Subway_lines.csv,125 St,5Line,0,392
+40.813224,-73.929849,Subway_lines.csv,138 St-Grand Concourse,5Line,0,391
+40.81841,-73.926718,Subway_lines.csv,149 St-Grand Concourse,5Line,0,603
+40.816109,-73.917757,Subway_lines.csv,3 Av-149 St,5Line,0,434
+40.81649,-73.907807,Subway_lines.csv,Jackson Av,5Line,0,433
+40.819585,-73.90177,Subway_lines.csv,Prospect Av,5Line,0,432
+40.822181,-73.896736,Subway_lines.csv,Intervale Av,5Line,0,431
+40.824073,-73.893064,Subway_lines.csv,Simpson St,5Line,0,430
+40.829993,-73.891865,Subway_lines.csv,Freeman St,5Line,0,429
+40.837288,-73.887734,Subway_lines.csv,174 St,5Line,0,428
+40.840295,-73.880049,Subway_lines.csv,West Farms Sq-E Tremont Av,5Line,0,427
+40.841894,-73.873488,Subway_lines.csv,E 180 St,5Line,0,426
+40.848828,-73.868457,Subway_lines.csv,Bronx Park East,5Line,0,425
+40.854364,-73.860495,Subway_lines.csv,Morris Park,5Line,0,446
+40.858985,-73.855359,Subway_lines.csv,Pelham Pkwy,5Line,0,445
+40.869526,-73.846384,Subway_lines.csv,Gun Hill Rd,5Line,0,444
+40.878663,-73.838591,Subway_lines.csv,Baychester Av,5Line,0,443
+40.8883,-73.830834,Subway_lines.csv,Eastchester-Dyre Av,5Line,0,442
+40.713065,-74.004131,Subway_lines.csv,Brooklyn Bridge-City Hall,6Line,0,622
+40.718803,-74.000193,Subway_lines.csv,Canal St,6Line,0,623
+40.722301,-73.997141,Subway_lines.csv,Spring St,6Line,0,409
+40.725915,-73.994659,Subway_lines.csv,Bleecker St,6Line,0,619
+40.730054,-73.99107,Subway_lines.csv,Astor Pl,6Line,0,407
+40.734673,-73.989951,Subway_lines.csv,14 St-Union Sq,6Line,0,602
+40.739864,-73.986599,Subway_lines.csv,23 St,6Line,0,405
+40.74307,-73.984264,Subway_lines.csv,28 St,6Line,0,404
+40.746081,-73.982076,Subway_lines.csv,33 St,6Line,0,403
+40.751776,-73.976848,Subway_lines.csv,Grand Central-42 St,6Line,0,610
+40.757107,-73.97192,Subway_lines.csv,51 St,6Line,0,612
+40.762526,-73.967967,Subway_lines.csv,59 St,6Line,0,613
+40.768141,-73.96387,Subway_lines.csv,68 St-Hunter College,6Line,0,399
+40.77362,-73.959874,Subway_lines.csv,77 St,6Line,0,398
+40.779492,-73.955589,Subway_lines.csv,86 St,6Line,0,397
+40.785672,-73.95107,Subway_lines.csv,96 St,6Line,0,396
+40.7906,-73.947478,Subway_lines.csv,103 St,6Line,0,395
+40.79502,-73.94425,Subway_lines.csv,110 St,6Line,0,394
+40.798629,-73.941617,Subway_lines.csv,116 St,6Line,0,393
+40.804138,-73.937594,Subway_lines.csv,125 St,6Line,0,392
+40.810476,-73.926138,Subway_lines.csv,3 Av-138 St,6Line,0,377
+40.807566,-73.91924,Subway_lines.csv,Brook Av,6Line,0,376
+40.805368,-73.914042,Subway_lines.csv,Cypress Av,6Line,0,375
+40.808719,-73.907657,Subway_lines.csv,E 143 St-St Mary's St,6Line,0,374
+40.812118,-73.904098,Subway_lines.csv,E 149 St,6Line,0,373
+40.816104,-73.896435,Subway_lines.csv,Longwood Av,6Line,0,372
+40.820948,-73.890549,Subway_lines.csv,Hunts Point Av,6Line,0,371
+40.826525,-73.886283,Subway_lines.csv,Whitlock Av,6Line,0,370
+40.828584,-73.879159,Subway_lines.csv,Elder Av,6Line,0,369
+40.829521,-73.874516,Subway_lines.csv,Morrison Av-Soundview,6Line,0,368
+40.831509,-73.867618,Subway_lines.csv,St Lawrence Av,6Line,0,367
+40.833226,-73.860816,Subway_lines.csv,Parkchester,6Line,0,366
+40.834255,-73.851222,Subway_lines.csv,Castle Hill Av,6Line,0,365
+40.836488,-73.847036,Subway_lines.csv,Zerega Av,6Line,0,364
+40.839892,-73.842952,Subway_lines.csv,Westchester Sq-E Tremont Av,6Line,0,363
+40.843863,-73.836322,Subway_lines.csv,Middletown Rd,6Line,0,362
+40.84681,-73.832569,Subway_lines.csv,Buhre Av,6Line,0,361
+40.852462,-73.828121,Subway_lines.csv,Pelham Bay Park,6Line,0,360
+40.755882,-74.00191,Subway_lines.csv,34 St-Hudson Yards,7Line,0,471
+40.755477,-73.987691,Subway_lines.csv,Times Sq-42 St,7Line,0,611
+40.753821,-73.981963,Subway_lines.csv,5 Av,7Line,0,609
+40.751431,-73.976041,Subway_lines.csv,Grand Central-42 St,7Line,0,610
+40.742626,-73.953581,Subway_lines.csv,Vernon Blvd-Jackson Av,7Line,0,464
+40.742216,-73.948916,Subway_lines.csv,Hunters Point Av,7Line,0,463
+40.747023,-73.945264,Subway_lines.csv,Court Sq,7Line,0,606
+40.750582,-73.940202,Subway_lines.csv,Queensboro Plaza,7Line,0,461
+40.744587,-73.930997,Subway_lines.csv,33 St-Rawson St,7Line,0,460
+40.743781,-73.924016,Subway_lines.csv,40 St-Lowery St,7Line,0,459
+40.743132,-73.918435,Subway_lines.csv,46 St-Bliss St,7Line,0,458
+40.744149,-73.912549,Subway_lines.csv,52 St,7Line,0,457
+40.74563,-73.902984,Subway_lines.csv,61 St-Woodside,7Line,0,456
+40.746325,-73.896403,Subway_lines.csv,69 St,7Line,0,455
+40.746848,-73.891394,Subway_lines.csv,74 St-Broadway,7Line,0,616
+40.747659,-73.883697,Subway_lines.csv,82 St-Jackson Hts,7Line,0,453
+40.748408,-73.876613,Subway_lines.csv,90 St-Elmhurst Av,7Line,0,452
+40.749145,-73.869527,Subway_lines.csv,Junction Blvd,7Line,0,451
+40.749865,-73.8627,Subway_lines.csv,103 St-Corona Plaza,7Line,0,450
+40.75173,-73.855334,Subway_lines.csv,111 St,7Line,0,449
+40.754622,-73.845625,Subway_lines.csv,Mets-Willets Point,7Line,0,448
+40.7596,-73.83003,Subway_lines.csv,Flushing-Main St,7Line,0,447
+40.603995,-73.755405,Subway_lines.csv,Far Rockaway-Mott Av,ALine,0,209
+40.600066,-73.761353,Subway_lines.csv,Beach 25 St,ALine,0,208
+40.595398,-73.768175,Subway_lines.csv,Beach 36 St,ALine,0,207
+40.592943,-73.776013,Subway_lines.csv,Beach 44 St,ALine,0,206
+40.592374,-73.788522,Subway_lines.csv,Beach 60 St,ALine,0,205
+40.590927,-73.796924,Subway_lines.csv,Beach 67 St,ALine,0,204
+40.608382,-73.815925,Subway_lines.csv,Broad Channel,ALine,0,199
+40.660476,-73.830301,Subway_lines.csv,Howard Beach-JFK Airport,ALine,0,198
+40.668234,-73.834058,Subway_lines.csv,Aqueduct-N Conduit Av,ALine,0,197
+40.672097,-73.835919,Subway_lines.csv,Aqueduct Racetrack,ALine,0,196
+40.680429,-73.843853,Subway_lines.csv,Rockaway Blvd,ALine,0,192
+40.679843,-73.85147,Subway_lines.csv,88 St,ALine,0,191
+40.679371,-73.858992,Subway_lines.csv,80 St,ALine,0,190
+40.677044,-73.86505,Subway_lines.csv,Grant Av,ALine,0,189
+40.675377,-73.872106,Subway_lines.csv,Euclid Av,ALine,0,188
+40.67413,-73.88075,Subway_lines.csv,Shepherd Av,ALine,0,187
+40.67271,-73.890358,Subway_lines.csv,Van Siclen Av,ALine,0,186
+40.674542,-73.896548,Subway_lines.csv,Liberty Av,ALine,0,185
+40.678334,-73.905316,Subway_lines.csv,Broadway Junction,ALine,0,621
+40.67834,-73.911946,Subway_lines.csv,Rockaway Av,ALine,0,183
+40.678822,-73.920786,Subway_lines.csv,Ralph Av,ALine,0,182
+40.679921,-73.940858,Subway_lines.csv,Kingston-Throop Avs,ALine,0,180
+40.679364,-73.930729,Subway_lines.csv,Utica Av,ALine,0,181
+40.680438,-73.950426,Subway_lines.csv,Nostrand Av,ALine,0,179
+40.68138,-73.956848,Subway_lines.csv,Franklin Av,ALine,0,627
+40.683263,-73.965838,Subway_lines.csv,Clinton-Washington Avs,ALine,0,177
+40.686113,-73.973946,Subway_lines.csv,Lafayette Av,ALine,0,176
+40.688484,-73.985001,Subway_lines.csv,Hoyt-Schermerhorn Sts,ALine,0,175
+40.692338,-73.987342,Subway_lines.csv,Jay St-MetroTech,ALine,0,636
+40.699337,-73.990531,Subway_lines.csv,High St,ALine,0,173
+40.710197,-74.007691,Subway_lines.csv,Fulton St,ALine,0,628
+40.714111,-74.008585,Subway_lines.csv,Chambers St,ALine,0,624
+40.720824,-74.005229,Subway_lines.csv,Canal St,ALine,0,169
+40.726227,-74.003739,Subway_lines.csv,Spring St,ALine,0,168
+40.732338,-74.000495,Subway_lines.csv,W 4 St-Wash Sq,ALine,0,167
+40.740893,-74.00169,Subway_lines.csv,14 St,ALine,0,618
+40.745906,-73.998041,Subway_lines.csv,23 St,ALine,0,165
+40.752287,-73.993391,Subway_lines.csv,34 St-Penn Station,ALine,0,164
+40.757308,-73.989735,Subway_lines.csv,42 St-Port Authority Bus Terminal,ALine,0,611
+40.762456,-73.985984,Subway_lines.csv,50 St,ALine,0,162
+40.768296,-73.981736,Subway_lines.csv,59 St-Columbus Circle,ALine,0,614
+40.775594,-73.97641,Subway_lines.csv,72 St,ALine,0,160
+40.781433,-73.972143,Subway_lines.csv,81 St-Museum of Natural History,ALine,0,159
+40.785868,-73.968916,Subway_lines.csv,86 St,ALine,0,158
+40.791642,-73.964696,Subway_lines.csv,96 St,ALine,0,157
+40.796092,-73.961454,Subway_lines.csv,103 St,ALine,0,156
+40.800603,-73.958161,Subway_lines.csv,Cathedral Pkwy (110 St),ALine,0,155
+40.805085,-73.954882,Subway_lines.csv,116 St,ALine,0,154
+40.811109,-73.952343,Subway_lines.csv,125 St,ALine,0,153
+40.817894,-73.947649,Subway_lines.csv,135 St,ALine,0,152
+40.824783,-73.944216,Subway_lines.csv,145 St,ALine,0,151
+40.830518,-73.941514,Subway_lines.csv,155 St,ALine,0,150
+40.836013,-73.939892,Subway_lines.csv,163 St-Amsterdam Av,ALine,0,149
+40.840719,-73.939561,Subway_lines.csv,168 St,ALine,0,605
+40.847391,-73.939704,Subway_lines.csv,175 St,ALine,0,147
+40.851695,-73.937969,Subway_lines.csv,181 St,ALine,0,146
+40.859022,-73.93418,Subway_lines.csv,190 St,ALine,0,145
+40.865491,-73.927271,Subway_lines.csv,Dyckman St,ALine,0,144
+40.868072,-73.919899,Subway_lines.csv,Inwood-207 St,ALine,0,143
+40.577621,-73.961376,Subway_lines.csv,Brighton Beach,BLine,0,55
+40.586896,-73.954155,Subway_lines.csv,Sheepshead Bay,BLine,0,54
+40.60867,-73.957734,Subway_lines.csv,Kings Hwy,BLine,0,51
+40.635082,-73.962793,Subway_lines.csv,Newkirk Plaza,BLine,0,47
+40.650527,-73.962982,Subway_lines.csv,Church Av,BLine,0,44
+40.661614,-73.962246,Subway_lines.csv,Prospect Park,BLine,0,42
+40.67705,-73.972367,Subway_lines.csv,7 Av,BLine,0,41
+40.68446,-73.97689,Subway_lines.csv,Atlantic Av-Barclays Ctr,BLine,0,617
+40.690635,-73.981824,Subway_lines.csv,DeKalb Av,BLine,0,26
+40.718267,-73.993753,Subway_lines.csv,Grand St,BLine,0,231
+40.725297,-73.996204,Subway_lines.csv,Broadway-Lafayette St,BLine,0,619
+40.732338,-74.000495,Subway_lines.csv,W 4 St-Wash Sq,BLine,0,167
+40.749719,-73.987823,Subway_lines.csv,34 St-Herald Sq,BLine,0,607
+40.754222,-73.984569,Subway_lines.csv,42 St-Bryant Pk,BLine,0,609
+40.758663,-73.981329,Subway_lines.csv,47-50 Sts-Rockefeller Ctr,BLine,0,225
+40.762862,-73.981637,Subway_lines.csv,7 Av,BLine,0,277
+40.768296,-73.981736,Subway_lines.csv,59 St-Columbus Circle,BLine,0,614
+40.775594,-73.97641,Subway_lines.csv,72 St,BLine,0,160
+40.781433,-73.972143,Subway_lines.csv,81 St-Museum of Natural History,BLine,0,159
+40.785868,-73.968916,Subway_lines.csv,86 St,BLine,0,158
+40.791642,-73.964696,Subway_lines.csv,96 St,BLine,0,157
+40.796092,-73.961454,Subway_lines.csv,103 St,BLine,0,156
+40.800603,-73.958161,Subway_lines.csv,Cathedral Pkwy (110 St),BLine,0,155
+40.805085,-73.954882,Subway_lines.csv,116 St,BLine,0,154
+40.811109,-73.952343,Subway_lines.csv,125 St,BLine,0,153
+40.817894,-73.947649,Subway_lines.csv,135 St,BLine,0,152
+40.824783,-73.944216,Subway_lines.csv,145 St,BLine,0,151
+40.830135,-73.938209,Subway_lines.csv,155 St,BLine,0,220
+40.827905,-73.925651,Subway_lines.csv,161 St-Yankee Stadium,BLine,0,604
+40.833771,-73.91844,Subway_lines.csv,167 St,BLine,0,218
+40.839306,-73.9134,Subway_lines.csv,170 St,BLine,0,217
+40.8459,-73.910136,Subway_lines.csv,174-175 Sts,BLine,0,216
+40.85041,-73.905227,Subway_lines.csv,Tremont Av,BLine,0,215
+40.856093,-73.900741,Subway_lines.csv,182-183 Sts,BLine,0,214
+40.861296,-73.897749,Subway_lines.csv,Fordham Rd,BLine,0,213
+40.866978,-73.893509,Subway_lines.csv,Kingsbridge Rd,BLine,0,212
+40.873244,-73.887138,Subway_lines.csv,Bedford Park Blvd,BLine,0,211
+40.675377,-73.872106,Subway_lines.csv,Euclid Av,CLine,0,188
+40.67413,-73.88075,Subway_lines.csv,Shepherd Av,CLine,0,187
+40.67271,-73.890358,Subway_lines.csv,Van Siclen Av,CLine,0,186
+40.674542,-73.896548,Subway_lines.csv,Liberty Av,CLine,0,185
+40.678334,-73.905316,Subway_lines.csv,Broadway Junction,CLine,0,621
+40.67834,-73.911946,Subway_lines.csv,Rockaway Av,CLine,0,183
+40.678822,-73.920786,Subway_lines.csv,Ralph Av,CLine,0,182
+40.679364,-73.930729,Subway_lines.csv,Utica Av,CLine,0,181
+40.679921,-73.940858,Subway_lines.csv,Kingston-Throop Avs,CLine,0,180
+40.680438,-73.950426,Subway_lines.csv,Nostrand Av,CLine,0,179
+40.68138,-73.956848,Subway_lines.csv,Franklin Av,CLine,0,627
+40.683263,-73.965838,Subway_lines.csv,Clinton-Washington Avs,CLine,0,177
+40.686113,-73.973946,Subway_lines.csv,Lafayette Av,CLine,0,176
+40.688484,-73.985001,Subway_lines.csv,Hoyt-Schermerhorn Sts,CLine,0,175
+40.692338,-73.987342,Subway_lines.csv,Jay St-MetroTech,CLine,0,636
+40.699337,-73.990531,Subway_lines.csv,High St,CLine,0,173
+40.710197,-74.007691,Subway_lines.csv,Fulton St,CLine,0,628
+40.714111,-74.008585,Subway_lines.csv,Chambers St,CLine,0,624
+40.720824,-74.005229,Subway_lines.csv,Canal St,CLine,0,169
+40.726227,-74.003739,Subway_lines.csv,Spring St,CLine,0,168
+40.732338,-74.000495,Subway_lines.csv,W 4 St-Wash Sq,CLine,0,167
+40.740893,-74.00169,Subway_lines.csv,14 St,CLine,0,618
+40.745906,-73.998041,Subway_lines.csv,23 St,CLine,0,165
+40.752287,-73.993391,Subway_lines.csv,34 St-Penn Station,CLine,0,164
+40.757308,-73.989735,Subway_lines.csv,42 St-Port Authority Bus Terminal,CLine,0,611
+40.762456,-73.985984,Subway_lines.csv,50 St,CLine,0,162
+40.768296,-73.981736,Subway_lines.csv,59 St-Columbus Circle,CLine,0,614
+40.775594,-73.97641,Subway_lines.csv,72 St,CLine,0,160
+40.781433,-73.972143,Subway_lines.csv,81 St-Museum of Natural History,CLine,0,159
+40.785868,-73.968916,Subway_lines.csv,86 St,CLine,0,158
+40.791642,-73.964696,Subway_lines.csv,96 St,CLine,0,157
+40.796092,-73.961454,Subway_lines.csv,103 St,CLine,0,156
+40.800603,-73.958161,Subway_lines.csv,Cathedral Pkwy (110 St),CLine,0,155
+40.805085,-73.954882,Subway_lines.csv,116 St,CLine,0,154
+40.811109,-73.952343,Subway_lines.csv,125 St,CLine,0,153
+40.817894,-73.947649,Subway_lines.csv,135 St,CLine,0,152
+40.824783,-73.944216,Subway_lines.csv,145 St,CLine,0,151
+40.830518,-73.941514,Subway_lines.csv,155 St,CLine,0,150
+40.836013,-73.939892,Subway_lines.csv,163 St-Amsterdam Av,CLine,0,149
+40.840719,-73.939561,Subway_lines.csv,168 St,CLine,0,605
+40.577422,-73.981233,Subway_lines.csv,Coney Island-Stillwell Av,DLine,0,58
+40.588841,-73.983765,Subway_lines.csv,Bay 50 St,DLine,0,70
+40.597704,-73.986829,Subway_lines.csv,25 Av,DLine,0,69
+40.601875,-73.993728,Subway_lines.csv,Bay Pkwy,DLine,0,68
+40.604556,-73.998168,Subway_lines.csv,20 Av,DLine,0,67
+40.607954,-74.001736,Subway_lines.csv,18 Av,DLine,0,66
+40.613501,-74.00061,Subway_lines.csv,79 St,DLine,0,65
+40.619589,-73.998864,Subway_lines.csv,71 St,DLine,0,64
+40.626472,-73.996895,Subway_lines.csv,62 St,DLine,0,615
+40.631435,-73.995476,Subway_lines.csv,55 St,DLine,0,62
+40.63626,-73.994791,Subway_lines.csv,50 St,DLine,0,61
+40.640914,-73.994304,Subway_lines.csv,Fort Hamilton Pkwy,DLine,0,60
+40.646292,-73.994324,Subway_lines.csv,9 Av,DLine,0,59
+40.655144,-74.003549,Subway_lines.csv,36 St,DLine,0,32
+40.660397,-73.998091,Subway_lines.csv,25 St,DLine,0,31
+40.665414,-73.992872,Subway_lines.csv,Prospect Av,DLine,0,30
+40.670847,-73.988302,Subway_lines.csv,4 Av-9 St,DLine,0,608
+40.677316,-73.98311,Subway_lines.csv,Union St,DLine,0,28
+40.683666,-73.97881,Subway_lines.csv,Atlantic Av-Barclays Ctr,DLine,0,617
+40.690635,-73.981824,Subway_lines.csv,DeKalb Av,DLine,0,26
+40.718267,-73.993753,Subway_lines.csv,Grand St,DLine,0,231
+40.725297,-73.996204,Subway_lines.csv,Broadway-Lafayette St,DLine,0,619
+40.732338,-74.000495,Subway_lines.csv,W 4 St-Wash Sq,DLine,0,167
+40.749719,-73.987823,Subway_lines.csv,34 St-Herald Sq,DLine,0,607
+40.754222,-73.984569,Subway_lines.csv,42 St-Bryant Pk,DLine,0,609
+40.758663,-73.981329,Subway_lines.csv,47-50 Sts-Rockefeller Ctr,DLine,0,225
+40.762862,-73.981637,Subway_lines.csv,7 Av,DLine,0,277
+40.768296,-73.981736,Subway_lines.csv,59 St-Columbus Circle,DLine,0,614
+40.811109,-73.952343,Subway_lines.csv,125 St,DLine,0,153
+40.824783,-73.944216,Subway_lines.csv,145 St,DLine,0,151
+40.830135,-73.938209,Subway_lines.csv,155 St,DLine,0,220
+40.827905,-73.925651,Subway_lines.csv,161 St-Yankee Stadium,DLine,0,604
+40.833771,-73.91844,Subway_lines.csv,167 St,DLine,0,218
+40.839306,-73.9134,Subway_lines.csv,170 St,DLine,0,217
+40.8459,-73.910136,Subway_lines.csv,174-175 Sts,DLine,0,216
+40.85041,-73.905227,Subway_lines.csv,Tremont Av,DLine,0,215
+40.856093,-73.900741,Subway_lines.csv,182-183 Sts,DLine,0,214
+40.861296,-73.897749,Subway_lines.csv,Fordham Rd,DLine,0,213
+40.866978,-73.893509,Subway_lines.csv,Kingsbridge Rd,DLine,0,212
+40.873244,-73.887138,Subway_lines.csv,Bedford Park Blvd,DLine,0,211
+40.874811,-73.878855,Subway_lines.csv,Norwood-205 St,DLine,0,210
+40.702147,-73.801109,Subway_lines.csv,Jamaica Center-Parsons/Archer,ELine,0,278
+40.700486,-73.807969,Subway_lines.csv,Sutphin Blvd-Archer Av-JFK Airport,ELine,0,279
+40.702566,-73.816859,Subway_lines.csv,Jamaica-Van Wyck,ELine,0,280
+40.709179,-73.820574,Subway_lines.csv,Briarwood,ELine,0,258
+40.714441,-73.831008,Subway_lines.csv,Kew Gardens-Union Tpke,ELine,0,259
+40.718331,-73.837324,Subway_lines.csv,75 Av,ELine,0,260
+40.721691,-73.844521,Subway_lines.csv,Forest Hills-71 Av,ELine,0,261
+40.726523,-73.852719,Subway_lines.csv,67 Av,ELine,0,262
+40.729846,-73.861604,Subway_lines.csv,63 Dr-Rego Park,ELine,0,263
+40.733106,-73.869229,Subway_lines.csv,Woodhaven Blvd,ELine,0,264
+40.737015,-73.877223,Subway_lines.csv,Grand Av-Newtown,ELine,0,265
+40.742454,-73.882017,Subway_lines.csv,Elmhurst Av,ELine,0,266
+40.746644,-73.891338,Subway_lines.csv,Jackson Hts-Roosevelt Av,ELine,0,616
+40.749669,-73.898453,Subway_lines.csv,65 St,ELine,0,268
+40.752885,-73.906006,Subway_lines.csv,Northern Blvd,ELine,0,269
+40.756312,-73.913333,Subway_lines.csv,46 St,ELine,0,270
+40.756879,-73.92074,Subway_lines.csv,Steinway St,ELine,0,271
+40.752039,-73.928781,Subway_lines.csv,36 St,ELine,0,272
+40.748973,-73.937243,Subway_lines.csv,Queens Plaza,ELine,0,273
+40.747846,-73.946,Subway_lines.csv,Court Sq-23 St,ELine,0,606
+40.757552,-73.969055,Subway_lines.csv,Lexington Av/53 St,ELine,0,612
+40.760167,-73.975224,Subway_lines.csv,5 Av/53 St,ELine,0,276
+40.762862,-73.981637,Subway_lines.csv,7 Av,ELine,0,277
+40.762456,-73.985984,Subway_lines.csv,50 St,ELine,0,162
+40.757308,-73.989735,Subway_lines.csv,42 St-Port Authority Bus Terminal,ELine,0,611
+40.752287,-73.993391,Subway_lines.csv,34 St-Penn Station,ELine,0,164
+40.745906,-73.998041,Subway_lines.csv,23 St,ELine,0,165
+40.740893,-74.00169,Subway_lines.csv,14 St,ELine,0,618
+40.732338,-74.000495,Subway_lines.csv,W 4 St-Wash Sq,ELine,0,167
+40.726227,-74.003739,Subway_lines.csv,Spring St,ELine,0,168
+40.720824,-74.005229,Subway_lines.csv,Canal St,ELine,0,169
+40.712582,-74.009781,Subway_lines.csv,World Trade Center,ELine,0,624
+40.577422,-73.981233,Subway_lines.csv,Coney Island-Stillwell Av,FLine,0,58
+40.576127,-73.975939,Subway_lines.csv,W 8 St-NY Aquarium,FLine,0,57
+40.581011,-73.974574,Subway_lines.csv,Neptune Av,FLine,0,253
+40.58962,-73.97425,Subway_lines.csv,Avenue X,FLine,0,252
+40.596063,-73.973357,Subway_lines.csv,Avenue U,FLine,0,251
+40.603217,-73.972361,Subway_lines.csv,Kings Hwy,FLine,0,250
+40.608944,-73.973022,Subway_lines.csv,Avenue P,FLine,0,249
+40.61514,-73.974197,Subway_lines.csv,Avenue N,FLine,0,248
+40.620769,-73.975264,Subway_lines.csv,Bay Pkwy,FLine,0,247
+40.625322,-73.976127,Subway_lines.csv,Avenue I,FLine,0,246
+40.629755,-73.976971,Subway_lines.csv,18 Av,FLine,0,245
+40.636119,-73.978172,Subway_lines.csv,Ditmas Av,FLine,0,244
+40.644041,-73.979678,Subway_lines.csv,Church Av,FLine,0,243
+40.650782,-73.975776,Subway_lines.csv,Fort Hamilton Pkwy,FLine,0,242
+40.660365,-73.979493,Subway_lines.csv,15 St-Prospect Park,FLine,0,241
+40.666271,-73.980305,Subway_lines.csv,7 Av,FLine,0,240
+40.670272,-73.989779,Subway_lines.csv,4 Av-9 St,FLine,0,608
+40.67358,-73.995959,Subway_lines.csv,Smith-9 Sts,FLine,0,238
+40.680303,-73.995048,Subway_lines.csv,Carroll St,FLine,0,237
+40.686145,-73.990862,Subway_lines.csv,Bergen St,FLine,0,236
+40.692338,-73.987342,Subway_lines.csv,Jay St-MetroTech,FLine,0,636
+40.701397,-73.986751,Subway_lines.csv,York St,FLine,0,235
+40.713715,-73.990173,Subway_lines.csv,East Broadway,FLine,0,234
+40.718611,-73.988114,Subway_lines.csv,Delancey St-Essex St,FLine,0,625
+40.723402,-73.989938,Subway_lines.csv,2 Av,FLine,0,232
+40.725297,-73.996204,Subway_lines.csv,Broadway-Lafayette St,FLine,0,619
+40.732338,-74.000495,Subway_lines.csv,W 4 St-Wash Sq,FLine,0,167
+40.738228,-73.996209,Subway_lines.csv,14 St,FLine,0,601
+40.742878,-73.992821,Subway_lines.csv,23 St,FLine,0,228
+40.749719,-73.987823,Subway_lines.csv,34 St-Herald Sq,FLine,0,607
+40.754222,-73.984569,Subway_lines.csv,42 St-Bryant Pk,FLine,0,609
+40.758663,-73.981329,Subway_lines.csv,47-50 Sts-Rockefeller Ctr,FLine,0,225
+40.763972,-73.97745,Subway_lines.csv,57 St,FLine,0,224
+40.764629,-73.966113,Subway_lines.csv,Lexington Av/63 St,FLine,0,223
+40.759145,-73.95326,Subway_lines.csv,Roosevelt Island,FLine,0,222
+40.754203,-73.942836,Subway_lines.csv,21 St-Queensbridge,FLine,0,221
+40.746644,-73.891338,Subway_lines.csv,Jackson Hts-Roosevelt Av,FLine,0,616
+40.721691,-73.844521,Subway_lines.csv,Forest Hills-71 Av,FLine,0,261
+40.718331,-73.837324,Subway_lines.csv,75 Av,FLine,0,260
+40.714441,-73.831008,Subway_lines.csv,Kew Gardens-Union Tpke,FLine,0,259
+40.709179,-73.820574,Subway_lines.csv,Briarwood,FLine,0,258
+40.70546,-73.810708,Subway_lines.csv,Sutphin Blvd,FLine,0,257
+40.707564,-73.803326,Subway_lines.csv,Parsons Blvd,FLine,0,256
+40.71047,-73.793604,Subway_lines.csv,169 St,FLine,0,255
+40.712646,-73.783817,Subway_lines.csv,Jamaica-179 St,FLine,0,254
+40.644041,-73.979678,Subway_lines.csv,Church Av,GLine,0,243
+40.650782,-73.975776,Subway_lines.csv,Fort Hamilton Pkwy,GLine,0,242
+40.660365,-73.979493,Subway_lines.csv,15 St-Prospect Park,GLine,0,241
+40.666271,-73.980305,Subway_lines.csv,7 Av,GLine,0,240
+40.670272,-73.989779,Subway_lines.csv,4 Av-9 St,GLine,0,608
+40.67358,-73.995959,Subway_lines.csv,Smith-9 Sts,GLine,0,238
+40.680303,-73.995048,Subway_lines.csv,Carroll St,GLine,0,237
+40.686145,-73.990862,Subway_lines.csv,Bergen St,GLine,0,236
+40.688484,-73.985001,Subway_lines.csv,Hoyt-Schermerhorn Sts,GLine,0,175
+40.687119,-73.975375,Subway_lines.csv,Fulton St,GLine,0,292
+40.688089,-73.966839,Subway_lines.csv,Clinton-Washington Avs,GLine,0,291
+40.688873,-73.96007,Subway_lines.csv,Classon Av,GLine,0,290
+40.689627,-73.953522,Subway_lines.csv,Bedford-Nostrand Avs,GLine,0,289
+40.694568,-73.949046,Subway_lines.csv,Myrtle-Willoughby Avs,GLine,0,288
+40.700377,-73.950234,Subway_lines.csv,Flushing Av,GLine,0,287
+40.706092,-73.950308,Subway_lines.csv,Broadway,GLine,0,286
+40.712792,-73.951418,Subway_lines.csv,Metropolitan Av,GLine,0,629
+40.724635,-73.951277,Subway_lines.csv,Nassau Av,GLine,0,284
+40.731352,-73.954449,Subway_lines.csv,Greenpoint Av,GLine,0,283
+40.744065,-73.949724,Subway_lines.csv,21 St,GLine,0,282
+40.746554,-73.943832,Subway_lines.csv,Court Sq,GLine,0,606
+40.706476,-74.011056,Subway_lines.csv,Broad St,JLine,0,107
+40.710197,-74.007691,Subway_lines.csv,Fulton St,JLine,0,628
+40.713243,-74.003401,Subway_lines.csv,Chambers St,JLine,0,622
+40.718092,-73.999892,Subway_lines.csv,Canal St,JLine,0,623
+40.72028,-73.993915,Subway_lines.csv,Bowery,JLine,0,103
+40.718315,-73.987437,Subway_lines.csv,Delancey St-Essex St,JLine,0,625
+40.708359,-73.957757,Subway_lines.csv,Marcy Av,JLine,0,101
+40.70687,-73.953431,Subway_lines.csv,Hewes St,JLine,0,100
+40.703869,-73.947408,Subway_lines.csv,Lorimer St,JLine,0,99
+40.70026,-73.941126,Subway_lines.csv,Flushing Av,JLine,0,98
+40.697207,-73.935657,Subway_lines.csv,Myrtle Av,JLine,0,97
+40.693342,-73.928814,Subway_lines.csv,Kosciuszko St,JLine,0,96
+40.68963,-73.92227,Subway_lines.csv,Gates Av,JLine,0,95
+40.68637,-73.916559,Subway_lines.csv,Halsey St,JLine,0,94
+40.682893,-73.910456,Subway_lines.csv,Chauncey St,JLine,0,93
+40.676992,-73.898654,Subway_lines.csv,Alabama Av,JLine,0,91
+40.678024,-73.891688,Subway_lines.csv,Van Siclen Av,JLine,0,90
+40.679947,-73.884639,Subway_lines.csv,Cleveland St,JLine,0,89
+40.68141,-73.880039,Subway_lines.csv,Norwood Av,JLine,0,88
+40.683194,-73.873785,Subway_lines.csv,Crescent St,JLine,0,87
+40.689941,-73.87255,Subway_lines.csv,Cypress Hills,JLine,0,86
+40.691324,-73.867139,Subway_lines.csv,75 St-Elderts Ln,JLine,0,85
+40.692435,-73.86001,Subway_lines.csv,85 St-Forest Pkwy,JLine,0,84
+40.693879,-73.851576,Subway_lines.csv,Woodhaven Blvd,JLine,0,83
+40.695178,-73.84433,Subway_lines.csv,104 St,JLine,0,82
+40.697418,-73.836345,Subway_lines.csv,111 St,JLine,0,81
+40.700492,-73.828294,Subway_lines.csv,121 St,JLine,0,80
+40.700486,-73.807969,Subway_lines.csv,Sutphin Blvd-Archer Av-JFK Airport,JLine,0,279
+40.702147,-73.801109,Subway_lines.csv,Jamaica Center-Parsons/Archer,JLine,0,278
+40.646654,-73.90185,Subway_lines.csv,Canarsie-Rockaway Pkwy,LLine,0,138
+40.650573,-73.899485,Subway_lines.csv,East 105 St,LLine,0,137
+40.658733,-73.899232,Subway_lines.csv,New Lots Av,LLine,0,136
+40.664038,-73.900571,Subway_lines.csv,Livonia Av,LLine,0,135
+40.669367,-73.901975,Subway_lines.csv,Sutter Av,LLine,0,134
+40.675345,-73.903097,Subway_lines.csv,Atlantic Av,LLine,0,133
+40.678856,-73.90324,Subway_lines.csv,Broadway Junction,LLine,0,621
+40.682829,-73.905249,Subway_lines.csv,Bushwick Av-Aberdeen St,LLine,0,131
+40.688764,-73.904046,Subway_lines.csv,Wilson Av,LLine,0,130
+40.695602,-73.904084,Subway_lines.csv,Halsey St,LLine,0,129
+40.699814,-73.911586,Subway_lines.csv,Myrtle-Wyckoff Avs,LLine,0,630
+40.703811,-73.918425,Subway_lines.csv,DeKalb Av,LLine,0,127
+40.706607,-73.922913,Subway_lines.csv,Jefferson St,LLine,0,126
+40.706152,-73.933147,Subway_lines.csv,Morgan Av,LLine,0,125
+40.707739,-73.93985,Subway_lines.csv,Montrose Av,LLine,0,124
+40.711926,-73.94067,Subway_lines.csv,Grand St,LLine,0,123
+40.714565,-73.944053,Subway_lines.csv,Graham Av,LLine,0,122
+40.714063,-73.950275,Subway_lines.csv,Lorimer St,LLine,0,629
+40.717304,-73.956872,Subway_lines.csv,Bedford Av,LLine,0,120
+40.730953,-73.981628,Subway_lines.csv,1 Av,LLine,0,119
+40.732849,-73.986122,Subway_lines.csv,3 Av,LLine,0,118
+40.734789,-73.99073,Subway_lines.csv,14 St-Union Sq,LLine,0,602
+40.737335,-73.996786,Subway_lines.csv,6 Av,LLine,0,601
+40.739777,-74.002578,Subway_lines.csv,8 Av,LLine,0,618
+40.711396,-73.889601,Subway_lines.csv,Middle Village-Metropolitan Av,MLine,0,108
+40.706186,-73.895877,Subway_lines.csv,Fresh Pond Rd,MLine,0,109
+40.704423,-73.903077,Subway_lines.csv,Forest Av,MLine,0,110
+40.702762,-73.90774,Subway_lines.csv,Seneca Av,MLine,0,111
+40.69943,-73.912385,Subway_lines.csv,Myrtle-Wyckoff Avs,MLine,0,630
+40.698664,-73.919711,Subway_lines.csv,Knickerbocker Av,MLine,0,113
+40.697857,-73.927397,Subway_lines.csv,Central Av,MLine,0,114
+40.697207,-73.935657,Subway_lines.csv,Myrtle Av,MLine,0,97
+40.70026,-73.941126,Subway_lines.csv,Flushing Av,MLine,0,98
+40.703869,-73.947408,Subway_lines.csv,Lorimer St,MLine,0,99
+40.70687,-73.953431,Subway_lines.csv,Hewes St,MLine,0,100
+40.708359,-73.957757,Subway_lines.csv,Marcy Av,MLine,0,101
+40.718315,-73.987437,Subway_lines.csv,Delancey St-Essex St,MLine,0,625
+40.725297,-73.996204,Subway_lines.csv,Broadway-Lafayette St,MLine,0,619
+40.732338,-74.000495,Subway_lines.csv,W 4 St-Wash Sq,MLine,0,167
+40.738228,-73.996209,Subway_lines.csv,14 St,MLine,0,601
+40.742878,-73.992821,Subway_lines.csv,23 St,MLine,0,228
+40.749719,-73.987823,Subway_lines.csv,34 St-Herald Sq,MLine,0,607
+40.754222,-73.984569,Subway_lines.csv,42 St-Bryant Pk,MLine,0,609
+40.758663,-73.981329,Subway_lines.csv,47-50 Sts-Rockefeller Ctr,MLine,0,225
+40.760167,-73.975224,Subway_lines.csv,5 Av/53 St,MLine,0,276
+40.757552,-73.969055,Subway_lines.csv,Lexington Av/53 St,MLine,0,612
+40.747846,-73.946,Subway_lines.csv,Court Sq-23 St,MLine,0,606
+40.748973,-73.937243,Subway_lines.csv,Queens Plaza,MLine,0,273
+40.752039,-73.928781,Subway_lines.csv,36 St,MLine,0,272
+40.756879,-73.92074,Subway_lines.csv,Steinway St,MLine,0,271
+40.756312,-73.913333,Subway_lines.csv,46 St,MLine,0,270
+40.752885,-73.906006,Subway_lines.csv,Northern Blvd,MLine,0,269
+40.749669,-73.898453,Subway_lines.csv,65 St,MLine,0,268
+40.746644,-73.891338,Subway_lines.csv,Jackson Hts-Roosevelt Av,MLine,0,616
+40.742454,-73.882017,Subway_lines.csv,Elmhurst Av,MLine,0,266
+40.737015,-73.877223,Subway_lines.csv,Grand Av-Newtown,MLine,0,265
+40.733106,-73.869229,Subway_lines.csv,Woodhaven Blvd,MLine,0,264
+40.729846,-73.861604,Subway_lines.csv,63 Dr-Rego Park,MLine,0,263
+40.726523,-73.852719,Subway_lines.csv,67 Av,MLine,0,262
+40.721691,-73.844521,Subway_lines.csv,Forest Hills-71 Av,MLine,0,261
+40.577422,-73.981233,Subway_lines.csv,Coney Island-Stillwell Av,NLine,0,58
+40.592721,-73.97823,Subway_lines.csv,86 St,NLine,0,79
+40.597473,-73.979137,Subway_lines.csv,Avenue U,NLine,0,78
+40.603923,-73.980353,Subway_lines.csv,Kings Hwy,NLine,0,77
+40.611815,-73.981848,Subway_lines.csv,Bay Pkwy,NLine,0,76
+40.61741,-73.985026,Subway_lines.csv,20 Av,NLine,0,75
+40.620671,-73.990414,Subway_lines.csv,18 Av,NLine,0,74
+40.624842,-73.996353,Subway_lines.csv,New Utrecht Av,NLine,0,615
+40.631386,-74.005351,Subway_lines.csv,Fort Hamilton Pkwy,NLine,0,72
+40.635064,-74.011719,Subway_lines.csv,8 Av,NLine,0,71
+40.641362,-74.017881,Subway_lines.csv,59 St,NLine,0,35
+40.645069,-74.014034,Subway_lines.csv,53 St,NLine,0,34
+40.648939,-74.010006,Subway_lines.csv,45 St,NLine,0,33
+40.655144,-74.003549,Subway_lines.csv,36 St,NLine,0,32
+40.660397,-73.998091,Subway_lines.csv,25 St,NLine,0,31
+40.665414,-73.992872,Subway_lines.csv,Prospect Av,NLine,0,30
+40.670847,-73.988302,Subway_lines.csv,4 Av-9 St,NLine,0,608
+40.677316,-73.98311,Subway_lines.csv,Union St,NLine,0,28
+40.683666,-73.97881,Subway_lines.csv,Atlantic Av-Barclays Ctr,NLine,0,617
+40.690635,-73.981824,Subway_lines.csv,DeKalb Av,NLine,0,26
+40.69218,-73.985942,Subway_lines.csv,Jay St-MetroTech,NLine,0,636
+40.6941,-73.991777,Subway_lines.csv,Court St,NLine,0,620
+40.718383,-74.00046,Subway_lines.csv,Canal St,NLine,0,623
+40.724329,-73.997702,Subway_lines.csv,Prince St,NLine,0,17
+40.730328,-73.992629,Subway_lines.csv,8 St-NYU,NLine,0,16
+40.735736,-73.990568,Subway_lines.csv,14 St-Union Sq,NLine,0,602
+40.741303,-73.989344,Subway_lines.csv,23 St,NLine,0,14
+40.745494,-73.988691,Subway_lines.csv,28 St,NLine,0,13
+40.749567,-73.98795,Subway_lines.csv,34 St-Herald Sq,NLine,0,607
+40.754672,-73.986754,Subway_lines.csv,Times Sq-42 St,NLine,0,611
+40.759901,-73.984139,Subway_lines.csv,49 St,NLine,0,10
+40.764664,-73.980658,Subway_lines.csv,57 St-7 Av,NLine,0,9
+40.764811,-73.973347,Subway_lines.csv,5 Av/59 St,NLine,0,8
+40.76266,-73.967258,Subway_lines.csv,Lexington Av/59 St,NLine,0,613
+40.750582,-73.940202,Subway_lines.csv,Queensboro Plaza,NLine,0,461
+40.752882,-73.932755,Subway_lines.csv,39 Av-Dutch Kills,NLine,0,6
+40.756804,-73.929575,Subway_lines.csv,36 Av,NLine,0,5
+40.76182,-73.925508,Subway_lines.csv,Broadway,NLine,0,4
+40.766779,-73.921479,Subway_lines.csv,30 Av,NLine,0,3
+40.770258,-73.917843,Subway_lines.csv,Astoria Blvd,NLine,0,2
+40.775036,-73.912034,Subway_lines.csv,Astoria-Ditmars Blvd,NLine,0,1
+40.577422,-73.981233,Subway_lines.csv,Coney Island-Stillwell Av,QLine,0,58
+40.576127,-73.975939,Subway_lines.csv,W 8 St-NY Aquarium,QLine,0,57
+40.576312,-73.968501,Subway_lines.csv,Ocean Pkwy,QLine,0,56
+40.577621,-73.961376,Subway_lines.csv,Brighton Beach,QLine,0,55
+40.586896,-73.954155,Subway_lines.csv,Sheepshead Bay,QLine,0,54
+40.595246,-73.955161,Subway_lines.csv,Neck Rd,QLine,0,53
+40.5993,-73.955929,Subway_lines.csv,Avenue U,QLine,0,52
+40.60867,-73.957734,Subway_lines.csv,Kings Hwy,QLine,0,51
+40.617618,-73.959399,Subway_lines.csv,Avenue M,QLine,0,50
+40.625039,-73.960803,Subway_lines.csv,Avenue J,QLine,0,49
+40.62927,-73.961639,Subway_lines.csv,Avenue H,QLine,0,48
+40.635082,-73.962793,Subway_lines.csv,Newkirk Plaza,QLine,0,47
+40.640927,-73.963891,Subway_lines.csv,Cortelyou Rd,QLine,0,46
+40.644031,-73.964492,Subway_lines.csv,Beverley Rd,QLine,0,45
+40.650527,-73.962982,Subway_lines.csv,Church Av,QLine,0,44
+40.655292,-73.961495,Subway_lines.csv,Parkside Av,QLine,0,43
+40.661614,-73.962246,Subway_lines.csv,Prospect Park,QLine,0,42
+40.67705,-73.972367,Subway_lines.csv,7 Av,QLine,0,41
+40.683666,-73.97881,Subway_lines.csv,Atlantic Av-Barclays Ctr,QLine,0,617
+40.68446,-73.97689,Subway_lines.csv,Atlantic Av-Barclays Ctr,QLine,0,617
+40.690635,-73.981824,Subway_lines.csv,DeKalb Av,QLine,0,26
+40.718383,-74.00046,Subway_lines.csv,Canal St,QLine,0,623
+40.724329,-73.997702,Subway_lines.csv,Prince St,QLine,0,17
+40.730328,-73.992629,Subway_lines.csv,8 St-NYU,QLine,0,16
+40.735736,-73.990568,Subway_lines.csv,14 St-Union Sq,QLine,0,602
+40.741303,-73.989344,Subway_lines.csv,23 St,QLine,0,14
+40.745494,-73.988691,Subway_lines.csv,28 St,QLine,0,13
+40.749567,-73.98795,Subway_lines.csv,34 St-Herald Sq,QLine,0,607
+40.754672,-73.986754,Subway_lines.csv,Times Sq-42 St,QLine,0,611
+40.759901,-73.984139,Subway_lines.csv,49 St,QLine,0,10
+40.764664,-73.980658,Subway_lines.csv,57 St-7 Av,QLine,0,9
+40.764629,-73.966113,Subway_lines.csv,Lexington Av/63 St,QLine,0,223
+40.768799,-73.958424,Subway_lines.csv,72 St,QLine,0,477
+40.777891,-73.951787,Subway_lines.csv,86 St,QLine,0,476
+40.784318,-73.947152,Subway_lines.csv,96 St,QLine,0,475
+40.616622,-74.030876,Subway_lines.csv,Bay Ridge-95 St,RLine,0,39
+40.622687,-74.028398,Subway_lines.csv,86 St,RLine,0,38
+40.629742,-74.02551,Subway_lines.csv,77 St,RLine,0,37
+40.634967,-74.023377,Subway_lines.csv,Bay Ridge Av,RLine,0,36
+40.641362,-74.017881,Subway_lines.csv,59 St,RLine,0,35
+40.645069,-74.014034,Subway_lines.csv,53 St,RLine,0,34
+40.648939,-74.010006,Subway_lines.csv,45 St,RLine,0,33
+40.655144,-74.003549,Subway_lines.csv,36 St,RLine,0,32
+40.660397,-73.998091,Subway_lines.csv,25 St,RLine,0,31
+40.665414,-73.992872,Subway_lines.csv,Prospect Av,RLine,0,30
+40.670847,-73.988302,Subway_lines.csv,4 Av-9 St,RLine,0,608
+40.677316,-73.98311,Subway_lines.csv,Union St,RLine,0,28
+40.683666,-73.97881,Subway_lines.csv,Atlantic Av-Barclays Ctr,RLine,0,617
+40.690635,-73.981824,Subway_lines.csv,DeKalb Av,RLine,0,26
+40.69218,-73.985942,Subway_lines.csv,Jay St-MetroTech,RLine,0,636
+40.6941,-73.991777,Subway_lines.csv,Court St,RLine,0,620
+40.703087,-74.012994,Subway_lines.csv,Whitehall St-South Ferry,RLine,0,635
+40.70722,-74.013342,Subway_lines.csv,Rector St,RLine,0,22
+40.710668,-74.011029,Subway_lines.csv,Cortlandt St,RLine,0,624
+40.713282,-74.006978,Subway_lines.csv,City Hall,RLine,0,20
+40.719527,-74.001775,Subway_lines.csv,Canal St,RLine,0,623
+40.724329,-73.997702,Subway_lines.csv,Prince St,RLine,0,17
+40.730328,-73.992629,Subway_lines.csv,8 St-NYU,RLine,0,16
+40.735736,-73.990568,Subway_lines.csv,14 St-Union Sq,RLine,0,602
+40.741303,-73.989344,Subway_lines.csv,23 St,RLine,0,14
+40.745494,-73.988691,Subway_lines.csv,28 St,RLine,0,13
+40.749567,-73.98795,Subway_lines.csv,34 St-Herald Sq,RLine,0,607
+40.754672,-73.986754,Subway_lines.csv,Times Sq-42 St,RLine,0,611
+40.759901,-73.984139,Subway_lines.csv,49 St,RLine,0,10
+40.764664,-73.980658,Subway_lines.csv,57 St-7 Av,RLine,0,9
+40.764811,-73.973347,Subway_lines.csv,5 Av/59 St,RLine,0,8
+40.76266,-73.967258,Subway_lines.csv,Lexington Av/59 St,RLine,0,613
+40.748973,-73.937243,Subway_lines.csv,Queens Plaza,RLine,0,273
+40.752039,-73.928781,Subway_lines.csv,36 St,RLine,0,272
+40.756879,-73.92074,Subway_lines.csv,Steinway St,RLine,0,271
+40.756312,-73.913333,Subway_lines.csv,46 St,RLine,0,270
+40.752885,-73.906006,Subway_lines.csv,Northern Blvd,RLine,0,269
+40.749669,-73.898453,Subway_lines.csv,65 St,RLine,0,268
+40.746644,-73.891338,Subway_lines.csv,Jackson Hts-Roosevelt Av,RLine,0,616
+40.742454,-73.882017,Subway_lines.csv,Elmhurst Av,RLine,0,266
+40.737015,-73.877223,Subway_lines.csv,Grand Av-Newtown,RLine,0,265
+40.733106,-73.869229,Subway_lines.csv,Woodhaven Blvd,RLine,0,264
+40.729846,-73.861604,Subway_lines.csv,63 Dr-Rego Park,RLine,0,263
+40.726523,-73.852719,Subway_lines.csv,67 Av,RLine,0,262
+40.721691,-73.844521,Subway_lines.csv,Forest Hills-71 Av,RLine,0,261
+40.580903,-73.835592,Subway_lines.csv,Rockaway Park-Beach 116 St,SLine1,0,203
+40.583209,-73.827559,Subway_lines.csv,Beach 105 St,SLine1,0,202
+40.585307,-73.820558,Subway_lines.csv,Beach 98 St,SLine1,0,201
+40.588034,-73.813641,Subway_lines.csv,Beach 90 St,SLine1,0,200
+40.608382,-73.815925,Subway_lines.csv,Broad Channel,SLine1,0,199
+40.661614,-73.962246,Subway_lines.csv,Prospect Park,SLine2,0,42
+40.670343,-73.959245,Subway_lines.csv,Botanic Garden,SLine2,0,626
+40.674772,-73.957624,Subway_lines.csv,Park Pl,SLine2,0,141
+40.680596,-73.955827,Subway_lines.csv,Franklin Av,SLine2,0,627
+40.703087,-74.012994,Subway_lines.csv,Whitehall St-South Ferry,WLine,0,635
+40.70722,-74.013342,Subway_lines.csv,Rector St,WLine,0,22
+40.710668,-74.011029,Subway_lines.csv,Cortlandt St,WLine,0,624
+40.713282,-74.006978,Subway_lines.csv,City Hall,WLine,0,20
+40.719527,-74.001775,Subway_lines.csv,Canal St,WLine,0,623
+40.724329,-73.997702,Subway_lines.csv,Prince St,WLine,0,17
+40.730328,-73.992629,Subway_lines.csv,8 St-NYU,WLine,0,16
+40.735736,-73.990568,Subway_lines.csv,14 St-Union Sq,WLine,0,602
+40.741303,-73.989344,Subway_lines.csv,23 St,WLine,0,14
+40.745494,-73.988691,Subway_lines.csv,28 St,WLine,0,13
+40.749567,-73.98795,Subway_lines.csv,34 St-Herald Sq,WLine,0,607
+40.754672,-73.986754,Subway_lines.csv,Times Sq-42 St,WLine,0,611
+40.759901,-73.984139,Subway_lines.csv,49 St,WLine,0,10
+40.764664,-73.980658,Subway_lines.csv,57 St-7 Av,WLine,0,9
+40.764811,-73.973347,Subway_lines.csv,5 Av/59 St,WLine,0,8
+40.76266,-73.967258,Subway_lines.csv,Lexington Av/59 St,WLine,0,613
+40.750582,-73.940202,Subway_lines.csv,Queensboro Plaza,WLine,0,461
+40.752882,-73.932755,Subway_lines.csv,39 Av-Dutch Kills,WLine,0,6
+40.756804,-73.929575,Subway_lines.csv,36 Av,WLine,0,5
+40.76182,-73.925508,Subway_lines.csv,Broadway,WLine,0,4
+40.766779,-73.921479,Subway_lines.csv,30 Av,WLine,0,3
+40.770258,-73.917843,Subway_lines.csv,Astoria Blvd,WLine,0,2
+40.775036,-73.912034,Subway_lines.csv,Astoria-Ditmars Blvd,WLine,0,1
+40.706476,-74.011056,Subway_lines.csv,Broad St,ZLine,0,107
+40.710197,-74.007691,Subway_lines.csv,Fulton St,ZLine,0,628
+40.713243,-74.003401,Subway_lines.csv,Chambers St,ZLine,0,622
+40.718092,-73.999892,Subway_lines.csv,Canal St,ZLine,0,623
+40.72028,-73.993915,Subway_lines.csv,Bowery,ZLine,0,103
+40.718315,-73.987437,Subway_lines.csv,Delancey St-Essex St,ZLine,0,625
+40.708359,-73.957757,Subway_lines.csv,Marcy Av,ZLine,0,101
+40.697207,-73.935657,Subway_lines.csv,Myrtle Av,ZLine,0,97
+40.68963,-73.92227,Subway_lines.csv,Gates Av,ZLine,0,95
+40.682893,-73.910456,Subway_lines.csv,Chauncey St,ZLine,0,93
+40.679498,-73.904512,Subway_lines.csv,Broadway Junction,ZLine,0,621
+40.676992,-73.898654,Subway_lines.csv,Alabama Av,ZLine,0,91
+40.678024,-73.891688,Subway_lines.csv,Van Siclen Av,ZLine,0,90
+40.68141,-73.880039,Subway_lines.csv,Norwood Av,ZLine,0,88
+40.683194,-73.873785,Subway_lines.csv,Crescent St,ZLine,0,87
+40.691324,-73.867139,Subway_lines.csv,75 St-Elderts Ln,ZLine,0,85
+40.693879,-73.851576,Subway_lines.csv,Woodhaven Blvd,ZLine,0,83
+40.695178,-73.84433,Subway_lines.csv,104 St,ZLine,0,82
+40.700492,-73.828294,Subway_lines.csv,121 St,ZLine,0,80
+40.700486,-73.807969,Subway_lines.csv,Sutphin Blvd-Archer Av-JFK Airport,ZLine,0,279
+40.702147,-73.801109,Subway_lines.csv,Jamaica Center-Parsons/Archer,ZLine,0,278
