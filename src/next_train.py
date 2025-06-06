@@ -42,11 +42,15 @@ def next_train_time(line, station, hour, time_travel):
     station_schedules = schedules[schedules['stop_name'] == station]
 
     # 5. Convert times and filter by current time
+    now_plus_time_travel = sum_time_from_travel(hour,time_travel)
     station_schedules = station_schedules.copy()
     station_schedules['arrival_time_parsed'] = station_schedules['arrival_time'].apply(parse_time)
-    next_schedules = station_schedules[station_schedules['arrival_time_parsed'] > sum_time_from_travel(hour,time_travel)]
+    next_schedules = station_schedules[station_schedules['arrival_time_parsed'] > now_plus_time_travel]
 
     # 6. Get the next time and convert it to a string
+    if next_schedules.empty:
+        return now_plus_time_travel
+    
     next_train = next_schedules.sort_values(by='arrival_time_parsed').iloc[0]
     next_train_hour = next_train['arrival_time_parsed']
     

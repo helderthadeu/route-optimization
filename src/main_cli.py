@@ -29,7 +29,7 @@ if __name__=="__main__":
         lengh_matrix = load_length_matrix_from_file("src\\files\\floyd_washal_lenght.txt")
 
         temp = []
-        origem = 1
+        origem = 231
         destino = 203
         
         # Print origin and destination station info
