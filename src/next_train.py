@@ -9,6 +9,16 @@ calendar = pd.read_csv("src\\gtfs_files\\calendar.txt")
 day_week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 def parse_time(t):
+    """
+    Converts a string in the format HH:MM:SS to a datetime.time object,
+    adjusting for hours greater than 24.
+
+    Args:
+        t (str): Time string in the format 'HH:MM:SS'. May exceed 24 hours.
+
+    Returns:
+        datetime.time or None: A time object, or None if parsing fails.
+    """
     try:
         h, m, s = map(int, t.split(":"))
         h = h % 24  # To avoid errors with hours above 24
@@ -17,10 +27,33 @@ def parse_time(t):
         return None
     
 def sum_time_from_travel(time, add):
+    """
+    Adds a number of hours to a datetime.time object.
+
+    Args:
+        time (datetime.time): Base time.
+        add (int): Number of hours to add.
+
+    Returns:
+        datetime.time: Resulting time after addition.
+    """
     dummy_date = datetime.combine(datetime.today(), time)
     return (dummy_date + timedelta(hours=add)).time()
 
 def next_train_time(line, station, hour, time_travel):
+    """
+    Returns the time of the next available train for a given line and station,
+    considering the current time and additional travel time.
+
+    Args:
+        line (str): Train line identifier (e.g., 'A', 'S', etc.).
+        station (str): Name of the target station.
+        hour (datetime.time): Current reference time.
+        time_travel (int): Time (in hours) it takes to reach the station.
+
+    Returns:
+        datetime.time: Time of the next available train, or current time plus travel time if no trains remain.
+    """
     # 1. Find out the current day of the week
     today_index = datetime.now().weekday()  # 0 = monday, 6 = sunday
     today = day_week[today_index]
