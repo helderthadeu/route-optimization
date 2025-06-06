@@ -50,7 +50,7 @@ class vertice:
         """
         Print vertice information in a readable format.
         """
-        print(f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} ID: {self.id} Name: {self.station_name} Complex ID: {self.complex_id}")
+        print(f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} - ID: {self.id} - Name: {self.station_name} - Complex ID: {self.complex_id}")
     
     def to_string(self):
         """
@@ -58,4 +58,4 @@ class vertice:
         Returns:
             str: String representation of the vertice.
         """
-        return f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} ID: {self.id} Name: {self.station_name} Complex ID: {self.complex_id}"
+        return f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} - ID: {self.id} - Name: {self.station_name} - Complex ID: {self.complex_id}"

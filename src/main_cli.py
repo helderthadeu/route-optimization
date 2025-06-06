@@ -9,6 +9,7 @@ Prints the shortest path and step-by-step traversal between two stations.
 from os import path
 from file_operate import *
 from floyd_warshall import *
+from next_train import *
 
 AVERAGE_SPEED = 30
 SUBWAY_TICKET = 2.9
@@ -36,11 +37,13 @@ if __name__=="__main__":
         print(vertices[destino].to_string())
         
         # Print shortest path length (in minutes)
+        agora = datetime.now().time().strftime("%H:%M:%S")
         print(f"Short lenght from {origem+1} to {destino+1}: {lengh_matrix[origem][destino]/AVERAGE_SPEED*60:.2f} minutes")
         short_path = get_short_path(vertices, predecessors, vertices[origem],vertices[destino])
         for index, current_vertex in enumerate(short_path):
             if index == 0:
-                print(f"{index+1} - {current_vertex.to_string()}")
+                agora = next_train_time(current_vertex.line, current_vertex.station_name, agora)
+                print(f"{index+1} - {current_vertex.to_string()} - Next Train: {agora}")
                 continue
             
             previous_vertex = short_path[index-1]
@@ -52,11 +55,12 @@ if __name__=="__main__":
                     break
             
             if edge_found:
+                agora = next_train_time(current_vertex.line, current_vertex.station_name, agora)
                 # If the edge has a third element, it is a transfer (walked)
                 if len(edge_found) > 2:
                     print(f"{index+1} - {current_vertex.to_string()} - walked")
                 else:
-                    print(f"{index+1} - {current_vertex.to_string()}")
+                    print(f"{index+1} - {current_vertex.to_string()} - Next Train: {agora}")
             else:
                 print(f"{index+1} - {current_vertex.to_string()}")
         
