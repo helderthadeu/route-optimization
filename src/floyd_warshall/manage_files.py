@@ -14,7 +14,7 @@ def save_graph_to_file(graph, filepath:str):
             temp = graph[key]
             file.write(f"{key.id};{key.lat};{key.lon};{key.station_name};{key.line};{key.complex_id}@")
             for v in temp:
-                file.write(f"{v[0].id};{v[0].lat};{v[0].lon};{v[0].station_name};{v[0].line};{v[0].complex_id};{v[1]}@")
+                file.write(f"{v[0].id};{v[0].lat};{v[0].lon};{v[0].station_name};{v[0].line};{v[0].complex_id};{v[1]};{v[2]}@")
             file.write("\n")      
 
 def save_fload_warshall_to_file(floyd_warshall_result:list[list[float]], filepath:str):
@@ -84,7 +84,7 @@ def load_graph_from_file(filepath:str) -> dict[vertice: list[list[vertice, float
                     e_data = edge.split(";")
                     v2 = vertice(int(e_data[0]), float(e_data[1]), float(e_data[2]), e_data[3], e_data[4], int(e_data[5]))
                     weight = float(e_data[6])
-                    graph[v].append([v2, weight])
+                    graph[v].append([v2, weight,None if e_data[7] == "None" else str(e_data[7])])
     return graph
 
 def load_predecessors_from_file(filepath:str) -> list[list[vertice]]:

@@ -104,9 +104,9 @@ def get_graph(routes:list[list[vertice, vertice]], vertices:list[vertice]) -> di
         dis1_0 = geodesic((route[0].lat, route[0].lon), (route[1].lat, route[1].lon)).kilometers
         dis0_1 = geodesic((route[1].lat, route[1].lon), (route[0].lat, route[0].lon)).kilometers
         if not [route[1], dis1_0] in graph[route[0]]:
-            graph[route[0]].append([route[1], dis1_0])
+            graph[route[0]].append([route[1], dis1_0, None])
         if not [route[0], dis0_1] in graph[route[1]]:
-            graph[route[1]].append([route[0], dis0_1])
+            graph[route[1]].append([route[0], dis0_1, None])
     for v in vertices: 
         for w in vertices:
             disv_w = geodesic((v.lat, v.lon), (w.lat, w.lon)).meters

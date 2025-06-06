@@ -3,3 +3,15 @@
 output.txt
 __pycache__
 files
+output.txt
+Dijkstra.exe
+graph.txt
+MapaCompleto.json
+cache/4fdc7efc9c0f7d1fb43223a4b16218c335651df5.json
+.gitignore
+cache/e65349b406240b6cea57e53ff5a0ceb1ea2ddc37.json
+*.exe
+src/subway_files/*
+src/teste_graph.py
+src/files/*.txt
+src/temp.py

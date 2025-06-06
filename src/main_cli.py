@@ -30,7 +30,7 @@ if __name__=="__main__":
 
         temp = []
         origem = 1
-        destino = 78
+        destino = 5
         
         # Print origin and destination station info
         print(vertices[origem].to_string())
@@ -56,9 +56,9 @@ if __name__=="__main__":
             
             if edge_found:
                 agora = next_train_time(current_vertex.line, current_vertex.station_name, agora)
-                # If the edge has a third element, it is a transfer (walked)
-                if len(edge_found) > 2:
-                    print(f"{index+1} - {current_vertex.to_string()} - walked")
+                # If the third element has not None, it is a transfer (walked)
+                if edge_found[2] != None:
+                    print(f"{index+1} - {current_vertex.to_string()} - Walked")
                 else:
                     print(f"{index+1} - {current_vertex.to_string()} - Next Train: {agora}")
             else:
