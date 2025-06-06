@@ -1,4 +1,4 @@
-from vertice_definition import vertice
+from src.vertice_definition import vertice
 
 
 def save_graph_to_file(graph, filepath:str):

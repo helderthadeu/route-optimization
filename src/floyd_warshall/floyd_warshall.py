@@ -1,8 +1,8 @@
 from os import path
-from vertice_definition import vertice
+from src.vertice_definition import vertice
 from geopy.distance import geodesic
 import math
-from file_operate import *
+from src.file_operate import *
 from .manage_files import *
 from typing import List
 
