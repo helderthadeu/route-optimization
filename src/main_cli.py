@@ -9,7 +9,7 @@ Prints the shortest path and step-by-step traversal between two stations.
 from os import path
 from file_operate import *
 from floyd_warshall import *
-from next_train import *
+from next_train import next_train_time, datetime
 
 AVERAGE_SPEED = 30
 SUBWAY_TICKET = 2.9
@@ -30,20 +30,20 @@ if __name__=="__main__":
 
         temp = []
         origem = 1
-        destino = 5
+        destino = 203
         
         # Print origin and destination station info
         print(vertices[origem].to_string())
         print(vertices[destino].to_string())
         
         # Print shortest path length (in minutes)
-        agora = datetime.now().time().strftime("%H:%M:%S")
+        now = datetime.now().time()
         print(f"Short lenght from {origem+1} to {destino+1}: {lengh_matrix[origem][destino]/AVERAGE_SPEED*60:.2f} minutes")
         short_path = get_short_path(vertices, predecessors, vertices[origem],vertices[destino])
         for index, current_vertex in enumerate(short_path):
             if index == 0:
-                agora = next_train_time(current_vertex.line, current_vertex.station_name, agora)
-                print(f"{index+1} - {current_vertex.to_string()} - Next Train: {agora}")
+                now = next_train_time(current_vertex.line, current_vertex.station_name, now, 0.0)
+                print(f"{index+1} - {current_vertex.to_string()} - Next Train: {now.strftime("%H:%M:%S")}")
                 continue
             
             previous_vertex = short_path[index-1]
@@ -55,16 +55,17 @@ if __name__=="__main__":
                     break
             
             if edge_found:
-                agora = next_train_time(current_vertex.line, current_vertex.station_name, agora)
+                
                 # If the third element has not None, it is a transfer (walked)
                 if edge_found[2] != None:
                     print(f"{index+1} - {current_vertex.to_string()} - Walked")
                 else:
-                    print(f"{index+1} - {current_vertex.to_string()} - Next Train: {agora}")
+                    travel_time = (lengh_matrix[index-1][index]/AVERAGE_SPEED)
+                    now = next_train_time(current_vertex.line, current_vertex.station_name, now, travel_time)
+                    print(f"{index+1} - {current_vertex.to_string()} - Next Train: {now.strftime("%H:%M:%S")}")
             else:
                 print(f"{index+1} - {current_vertex.to_string()}")
-        
-        # print(len(temp))
+
     else:
         # If files do not exist, generate them
         generate_floyd_warshall()
