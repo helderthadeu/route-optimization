@@ -37,7 +37,7 @@ src/
    - Python 3.10+
    - Install dependencies (e.g., `geopy`, `chardet`):
      ```
-     pip install geopy chardet
+     pip install geopy chardet pandas datetime
      ```
 
 2. **Run the CLI:**
