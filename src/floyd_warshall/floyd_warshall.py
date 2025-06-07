@@ -1,8 +1,8 @@
 from os import path
-from src.vertice_definition import vertice
+from vertice_definition import vertice
 from geopy.distance import geodesic
 import math
-from src.file_operate import *
+from file_operate import *
 from .manage_files import *
 from typing import List
 
@@ -10,7 +10,7 @@ AVERAGE_SPEED = 30
 SUBWAY_TICKET = 2.9
 
 def to_string(self):
-        return f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} ID: {self.id} Name: {self.station_name} Complex ID: {self.complex_id}"
+    return f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} ID: {self.id} Name: {self.station_name} Complex ID: {self.complex_id}"
     
 def define_vertice(data: list, id_start: int) -> list[vertice]:
     """
@@ -33,13 +33,13 @@ def define_vertice(data: list, id_start: int) -> list[vertice]:
     
         complex_id = int(element[6])
 
-        found = None
+        exists = False
         for v in new_vertices:
             
             if math.isclose(v.lat, lat, abs_tol=1e-6) and math.isclose(v.lon, lon, abs_tol=1e-6):
-                found = v
+                exists = True
                 break
-        if found != None:
+        if exists:
             continue
         else:
             new_vertices.append(vertice(id=current_id, lat=lat, lon=lon, station_name=station_name,line=line, complex_id=complex_id))
@@ -65,25 +65,18 @@ def define_routes(vertices:list[vertice]) -> list[list[vertice,vertice]]:
         previous_vertice = None
         for index, vertice in enumerate(vertices):
             if vertice.line == line:
-                if previous_vertice is None:
-                    previous_vertice = vertice
-                else:
+                if previous_vertice is not None:
                     routes.append([previous_vertice, vertice])
                     routes.append([vertice, previous_vertice])
-                    previous_vertice = vertice
-                    
-                
-    
-    for index,  vertice in enumerate(vertices[:-1]):
-        for index2, vertice2 in enumerate(vertices[:-1]):
-            if index2 == index:
-                continue
-            elif vertice.complex_id == vertice2.complex_id:
-                if vertice.id != vertice2.id:
 
-                    routes.append([vertice, vertice2])
+                previous_vertice = vertice
+                            
 
-            
+    for index, vertice in enumerate(vertices[:-1]):
+        for vertice2 in vertices[index+1:]:
+            if vertice.complex_id == vertice2.complex_id:
+                routes.append([vertice, vertice2])
+                routes.append([vertice2, vertice])     
 
     return routes
 

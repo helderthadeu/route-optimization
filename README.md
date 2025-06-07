@@ -35,7 +35,7 @@ src/
 
 1. **Install Requirements:**
    - Python 3.10+
-   - Install dependencies (e.g., `geopy`, `chardet`):
+   - Install dependencies (e.g., `geopy`, `chardet`, `pandas`, `datetime`):
      ```
      pip install geopy chardet pandas datetime
      ```
