@@ -29,8 +29,8 @@ if __name__=="__main__":
         lengh_matrix = load_length_matrix_from_file("src\\files\\floyd_washal_lenght.txt")
 
         temp = []
-        origem = 231
-        destino = 203
+        origem = 340
+        destino = 312
         
         # Print origin and destination station info
         print(vertices[origem].to_string())
@@ -38,8 +38,8 @@ if __name__=="__main__":
         
         # Print shortest path length (in minutes)
         now = datetime.now().time()
-        print(f"Short lenght from {origem+1} to {destino+1}: {lengh_matrix[origem][destino]/AVERAGE_SPEED*60:.2f} minutes")
-        short_path = get_short_path(vertices, predecessors, vertices[origem],vertices[destino])
+        print(f"Short lenght from {origem - 1} to {destino - 1}: {lengh_matrix[origem - 1][destino - 1]/AVERAGE_SPEED*60:.2f} minutes")
+        short_path = get_short_path(vertices, predecessors, vertices[origem - 1],vertices[destino - 1])
         for index, current_vertex in enumerate(short_path):
             if index == 0:
                 now = next_train_time(current_vertex.line, current_vertex.station_name, now, 0.0)

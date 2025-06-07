@@ -36,7 +36,7 @@ def define_vertice(data: list, id_start: int) -> list[vertice]:
         exists = False
         for v in new_vertices:
             
-            if math.isclose(v.lat, lat, abs_tol=1e-6) and math.isclose(v.lon, lon, abs_tol=1e-6):
+            if v.station_name == station_name and v.line == line and v.complex_id == complex_id:
                 exists = True
                 break
         if exists:
@@ -44,10 +44,10 @@ def define_vertice(data: list, id_start: int) -> list[vertice]:
         else:
             new_vertices.append(vertice(id=current_id, lat=lat, lon=lon, station_name=station_name,line=line, complex_id=complex_id))
             current_id += 1
-            
+
     return new_vertices
 
-def define_routes(vertices:list[vertice]) -> list[list[vertice,vertice]]:
+def define_routes(vertices:list[vertice]) -> list[tuple[vertice,vertice]]:
     """
     Define the routes (edges) between vertices based on subway line and complex_id.
     Args:
@@ -66,8 +66,8 @@ def define_routes(vertices:list[vertice]) -> list[list[vertice,vertice]]:
         for index, vertice in enumerate(vertices):
             if vertice.line == line:
                 if previous_vertice is not None:
-                    routes.append([previous_vertice, vertice])
-                    routes.append([vertice, previous_vertice])
+                    routes.append((previous_vertice, vertice))
+                    routes.append((vertice, previous_vertice))
 
                 previous_vertice = vertice
                             
@@ -75,12 +75,12 @@ def define_routes(vertices:list[vertice]) -> list[list[vertice,vertice]]:
     for index, vertice in enumerate(vertices[:-1]):
         for vertice2 in vertices[index+1:]:
             if vertice.complex_id == vertice2.complex_id:
-                routes.append([vertice, vertice2])
-                routes.append([vertice2, vertice])     
+                routes.append((vertice, vertice2))
+                routes.append((vertice2, vertice))
 
     return routes
 
-def get_graph(routes:list[list[vertice, vertice]], vertices:list[vertice]) -> dict[vertice:list[list[vertice, float]]]:
+def get_graph(routes:list[tuple[vertice, vertice]], vertices:list[vertice]) -> dict[vertice:list[tuple[vertice, float]]]:
     """
     Build the graph as a dictionary mapping each vertice to its neighbors and the distance to them.
     Args:
@@ -97,17 +97,17 @@ def get_graph(routes:list[list[vertice, vertice]], vertices:list[vertice]) -> di
         dis1_0 = geodesic((route[0].lat, route[0].lon), (route[1].lat, route[1].lon)).kilometers
         dis0_1 = geodesic((route[1].lat, route[1].lon), (route[0].lat, route[0].lon)).kilometers
         if not [route[1], dis1_0] in graph[route[0]]:
-            graph[route[0]].append([route[1], dis1_0, None])
+            graph[route[0]].append((route[1], dis1_0, None))
         if not [route[0], dis0_1] in graph[route[1]]:
-            graph[route[1]].append([route[0], dis0_1, None])
+            graph[route[1]].append((route[0], dis0_1, None))
     for v in vertices: 
         for w in vertices:
             disv_w = geodesic((v.lat, v.lon), (w.lat, w.lon)).meters
             if v != w and v.complex_id != w.complex_id and v.line != w.line and disv_w <= 100:
                 if [w, disv_w, f"{v.id}|{w.id}"] not in graph[v]:
-                    graph[v].append([w, disv_w, f"{v.id}|{w.id}"])
+                    graph[v].append((w, disv_w, f"{v.id}|{w.id}"))
                 if [v, disv_w, f"{w.id}|{v.id}"] not in graph[w]:
-                    graph[w].append([v, disv_w, f"{w.id}|{v.id}"])
+                    graph[w].append((v, disv_w, f"{w.id}|{v.id}"))
 
     
     return graph
@@ -288,8 +288,8 @@ def get_short_path(vertices: list[vertice], predecessors: list[list[vertice]], o
     """
     path = []
     try:
-        i = next(idx for idx, v in enumerate(vertices) if int(v.id) == int(origin.id))
-        j = next(idx for idx, v in enumerate(vertices) if int(v.id) == int(destiny.id))
+        i = vertices.index(origin)
+        j = vertices.index(destiny)
     except StopIteration:
         print("Erro: origin and destiny outside from the list.")
         return []
@@ -306,7 +306,7 @@ def get_short_path(vertices: list[vertice], predecessors: list[list[vertice]], o
     
     while int(current.id) != int(origin.id) and path_length <= max_path_length:
         path.insert(0, current)
-        current_idx = next(idx for idx, v in enumerate(vertices) if int(v.id) == int(current.id))
+        current_idx = vertices.index(current)
         pred = predecessors[i][current_idx]
         
         if pred is None:
@@ -335,16 +335,10 @@ def generate_floyd_warshall():
     routes = []
     data = load_data_csv(file_path)
     # print(data)
-    vertices_local = define_vertice(data, id_counter)
-    for route in define_routes(vertices_local):
-        routes.append(route)
-    for v in vertices_local:
-        if v not in vertices:
-            vertices.append(v)
-        else:
-            print(f"Duplicate vertice found: {v.to_string()}")
+    vertices = define_vertice(data, id_counter)
+    routes = define_routes(vertices)
         
-    id_counter = max(v.id for v in vertices) + 1
+    id_counter = len(vertices)
 
     graph = get_graph(routes, vertices)
     floyd_warshall_result, predecessors = floyd_warshall_by_distance(graph, vertices) 
