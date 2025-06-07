@@ -189,6 +189,74 @@ def floyd_warshall_by_distance(graph:dict[vertice:list[vertice]], vertices:list[
                     predecessor[index_j][index_i] = predecessor[index_k][index_i]
     return [subgraphs, predecessor]
 
+def calc_factor(wheight_a:float, distance:float, wheight_b:float, crimes:int, riders:int) -> float:
+    """
+    Calculate a factor based on distance, crimes, and riders.
+    Args:
+        wheight_a (float): Weight for the distance factor.
+        distance (float): Distance between two points.
+        wheight_b (float): Weight for the crimes and riders factor.
+        crimes (int): Number of crimes at the station.
+        riders (int): Number of riders at the station.
+    Returns:
+        float: Calculated factor.
+    """
+    
+    crimes_per_rider = crimes / riders if riders > 0 else 0
+    
+    if distance == 0:
+        return 0
+    return (wheight_a * distance) + (wheight_b * crimes_per_rider)
+    
+def floyd_warshall_by_factor(graph:dict[vertice:list[vertice]], vertices:list[vertice]) -> list[list[float]]:
+    """
+    Compute shortest paths and predecessors for all pairs of vertices using the Floyd-Warshall algorithm.
+    Args:
+        graph (dict[vertice, list[list[vertice, float]]]): The graph dictionary.
+        vertices (list[vertice]): List of vertice objects.
+    Returns:
+        list: A pair [distance_matrix, predecessor_matrix].
+    """
+    subgraphs = []
+    predecessor = []
+    print("Getting Floyd Washal...")
+
+    n = len(vertices)
+    subgraphs = [[float('inf')] * n for _ in range(n)]
+    predecessor = [[None] * n for _ in range(n)]
+    for i in range(n):
+        subgraphs[i][i] = 0
+        predecessor[i][i] = vertices[i] 
+        
+    for index_i, i in enumerate(vertices):
+        for index_j, j in enumerate(vertices):
+            
+            ids = []
+            dis = geodesic((i.lat, i.lon), (j.lat, j.lon)).kilometers
+            
+            for elements_i in  graph[i]:
+                ids.append(elements_i[0].id)
+            if i in graph.keys() and j.id in ids:
+                if i.complex_id == j.complex_id:
+                    dis = 0
+                    
+                factor = calc_factor(2, dis, 1, i.total_crimes, i.total_riders)
+                subgraphs[index_i][index_j] = factor
+                subgraphs[index_j][index_i] = factor
+                predecessor[index_i][index_j] = i
+                predecessor[index_j][index_i] = j
+
+    size = len(subgraphs)
+    for index_k in range(size):
+        for index_i in range(size):
+            for index_j in range(size):                
+                if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
+                    subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
+                    subgraphs[index_j][index_i] = subgraphs[index_i][index_j]
+                    predecessor[index_i][index_j] = predecessor[index_k][index_j] 
+                    predecessor[index_j][index_i] = predecessor[index_k][index_i]
+    return [subgraphs, predecessor]
+
 def load_graph_from_file(filepath:str) -> dict[vertice:list[list[vertice, float]]]:
     """
     Load a graph from a file in the custom format used by this project.
