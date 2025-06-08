@@ -1,85 +1,114 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: #f5f7fa;
-    overflow: hidden;
-}
-
+/* Layout geral */
 body {
-    background-color: #f5f7fa;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  background-color: #f4f7fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.title {
+/* Título principal */
+h1 {
+  text-align: center;
+  color: #1f3b4d;
+  font-size: 30px;
+  margin-top: 15px;
+}
+
+h3{
+text-align: center;
+  color: #1f3b4d;
+  font-size: 15px;
+}
+
+p{
     text-align: center;
-    font-size: 2rem;
-    color: #2c3e50;
-}
-
-.content {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    gap: 40px;
-}
-
-.left-panel {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    height: 74vh;
-
-}
-
-.right-panel {
-    flex-grow: 1;
-
-}
-
-.input-box {
-    padding: 8px 4px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    
-}
-
-.btn {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.btn:hover {
-    background-color: #2980b9;
-}
-
-.output-box {
-    background-color: #ecf0f1;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.mapa {
-    height: 80vh;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: #2980b9;
+    font-size: 18px;
 }
 
 
+/* Container dos dropdowns */
+div > label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+}
+
+.Select-control {
+  border-radius: 8px !important;
+  border: 1px solid #ccc !important;
+  box-shadow: none !important;
+  font-size: 1rem;
+}
+
+/* Dropdowns em coluna com espaçamento */
+.css-1wa3eu0-placeholder {
+  color: #999 !important;
+}
+
+div > .dash-dropdown {
+  margin-bottom: 20px;
+}
+
+/* Botão com animação estilosa */
+#botao-calcular {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: #171717;
+  padding: 1em 2em;
+  border: none;
+  border-radius: .6rem;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+
+#botao-calcular:hover{
+    background-color: #62ca70;
+    color: #0f0e0e;
+}
+
+/* Mapa com espaçamento */
+#mapa-rota {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Informações da rota */
+#info-rota {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+  color: #2a4d69;
+}
+
+/* Informação do próximo trem */
+#saida-proximo-trem {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+  color: #050c33;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  #botao-calcular {
+    padding: 0.8em 1.5em;
+  }
+
+  #mapa-rota {
+    height: 40vh !important;
+  }
+}
