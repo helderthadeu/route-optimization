@@ -64,13 +64,15 @@ app = dash.Dash(__name__)
 station_options = [{'label': f"{v.station_name} ({v.line})", 'value': v.id} for v in vertices]
 
 app.layout = html.Div([
-    html.H1("Rota no Metrô (Floyd-Warshall)"),
-    html.H3("Enzo, Gabriel e Helder - Engenharia de Computação"),
+    html.H1("Busca de Rotas"),
     html.P("Busca de melhores rotas de metrô em Manhattan - Nova York"),
+    html.H3("Enzo, Gabriel e Helder - Engenharia de Computação"),
+    
 
     html.Div(style={"display": "flex"}, children=[
         # Div com seletores e botões à esquerda
         html.Div([
+            html.H2("Busca de rotas: ", id = "busca-title"),
             html.Label("Origem"),
             dcc.Dropdown(id="origin", options=station_options, placeholder="Selecione a estação de origem", style={"marginBottom": "10px", "width": "100%"}),
 
@@ -78,32 +80,20 @@ app.layout = html.Div([
             dcc.Dropdown(id="destination", options=station_options, placeholder="Selecione a estação de destino", style={"width": "100%"}),
 
             html.Div(style={"marginTop": "20px"}, children=[
-                html.Button("Calcular rota", id="botao-calcular", n_clicks=0, style={
-                    "padding": "10px 10px", 
-                    "fontSize": "16px", 
-                    "cursor": "pointer",
-                    "width": "100%"
-                })
+                html.Button("Calcular rota", id="botao-calcular", n_clicks=0)
             ]),
 
-            html.Div(id="info-rota", style={"marginTop": "20px", "fontWeight": "bold"}),
+            html.Div(id="info-rota"),
 
-            html.Div(id="saida-proximo-trem", style={
-                "marginTop": "15px", 
-                "fontSize": "18px", 
-                "color": "darkblue", 
-                "fontWeight": "bold",
-                "fontFamily": "Arial, sans-serif"
-            }),
-        ], style={"width": "30%", "padding": "20px"}),
+            html.Div(id="saida-proximo-trem"),
+        ],id="left-section"),
 
         # Div com o mapa à direita
         html.Div([
-            dcc.Graph(id="mapa-rota", style={"height": "60vh", "width": "100%"})
-        ], style={"width": "70%", "padding": "20px"})
+            dcc.Graph(id="mapa-rota")
+        ], id="right-section")
     ])
 ])
-
 
 @app.callback(
     [Output("mapa-rota", "figure"),
