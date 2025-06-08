@@ -145,7 +145,7 @@ if __name__ == "__main__":
     If Floyd-Warshall results do not exist, it generates them.
     Then runs the Dash app.
     """
-    if not (os.path.exists("files/predecessors.txt") and os.path.exists("files/floyd_washal_lenght.txt")):
+    if not (os.path.exists("src/files/predecessors.txt") and os.path.exists("src/files/floyd_washal_lenght.txt")):
         generate_floyd_warshall()
 
     app.run(debug=True)
