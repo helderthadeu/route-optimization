@@ -1,43 +1,53 @@
-"""
-Dash Application for Subway Route Planning in Manhattan
-
-This application calculates the shortest subway route between two stations
-using Floyd-Warshall algorithm results, and displays the route on a map with 
-details like next train arrival and travel time.
-"""
-
-import dash
-from dash import dcc, html, Input, Output
+import dash 
+from dash import dcc, html, Input, Output, State
 import plotly.graph_objects as go
 import pandas as pd
 from datetime import datetime, timedelta
-from src.floyd_utils import load_vertices, load_predecessors, get_short_path
-from src.next_train import next_train_time
-from src.floyd_warshall.floyd_warshall import generate_floyd_warshall
 import os
 
-# Load subway graph data
-vertices = load_vertices("src/files/vertices.txt")
-predecessors = load_predecessors("src/files/predecessors.txt", vertices)
+from src.file_operate import *
+from src.floyd_warshall.floyd_warshall import *
+from src.next_train import *
+from src.floyd_utils import *
+
+def somar_horas_decimais(horas_decimais: float) -> str:
+    """
+    Adds the current time to a given decimal number of hours and returns the result in HH:MM format.
+
+    Args:
+        horas_decimais (float): Number of decimal hours to add (e.g., 1.5 means 1 hour and 30 minutes)
+
+    Returns:
+        str: Resulting time in HH:MM format
+    """
+    agora = datetime.now()
+    minutos = int(horas_decimais * 60)
+    nova_hora = agora + timedelta(minutes=minutos)
+    return nova_hora.strftime("%H:%M")
+
+# Load subway graph data from files
+vertices = load_vertices("files/vertices.txt")
+predecessors = load_predecessors("files/predecessors.txt", vertices)
+length_matrix = load_length_matrix_from_file("files/floyd_washal_lenght.txt")
 
 # Initialize Dash application
 app = dash.Dash(__name__)
 
-# Generate dropdown options for station selection
+# Dropdown options for stations
 station_options = [{'label': f"{v.station_name} ({v.line})", 'value': v.id} for v in vertices]
 
-# Define application layout
+# Application layout
 app.layout = html.Div([
-    html.H1("Busca de Rotas"),  # Route search title
-    html.P("Busca de melhores rotas de metrô em Manhattan - Nova York"),  # Description
-    html.H3("Enzo, Gabriel e Helder - Engenharia de Computação"),  # Authors
+    html.H1("Busca de Rotas"),
+    html.P("Busca de melhores rotas de metrô em Manhattan - Nova York"),
+    html.H3("Enzo, Gabriel e Helder - Engenharia de Computação"),
 
     html.Div(style={"display": "flex"}, children=[
-        # Left side: dropdowns and button
+        # Left panel with controls
         html.Div([
-            html.H2("Busca de rotas: ", id="busca-title"),
-            
-            html.Label("Origem"),  # Origin station
+            html.H2("Busca de rotas:", id="busca-title"),
+
+            html.Label("Origem"),
             dcc.Dropdown(
                 id="origin",
                 options=station_options,
@@ -45,7 +55,7 @@ app.layout = html.Div([
                 style={"marginBottom": "10px", "width": "100%"}
             ),
 
-            html.Label("Destino"),  # Destination station
+            html.Label("Destino"),
             dcc.Dropdown(
                 id="destination",
                 options=station_options,
@@ -57,16 +67,16 @@ app.layout = html.Div([
                 html.Button("Calcular rota", id="botao-calcular", n_clicks=0)
             ]),
 
-            html.Div(id="info-rota"),  # Displays route info
-            html.Div(id="saida-proximo-trem"),  # Displays next train info
+            html.Div(id="info-rota"),
+            html.Div(id="saida-proximo-trem"),
         ], id="left-section"),
 
-        # Right side: route map
+        # Right panel with route map
         html.Div([
             dcc.Graph(id="mapa-rota")
         ], id="right-section")
     ]),
-    html.Footer("Pontifícia Universidade Católica de Minas Gerais - 2025")  # Footer
+    html.Footer("Pontifícia Universidade Católica de Minas Gerais - 2025")
 ])
 
 @app.callback(
@@ -74,78 +84,88 @@ app.layout = html.Div([
      Output("info-rota", "children"),
      Output("saida-proximo-trem", "children")],
     [Input("botao-calcular", "n_clicks")],
-    [dash.State("origin", "value"),
-     dash.State("destination", "value")]
+    [State("origin", "value"),
+     State("destination", "value")]
 )
 def update_mapa(n_clicks, orig_id, dest_id):
     """
-    Callback function to update the map and route information
-    based on selected origin and destination stations.
+    Updates the map and route information based on the selected origin and destination.
 
-    Parameters:
-    - n_clicks (int): Number of button clicks
-    - orig_id (str): Origin station ID
-    - dest_id (str): Destination station ID
+    Args:
+        n_clicks (int): Number of times the calculate button has been clicked
+        orig_id (int): ID of the origin station
+        dest_id (int): ID of the destination station
 
     Returns:
-    - fig (plotly.graph_objs.Figure): Map with route plotted
-    - info_text (str): Summary of the route
-    - proximo_trem_text (str): Estimated arrival time at destination
+        tuple: 
+            - Figure with the plotted route on the map
+            - Route information text
+            - Next train arrival time at destination
     """
+    AVERAGE_SPEED = 30.0  # Average speed in km/h
+
     if not n_clicks or orig_id is None or dest_id is None or orig_id == dest_id:
         return go.Figure(), "", ""
 
-    # Retrieve origin and destination vertex objects
     orig = next(v for v in vertices if v.id == orig_id)
     dest = next(v for v in vertices if v.id == dest_id)
-
-    # Find the shortest path between origin and destination
     path = get_short_path(vertices, predecessors, orig, dest)
+
     if not path:
         return go.Figure(), "Nenhuma rota encontrada.", ""
 
-    # Calculate total travel time (default weight = 2 if not defined)
-    time_travel = sum(getattr(path[i], 'weight', 2) for i in range(len(path)-1))
-    time_travel_hours = time_travel / 60.0
+    # Calculate total travel distance
+    total_distance = 0.0
+    for i in range(len(path) - 1):
+        o = path[i].id - 1
+        d = path[i + 1].id - 1
+        total_distance += length_matrix[o][d]
 
-    # Get next train time based on origin station and current time
-    now = datetime.now().time()
-    next_train = next_train_time(orig.line, orig.station_name, now, time_travel_hours)
+    print(total_distance)
 
-    # Extract latitude, longitude, and station names for the map
-    lats = [p.lat for p in path]
-    lons = [p.lon for p in path]
-    names = [f"{p.station_name} ({p.line})" for p in path]
+    # Calculate travel time in minutes and hours
+    total_minutes = total_distance / AVERAGE_SPEED * 60.0
+    total_hours = total_minutes / 60.0
 
-    # Plot route on map using Plotly
+    hora_formatada = somar_horas_decimais(total_hours)
+
+    minutos = int(total_minutes)
+    segundos = int((total_minutes - minutos) * 60)
+    minuto_formatado = f"{minutos:02d}:{segundos:02d}"
+
+    # Map data
+    lats = [v.lat for v in path]
+    lons = [v.lon for v in path]
+    names = [f"{v.station_name} ({v.line})" for v in path]
+
     fig = go.Figure(go.Scattermapbox(
         mode="markers+lines",
         lat=lats,
         lon=lons,
-        marker={'size': 10, 'color': "#00AD54"},  # Green markers
+        marker={'size': 10, 'color': "#00AD54"},
         text=names,
-        line=dict(width=3, color='blue')  # Blue path line
+        line=dict(width=3, color='blue')
     ))
+
     fig.update_layout(
         mapbox_style="open-street-map",
         mapbox_zoom=12,
         mapbox_center={"lat": float(path[0].lat), "lon": float(path[0].lon)},
-        margin={"r":0, "t":0, "l":0, "b":0}
+        margin={"r": 0, "t": 0, "l": 0, "b": 0}
     )
 
-    # Format informational texts
-    info_text = f"Rota de {orig.station_name} até {dest.station_name} com {len(path)-1} conexões."
-    proximo_trem_text = f"Chegada à {dest.station_name} às {next_train.strftime('%H:%M:%S')}, saindo agora."
+    # Informational text
+    info_text = f"Rota de {orig.station_name} até {dest.station_name} com {len(path)-1} conexões. Distância total de {round(total_distance,2)} km."
+    proximo_trem_text = f"Chegada prevista à {dest.station_name} às {hora_formatada} (duração: {(minuto_formatado)} minutos)."
 
     return fig, info_text, proximo_trem_text
 
 if __name__ == "__main__":
     """
-    Entry point of the application.
-    If Floyd-Warshall results do not exist, it generates them.
-    Then runs the Dash app.
+    Application entry point. If required Floyd-Warshall data files do not exist, they are generated.
+    Then, the Dash server is started in debug mode.
     """
-    if not (os.path.exists("src/files/predecessors.txt") and os.path.exists("src/files/floyd_washal_lenght.txt")):
+    if not (os.path.exists("files/predecessors.txt") and os.path.exists("files/floyd_washal_lenght.txt")):
         generate_floyd_warshall()
 
     app.run(debug=True)
