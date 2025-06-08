@@ -10,10 +10,7 @@ from typing import List
 
 AVERAGE_SPEED = 30
 SUBWAY_TICKET = 2.9
-
-def to_string(self):
-    return f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} ID: {self.id} Name: {self.station_name} Complex ID: {self.complex_id}"
-    
+   
 def define_vertice(data: list, id_start: int) -> list[vertice]:
     """
     Create a list of unique vertice objects from the provided data, avoiding duplicates by coordinates.
@@ -112,30 +109,6 @@ def get_graph(routes:list[edge], vertices:list[vertice]) -> graph:
                     adjacency_list[w].append((v, dist_v_w, f"{w.id}|{v.id}"))
     
     return graph(adjacency_list=adjacency_list)
-
-def calc_distance(lat_initial:float, long_initial:float, lat_final:float, long_final:float) -> float:
-    """
-    Calculate the distance between two geographic points using the Haversine formula.
-    Args:
-        lat_initial (float): Starting latitude in degrees.
-        long_initial (float): Starting longitude in degrees.
-        lat_final (float): Ending latitude in degrees.
-        long_final (float): Ending longitude in degrees.
-    Returns:
-        float: Distance between the points in meters.
-    """
-    # Convert degrees to radians
-    d2r = math.pi / 180.0
-    lat1, lon1 = lat_initial * d2r, long_initial * d2r
-    lat2, lon2 = lat_final * d2r, long_final * d2r
-    
-    # Haversine formula
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
-    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    
-    return 6371 * c  # Earth radius in meters
 
 def floyd_warshall_by_distance(graph:graph, vertices:list[vertice]) -> list[list[float]]:
     """
