@@ -17,8 +17,8 @@ from src.floyd_warshall.floyd_warshall import generate_floyd_warshall
 import os
 
 # Load subway graph data
-vertices = load_vertices("files/vertices.txt")
-predecessors = load_predecessors("files/predecessors.txt", vertices)
+vertices = load_vertices("src/files/vertices.txt")
+predecessors = load_predecessors("src/files/predecessors.txt", vertices)
 
 # Initialize Dash application
 app = dash.Dash(__name__)

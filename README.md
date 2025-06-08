@@ -12,18 +12,21 @@ This project provides tools to model a subway network as a graph, compute shorte
 ## Project Structure
 
 ```
+assets/                     # Static assets (e.g., CSS)
 src/
-  file_operate.py           # Functions for loading CSV and JSON data
+  files/                    # Output files (graph, matrices, etc.)
   floyd_warshall/
     floyd_warshall.py       # Main graph and algorithm logic
     manage_files.py         # Functions for saving/loading graph and matrices
-  main_cli.py               # Command-line interface for shortest path queries
-  vertice_definition.py     # Definition of the vertice (station) class
-  assets/                   # Static assets (e.g., CSS)
-  files/                    # Output files (graph, matrices, etc.)
+  models/
+    vertice_definition.py   # Definition of the vertice (station) class
+    edge_definition.py      # Definition of the edge (line) class
+    graph_definition.py     # Definition of the graph (subway) class
   subway_files/             # Input data (CSV files for stations and lines)
-app.py                     #App is the UI
-floyd_utils                #Support functions to UI
+  file_operate.py           # Functions for loading CSV and JSON data
+  main_cli.py               # Command-line interface for shortest path queries
+app.py                      # App is the UI
+floyd_utils                 # Support functions to UI
 ```
 
 ## How It Works
