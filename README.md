@@ -22,6 +22,8 @@ src/
   assets/                   # Static assets (e.g., CSS)
   files/                    # Output files (graph, matrices, etc.)
   subway_files/             # Input data (CSV files for stations and lines)
+app.py                     #App is the UI
+floyd_utils                #Support functions to UI
 ```
 
 ## How It Works
