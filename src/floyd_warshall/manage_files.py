@@ -1,7 +1,8 @@
-from vertice_definition import vertice
+from models.vertice_definition import vertice
+from models.graph_definition import graph
 
 
-def save_graph_to_file(graph, filepath:str):
+def save_graph_to_file(graph: graph, filepath:str):
     """
     Save the graph to a file in a custom text format.
     Each line represents a vertice and its edges, separated by '@'.
@@ -9,9 +10,10 @@ def save_graph_to_file(graph, filepath:str):
         graph (dict): The graph dictionary with vertice keys and edge lists.
         filepath (str): Path to the output file.
     """
+    adjacency = graph.adjacency_list
     with open(filepath, "w") as file:
-        for key in graph.keys():
-            temp = graph[key]
+        for key in adjacency.keys():
+            temp = adjacency[key]
             file.write(f"{key.id};{key.lat};{key.lon};{key.station_name};{key.line};{key.complex_id}@")
             for v in temp:
                 file.write(f"{v[0].id};{v[0].lat};{v[0].lon};{v[0].station_name};{v[0].line};{v[0].complex_id};{v[1]};{v[2]}@")
@@ -60,7 +62,7 @@ def save_vertices_to_file(vertices:list[vertice], filepath:str):
         for i in vertices:
             file.write(f"{i.id};{i.lat};{i.lon};{i.station_name};{i.line};{i.complex_id}@")
 
-def load_graph_from_file(filepath:str) -> dict[vertice: list[list[vertice, float]]]:
+def load_graph_from_file(filepath:str) -> graph:
     """
     Load a graph from a file in the custom format used by this project.
     Args:
@@ -68,7 +70,7 @@ def load_graph_from_file(filepath:str) -> dict[vertice: list[list[vertice, float
     Returns:
         dict: The loaded graph as a dictionary.
     """
-    graph = {}
+    adjacency = {}
     with open(filepath, "r") as file:
         for line in file:
             parts = line.strip().split("@")
@@ -77,15 +79,16 @@ def load_graph_from_file(filepath:str) -> dict[vertice: list[list[vertice, float
             # Carrega o vértice principal
             v_data = parts[0].split(";")
             v = vertice(int(v_data[0]), float(v_data[1]), float(v_data[2]), v_data[3], v_data[4], int(v_data[5]))
-            graph[v] = []
+            adjacency[v] = []
             # Carrega as arestas
             for edge in parts[1:]:
                 if edge and len(edge.split(";")) >= 7:
                     e_data = edge.split(";")
                     v2 = vertice(int(e_data[0]), float(e_data[1]), float(e_data[2]), e_data[3], e_data[4], int(e_data[5]))
                     weight = float(e_data[6])
-                    graph[v].append([v2, weight,None if e_data[7] == "None" else str(e_data[7])])
-    return graph
+                    adjacency[v].append([v2, weight,None if e_data[7] == "None" else str(e_data[7])])
+    
+    return graph(adjacency_list=adjacency)
 
 def load_predecessors_from_file(filepath:str) -> list[list[vertice]]:
     """

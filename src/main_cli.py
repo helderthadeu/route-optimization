@@ -33,8 +33,8 @@ if __name__=="__main__":
         destino = 312
         
         # Print origin and destination station info
-        print(vertices[origem].to_string())
-        print(vertices[destino].to_string())
+        print(vertices[origem-1].to_string())
+        print(vertices[destino-1].to_string())
         
         # Print shortest path length (in minutes)
         now = datetime.now().time()
@@ -49,7 +49,7 @@ if __name__=="__main__":
             previous_vertex = short_path[index-1]
 
             edge_found = None
-            for edge in graph.get(previous_vertex, []):
+            for edge in graph.adjacency_list.get(previous_vertex, []):
                 if edge[0] == current_vertex:
                     edge_found = edge
                     break

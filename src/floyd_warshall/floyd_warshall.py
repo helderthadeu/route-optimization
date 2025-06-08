@@ -1,5 +1,7 @@
 from os import path
-from vertice_definition import vertice
+from models.vertice_definition import vertice
+from models.edge_definition import edge
+from models.graph_definition import graph
 from geopy.distance import geodesic
 import math
 from file_operate import *
@@ -47,7 +49,7 @@ def define_vertice(data: list, id_start: int) -> list[vertice]:
 
     return new_vertices
 
-def define_routes(vertices:list[vertice]) -> list[tuple[vertice,vertice]]:
+def define_routes(vertices:list[vertice]) -> list[edge]:
     """
     Define the routes (edges) between vertices based on subway line and complex_id.
     Args:
@@ -66,8 +68,8 @@ def define_routes(vertices:list[vertice]) -> list[tuple[vertice,vertice]]:
         for index, vertice in enumerate(vertices):
             if vertice.line == line:
                 if previous_vertice is not None:
-                    routes.append((previous_vertice, vertice))
-                    routes.append((vertice, previous_vertice))
+                    routes.append(edge(origin=previous_vertice, destiny=vertice))
+                    routes.append(edge(origin=vertice, destiny=previous_vertice))
 
                 previous_vertice = vertice
                             
@@ -75,12 +77,12 @@ def define_routes(vertices:list[vertice]) -> list[tuple[vertice,vertice]]:
     for index, vertice in enumerate(vertices[:-1]):
         for vertice2 in vertices[index+1:]:
             if vertice.complex_id == vertice2.complex_id:
-                routes.append((vertice, vertice2))
-                routes.append((vertice2, vertice))
+                routes.append(edge(origin=vertice, destiny=vertice2))
+                routes.append(edge(origin=vertice2, destiny=vertice))
 
     return routes
 
-def get_graph(routes:list[tuple[vertice, vertice]], vertices:list[vertice]) -> dict[vertice:list[tuple[vertice, float]]]:
+def get_graph(routes:list[edge], vertices:list[vertice]) -> graph:
     """
     Build the graph as a dictionary mapping each vertice to its neighbors and the distance to them.
     Args:
@@ -90,27 +92,26 @@ def get_graph(routes:list[tuple[vertice, vertice]], vertices:list[vertice]) -> d
         dict[vertice, list[list[vertice, float]]]: Graph dictionary.
     """
     print("Getting graph...")
-    graph = {}
+    adjacency_list = {}
     for vertice in vertices:
-        graph[vertice] = []   
+        adjacency_list[vertice] = []   
     for route in routes:
-        dis1_0 = geodesic((route[0].lat, route[0].lon), (route[1].lat, route[1].lon)).kilometers
-        dis0_1 = geodesic((route[1].lat, route[1].lon), (route[0].lat, route[0].lon)).kilometers
-        if not [route[1], dis1_0] in graph[route[0]]:
-            graph[route[0]].append((route[1], dis1_0, None))
-        if not [route[0], dis0_1] in graph[route[1]]:
-            graph[route[1]].append((route[0], dis0_1, None))
+        dist_destiny_origin = geodesic((route.origin.lat, route.origin.lon), (route.destiny.lat, route.destiny.lon)).kilometers
+        dist_origin_destiny = geodesic((route.destiny.lat, route.destiny.lon), (route.origin.lat, route.origin.lon)).kilometers
+        if not [route.destiny, dist_destiny_origin] in adjacency_list[route.origin]:
+            adjacency_list[route.origin].append((route.destiny, dist_destiny_origin, None))
+        if not [route.origin, dist_origin_destiny] in adjacency_list[route.destiny]:
+            adjacency_list[route.destiny].append((route.origin, dist_origin_destiny, None))
     for v in vertices: 
         for w in vertices:
-            disv_w = geodesic((v.lat, v.lon), (w.lat, w.lon)).meters
-            if v != w and v.complex_id != w.complex_id and v.line != w.line and disv_w <= 100:
-                if [w, disv_w, f"{v.id}|{w.id}"] not in graph[v]:
-                    graph[v].append((w, disv_w, f"{v.id}|{w.id}"))
-                if [v, disv_w, f"{w.id}|{v.id}"] not in graph[w]:
-                    graph[w].append((v, disv_w, f"{w.id}|{v.id}"))
-
+            dist_v_w = geodesic((v.lat, v.lon), (w.lat, w.lon)).meters
+            if v != w and v.complex_id != w.complex_id and v.line != w.line and dist_v_w <= 100:
+                if [w, dist_v_w, f"{v.id}|{w.id}"] not in adjacency_list[v]:
+                    adjacency_list[v].append((w, dist_v_w, f"{v.id}|{w.id}"))
+                if [v, dist_v_w, f"{w.id}|{v.id}"] not in adjacency_list[w]:
+                    adjacency_list[w].append((v, dist_v_w, f"{w.id}|{v.id}"))
     
-    return graph
+    return graph(adjacency_list=adjacency_list)
 
 def calc_distance(lat_initial:float, long_initial:float, lat_final:float, long_final:float) -> float:
     """
@@ -136,7 +137,7 @@ def calc_distance(lat_initial:float, long_initial:float, lat_final:float, long_f
     
     return 6371 * c  # Earth radius in meters
 
-def floyd_warshall_by_distance(graph:dict[vertice:list[vertice]], vertices:list[vertice]) -> list[list[float]]:
+def floyd_warshall_by_distance(graph:graph, vertices:list[vertice]) -> list[list[float]]:
     """
     Compute shortest paths and predecessors for all pairs of vertices using the Floyd-Warshall algorithm.
     Args:
@@ -150,6 +151,7 @@ def floyd_warshall_by_distance(graph:dict[vertice:list[vertice]], vertices:list[
     print("Getting Floyd Washal...")
 
     n = len(vertices)
+    adjacency = graph.adjacency_list
     subgraphs = [[float('inf')] * n for _ in range(n)]
     predecessor = [[None] * n for _ in range(n)]
     for i in range(n):
@@ -161,9 +163,9 @@ def floyd_warshall_by_distance(graph:dict[vertice:list[vertice]], vertices:list[
             dis = geodesic((i.lat, i.lon), (j.lat, j.lon)).kilometers
             
             ids = []
-            for elements_i in  graph[i]:
+            for elements_i in adjacency[i]:
                 ids.append(elements_i[0].id)
-            if i in graph.keys() and j.id in ids:
+            if i in adjacency.keys() and j.id in ids:
                 if i.complex_id == j.complex_id:
                     dis = 0
                 subgraphs[index_i][index_j] = dis
