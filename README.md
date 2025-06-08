@@ -25,6 +25,7 @@ src/
   subway_files/             # Input data (CSV files for stations and lines)
   file_operate.py           # Functions for loading CSV and JSON data
   main_cli.py               # Command-line interface for shortest path queries
+  next_train.py             # Functions to get the time of the next train from the station and line
 app.py                      # App is the UI
 floyd_utils                 # Support functions to UI
 ```
@@ -52,7 +53,12 @@ floyd_utils                 # Support functions to UI
    - On first run, the program will generate the graph and matrices from the CSV data.
    - On subsequent runs, it will load the precomputed files for fast queries.
 
-3. **Modify Query:**
+## Debug
+For debug, run the CLI: 
+```
+python src/main_cli.py
+```
+**Modify Query:**
    - Edit the `origem` and `destino` variables in `main_cli.py` to set the origin and destination station indices.
 
 ## File Descriptions
@@ -60,8 +66,12 @@ floyd_utils                 # Support functions to UI
 - **file_operate.py:** Functions to load CSV and JSON data with automatic encoding detection.
 - **floyd_warshall.py:** Core logic for graph construction and the Floyd-Warshall algorithm.
 - **manage_files.py:** Functions to save/load the graph, vertices, and matrices to/from files.
+- **next_train.py:** Functions to get the time of the next train.
 - **vertice_definition.py:** The `vertice` class, representing a subway station.
+- **edge_definition.py:** The `edge` class, representing a line between two subway stations.
+- **graph_definition.py:** The `graph` class, representing a subway of New York.
 - **main_cli.py:** Command-line interface for querying shortest paths.
+- **app.py:** Main file, execute the application
 
 ## Customization
 
