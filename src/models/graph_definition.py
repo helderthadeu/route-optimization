@@ -1,4 +1,4 @@
-from models.vertice_definition import vertice
+from src.models.vertice_definition import vertice
 """
 vertice_definition.py
 ---------------------

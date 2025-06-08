@@ -1,4 +1,4 @@
-from floyd_warshall.floyd_warshall import vertice, get_short_path
+from src.floyd_warshall.floyd_warshall import vertice, get_short_path
 
 def load_vertices(filepath):
     vertices = []

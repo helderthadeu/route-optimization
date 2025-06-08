@@ -1,10 +1,10 @@
 from os import path
-from models.vertice_definition import vertice
-from models.edge_definition import edge
-from models.graph_definition import graph
+from src.models.vertice_definition import vertice
+from src.models.edge_definition import edge
+from src.models.graph_definition import graph
 from geopy.distance import geodesic
 import math
-from file_operate import *
+from src.file_operate import *
 from .manage_files import *
 from typing import List
 

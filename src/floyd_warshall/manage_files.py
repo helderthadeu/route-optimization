@@ -1,5 +1,5 @@
-from models.vertice_definition import vertice
-from models.graph_definition import graph
+from src.models.vertice_definition import vertice
+from src.models.graph_definition import graph
 
 
 def save_graph_to_file(graph: graph, filepath:str):
