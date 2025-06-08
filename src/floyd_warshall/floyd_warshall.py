@@ -86,7 +86,7 @@ def get_graph(routes:list[edge], vertices:list[vertice]) -> graph:
         routes (list[list[vertice, vertice]]): List of routes as vertice pairs.
         vertices (list[vertice]): List of vertice objects.
     Returns:
-        dict[vertice, list[list[vertice, float]]]: Graph dictionary.
+        graph: Graph contains dictionary with adjacency list
     """
     print("Getting graph...")
     adjacency_list = {}
@@ -130,15 +130,14 @@ def floyd_warshall_by_distance(graph:graph, vertices:list[vertice]) -> list[list
     for i in range(n):
         subgraphs[i][i] = 0
         predecessor[i][i] = vertices[i] 
-        
+    
     for index_i, i in enumerate(vertices):
+        ids = []
+        for elements_i in adjacency[i]:
+            ids.append(elements_i[0].id)
         for index_j, j in enumerate(vertices):
-            dis = geodesic((i.lat, i.lon), (j.lat, j.lon)).kilometers
-            
-            ids = []
-            for elements_i in adjacency[i]:
-                ids.append(elements_i[0].id)
             if i in adjacency.keys() and j.id in ids:
+                dis = geodesic((i.lat, i.lon), (j.lat, j.lon)).kilometers
                 if i.complex_id == j.complex_id:
                     dis = 0
                 subgraphs[index_i][index_j] = dis
@@ -149,9 +148,10 @@ def floyd_warshall_by_distance(graph:graph, vertices:list[vertice]) -> list[list
     size = len(subgraphs)
     for index_k in range(size):
         for index_i in range(size):
-            for index_j in range(size):                
-                if subgraphs[index_i][index_j] > subgraphs[index_i][index_k] + subgraphs[index_k][index_j]:
-                    subgraphs[index_i][index_j] = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]
+            for index_j in range(size):     
+                dist = subgraphs[index_i][index_k] + subgraphs[index_k][index_j]           
+                if subgraphs[index_i][index_j] > dist:
+                    subgraphs[index_i][index_j] = dist
                     subgraphs[index_j][index_i] = subgraphs[index_i][index_j]
                     predecessor[index_i][index_j] = predecessor[index_k][index_j] 
                     predecessor[index_j][index_i] = predecessor[index_k][index_i]
