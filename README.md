@@ -37,14 +37,14 @@ floyd_utils                #Support functions to UI
 
 1. **Install Requirements:**
    - Python 3.10+
-   - Install dependencies (e.g., `geopy`, `chardet`, `pandas`, `datetime`):
+   - Install dependencies (e.g., `geopy`, `chardet`, `pandas`, `datetime`, `plotly`, `dash`):
      ```
-     pip install geopy chardet pandas datetime
+     pip install geopy chardet pandas datetime plotly dash
      ```
 
 2. **Run the CLI:**
    ```
-   python src/main_cli.py
+   python app.py
    ```
    - On first run, the program will generate the graph and matrices from the CSV data.
    - On subsequent runs, it will load the precomputed files for fast queries.
