@@ -38,12 +38,15 @@ if __name__=="__main__":
         
         # Print shortest path length (in minutes)
         now = datetime.now().time()
+        crime_rate = 0.0
         print(f"Short lenght from {origem - 1} to {destino - 1}: {lengh_matrix[origem - 1][destino - 1]/AVERAGE_SPEED*60:.2f} minutes")
         short_path = get_short_path(vertices, predecessors, vertices[origem - 1],vertices[destino - 1])
         for index, current_vertex in enumerate(short_path):
+            crime_rate += float(current_vertex.crime_rate)
             if index == 0:
                 now = next_train_time(current_vertex.line, current_vertex.station_name, now, 0.0)
                 print(f"{index+1} - {current_vertex.to_string()} - Next Train: {now.strftime("%H:%M:%S")}")
+                print(f"Acumulated crime_rate: {crime_rate/(index+1)}")
                 continue
             
             previous_vertex = short_path[index-1]
@@ -59,10 +62,12 @@ if __name__=="__main__":
                 # If the third element has not None, it is a transfer (walked)
                 if edge_found[2] != None:
                     print(f"{index+1} - {current_vertex.to_string()} - Walked")
+                    print(f"Acumulated crime_rate: {crime_rate/(index+1)}")
                 else:
                     travel_time = (lengh_matrix[index-1][index]/AVERAGE_SPEED)
                     now = next_train_time(current_vertex.line, current_vertex.station_name, now, travel_time)
                     print(f"{index+1} - {current_vertex.to_string()} - Next Train: {now.strftime("%H:%M:%S")}")
+                    print(f"Acumulated crime_rate: {crime_rate/(index+1)}")
             else:
                 print(f"{index+1} - {current_vertex.to_string()}")
 

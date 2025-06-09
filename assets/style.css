@@ -132,7 +132,7 @@ Styles for text blocks that display travel route and time information.
 */
 
 #info-rota,
-#saida-proximo-trem,#chegada {
+#saida-proximo-trem,#chegada,#score-crime {
   text-align: left;
   margin-top: 10px;
   font-size: 18px;

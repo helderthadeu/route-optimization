@@ -17,7 +17,7 @@ class vertice:
         line (str): Subway line name or code.
         complex_id (int): Identifier for station complexes (for transfers).
     """
-    def __init__(self, id:int, lat:float, lon:float, station_name:str, line:str, complex_id:int, total_crimes:int=0, total_riders:int=0):
+    def __init__(self, id:int, lat:float, lon:float, station_name:str, line:str, complex_id:int, crime_rate:float, total_crimes:int=0, total_riders:int=0):
         # Initialize vertice attributes
         self.id = id
         self.lat = lat
@@ -25,6 +25,7 @@ class vertice:
         self.station_name = station_name
         self.line = line
         self.complex_id = complex_id
+        self.crime_rate = crime_rate
         self.total_crimes = 0
         self.total_riders = 0
     
@@ -60,4 +61,4 @@ class vertice:
         Returns:
             str: String representation of the vertice.
         """
-        return f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} - ID: {self.id} - Name: {self.station_name} - Complex ID: {self.complex_id} - Total Crimes: {self.total_crimes} - Total Riders: {self.total_riders}"
+        return f"Coordinates: {self.lat}, {self.lon} - Line: {self.line} - ID: {self.id} - Name: {self.station_name} - Complex ID: {self.complex_id} - Crime Rate: {self.crime_rate}"

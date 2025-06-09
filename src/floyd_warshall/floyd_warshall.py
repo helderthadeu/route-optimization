@@ -31,6 +31,8 @@ def define_vertice(data: list, id_start: int) -> list[vertice]:
         line = str(element[4])
     
         complex_id = int(element[6])
+        crime_rate_str = element[7].strip()
+        crime_rate = float(crime_rate_str) if crime_rate_str != "" else 0.000072
 
         exists = False
         for v in new_vertices:
@@ -41,7 +43,7 @@ def define_vertice(data: list, id_start: int) -> list[vertice]:
         if exists:
             continue
         else:
-            new_vertices.append(vertice(id=current_id, lat=lat, lon=lon, station_name=station_name,line=line, complex_id=complex_id))
+            new_vertices.append(vertice(id=current_id, lat=lat, lon=lon, station_name=station_name,line=line, complex_id=complex_id, crime_rate=crime_rate))
             current_id += 1
 
     return new_vertices

@@ -14,9 +14,9 @@ def save_graph_to_file(graph: graph, filepath:str):
     with open(filepath, "w") as file:
         for key in adjacency.keys():
             temp = adjacency[key]
-            file.write(f"{key.id};{key.lat};{key.lon};{key.station_name};{key.line};{key.complex_id}@")
+            file.write(f"{key.id};{key.lat};{key.lon};{key.station_name};{key.line};{key.complex_id};{key.crime_rate}@")
             for v in temp:
-                file.write(f"{v[0].id};{v[0].lat};{v[0].lon};{v[0].station_name};{v[0].line};{v[0].complex_id};{v[1]};{v[2]}@")
+                file.write(f"{v[0].id};{v[0].lat};{v[0].lon};{v[0].station_name};{v[0].line};{v[0].complex_id};{key.crime_rate};{v[1]};{v[2]}@")
             file.write("\n")      
 
 def save_fload_warshall_to_file(floyd_warshall_result:list[list[float]], filepath:str):
@@ -47,7 +47,7 @@ def save_predecessors_to_file(predecessors:list[list[vertice]], filepath:str):
                 if j is None:
                     file.write(f"{j}@")
                 else:
-                    file.write(f"{j.id};{j.lat};{j.lon};{j.station_name};{j.line};{j.complex_id}@")
+                    file.write(f"{j.id};{j.lat};{j.lon};{j.station_name};{j.line};{j.complex_id};{j.crime_rate}@")
             file.write("\n")
 
 def save_vertices_to_file(vertices:list[vertice], filepath:str):
@@ -60,7 +60,7 @@ def save_vertices_to_file(vertices:list[vertice], filepath:str):
     """
     with open(filepath, "w") as file:
         for i in vertices:
-            file.write(f"{i.id};{i.lat};{i.lon};{i.station_name};{i.line};{i.complex_id}@")
+            file.write(f"{i.id};{i.lat};{i.lon};{i.station_name};{i.line};{i.complex_id};{i.crime_rate}@")
 
 def load_graph_from_file(filepath:str) -> graph:
     """
@@ -78,13 +78,13 @@ def load_graph_from_file(filepath:str) -> graph:
                 continue
             # Carrega o vértice principal
             v_data = parts[0].split(";")
-            v = vertice(int(v_data[0]), float(v_data[1]), float(v_data[2]), v_data[3], v_data[4], int(v_data[5]))
+            v = vertice(int(v_data[0]), float(v_data[1]), float(v_data[2]), v_data[3], v_data[4], int(v_data[5]),float(v_data[6]))
             adjacency[v] = []
             # Carrega as arestas
             for edge in parts[1:]:
                 if edge and len(edge.split(";")) >= 7:
                     e_data = edge.split(";")
-                    v2 = vertice(int(e_data[0]), float(e_data[1]), float(e_data[2]), e_data[3], e_data[4], int(e_data[5]))
+                    v2 = vertice(int(e_data[0]), float(e_data[1]), float(e_data[2]), e_data[3], e_data[4], int(e_data[5]),float(v_data[6]))
                     weight = float(e_data[6])
                     adjacency[v].append([v2, weight,None if e_data[7] == "None" else str(e_data[7])])
     
@@ -111,7 +111,7 @@ def load_predecessors_from_file(filepath:str) -> list[list[vertice]]:
                         
                         temp = v.split(";")
                         # print(temp[0])
-                        values = vertice(temp[0], temp[1], temp[2],temp[3],line=temp[4], complex_id=temp[5])
+                        values = vertice(temp[0], temp[1], temp[2],temp[3],line=temp[4], complex_id=temp[5], crime_rate=temp[6])
                         predecessors[index].append(values)
     return predecessors
 
@@ -131,7 +131,7 @@ def load_vertices_from_file(filepath:str) -> list[vertice]:
                 if v.split(";")[0].isnumeric():
                     temp = v.split(";")
                     # print(temp[0])
-                    values = vertice(temp[0], temp[1], temp[2],temp[3],line=temp[4], complex_id= temp[5])
+                    values = vertice(temp[0], temp[1], temp[2],temp[3],line=temp[4], complex_id= temp[5], crime_rate= temp[6])
                     vertices.append(values)
     return vertices
 

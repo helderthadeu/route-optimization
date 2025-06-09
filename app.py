@@ -30,10 +30,22 @@ def somar_horas_decimais(horas_decimais: float, hora_saida: datetime.time) -> st
     nova_hora = dt_hora_saida + timedelta(minutes=minutos)
     return nova_hora.strftime("%H:%M")
 
+def calculate_route_crime_rate_score(crime_rate: float) -> str:
+    if crime_rate < 0.000045:
+        return "A"
+    elif crime_rate <= 0.000072:
+        return "B"
+    elif crime_rate <= 0.000148:
+        return "C"
+    elif crime_rate <= 0.000300:
+        return "D"
+    else:
+        return "F"
+
 # Load subway graph data from files
-vertices = load_vertices("files/vertices.txt")
-predecessors = load_predecessors("files/predecessors.txt", vertices)
-length_matrix = load_length_matrix_from_file("files/floyd_washal_lenght.txt")
+vertices = load_vertices("src/files/vertices.txt")
+predecessors = load_predecessors("src/files/predecessors.txt", vertices)
+length_matrix = load_length_matrix_from_file("src/files/floyd_washal_lenght.txt")
 
 # Initialize Dash application
 app = dash.Dash(__name__)
@@ -74,7 +86,8 @@ app.layout = html.Div([
 
             html.Div(id="info-rota"),
             html.Div(id="saida-proximo-trem"),
-            html.Div(id= "chegada")
+            html.Div(id= "chegada"),
+            html.Div(id="score-crime"),
         ], id="left-section"),
 
         # Right panel with route map
@@ -89,7 +102,8 @@ app.layout = html.Div([
     [Output("mapa-rota", "figure"),
      Output("info-rota", "children"),
      Output("saida-proximo-trem", "children"),
-     Output("chegada", "children")],
+     Output("chegada", "children"),
+     Output("score-crime", "children")],
     [Input("botao-calcular", "n_clicks")],
     [State("origin", "value"),
      State("destination", "value")]
@@ -112,14 +126,14 @@ def update_mapa(n_clicks, orig_id, dest_id):
     AVERAGE_SPEED = 30.0  # Average speed in km/h
 
     if not n_clicks or orig_id is None or dest_id is None or orig_id == dest_id:
-        return go.Figure(), "", ""
+        return go.Figure(), "", "", "", ""
 
     orig = next(v for v in vertices if v.id == orig_id)
     dest = next(v for v in vertices if v.id == dest_id)
     path = get_short_path(vertices, predecessors, orig, dest)
 
     if not path:
-        return go.Figure(), "Nenhuma rota encontrada.", ""
+        return go.Figure(), "Nenhuma rota encontrada.", "", "", ""
 
     # Calculate total travel distance
     total_distance = 0.0
@@ -128,8 +142,9 @@ def update_mapa(n_clicks, orig_id, dest_id):
         d = path[i + 1].id - 1
         total_distance += length_matrix[o][d]
 
-    print(total_distance)
-
+    total_crime_percentage = sum(float(v.crime_rate) for v in path)
+    average_crime_percentagem_in_travel = round(total_crime_percentage/len(path), 6)
+    travel_crimes_score = calculate_route_crime_rate_score(crime_rate=average_crime_percentagem_in_travel)
     now = datetime.now().time()
     hora_saida = next_train_time(orig.line, orig.station_name, now, 0.0)
 
@@ -168,15 +183,16 @@ def update_mapa(n_clicks, orig_id, dest_id):
     info_text = f"Rota de {orig.station_name} até {dest.station_name} com {len(path)-1} conexões. Distância total de {round(total_distance,2)} km."
     proximo_trem_text = f"Próximo trem saí ás {hora_saida.strftime("%H:%M")}."
     chegada = f"Chegada prevista à {dest.station_name} às {hora_formatada} (duração: {(minuto_formatado)} minutos)."
+    crimes_score = f"Ranking de segurança da rota: {travel_crimes_score}"
 
-    return fig, info_text, proximo_trem_text, chegada
+    return fig, info_text, proximo_trem_text, chegada, crimes_score
 
 if __name__ == "__main__":
     """
     Application entry point. If required Floyd-Warshall data files do not exist, they are generated.
     Then, the Dash server is started in debug mode.
     """
-    if not (os.path.exists("files/predecessors.txt") and os.path.exists("files/floyd_washal_lenght.txt")):
+    if not (os.path.exists("src/files/predecessors.txt") and os.path.exists("src/files/floyd_washal_lenght.txt")):
         generate_floyd_warshall()
 
     app.run(debug=True)
