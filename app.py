@@ -9,20 +9,25 @@ from src.file_operate import *
 from src.floyd_warshall.floyd_warshall import *
 from src.next_train import *
 from src.floyd_utils import *
+from src.next_train import *
 
-def somar_horas_decimais(horas_decimais: float) -> str:
+def somar_horas_decimais(horas_decimais: float, hora_saida: datetime.time) -> str:
     """
-    Adds the current time to a given decimal number of hours and returns the result in HH:MM format.
+    Adds a decimal number of hours to a given time (datetime.time) and returns the result in HH:MM format.
 
     Args:
         horas_decimais (float): Number of decimal hours to add (e.g., 1.5 means 1 hour and 30 minutes)
+        hora_saida (datetime.time): Base time to add hours to
 
     Returns:
         str: Resulting time in HH:MM format
     """
-    agora = datetime.now()
     minutos = int(horas_decimais * 60)
-    nova_hora = agora + timedelta(minutes=minutos)
+    # Converte hora_saida para datetime.datetime do dia atual
+    hoje = datetime.today()
+    dt_hora_saida = datetime.combine(hoje.date(), hora_saida)
+
+    nova_hora = dt_hora_saida + timedelta(minutes=minutos)
     return nova_hora.strftime("%H:%M")
 
 # Load subway graph data from files
@@ -69,6 +74,7 @@ app.layout = html.Div([
 
             html.Div(id="info-rota"),
             html.Div(id="saida-proximo-trem"),
+            html.Div(id= "chegada")
         ], id="left-section"),
 
         # Right panel with route map
@@ -82,7 +88,8 @@ app.layout = html.Div([
 @app.callback(
     [Output("mapa-rota", "figure"),
      Output("info-rota", "children"),
-     Output("saida-proximo-trem", "children")],
+     Output("saida-proximo-trem", "children"),
+     Output("chegada", "children")],
     [Input("botao-calcular", "n_clicks")],
     [State("origin", "value"),
      State("destination", "value")]
@@ -123,16 +130,19 @@ def update_mapa(n_clicks, orig_id, dest_id):
 
     print(total_distance)
 
+    now = datetime.now().time()
+    hora_saida = next_train_time(orig.line, orig.station_name, now, 0.0)
+
     # Calculate travel time in minutes and hours
     total_minutes = total_distance / AVERAGE_SPEED * 60.0
     total_hours = total_minutes / 60.0
 
-    hora_formatada = somar_horas_decimais(total_hours)
+    hora_formatada = somar_horas_decimais(total_hours, hora_saida)
 
     minutos = int(total_minutes)
     segundos = int((total_minutes - minutos) * 60)
-    minuto_formatado = f"{minutos:02d}:{segundos:02d}"
-
+    minuto_formatado = f"{minutos:02d}"
+    
     # Map data
     lats = [v.lat for v in path]
     lons = [v.lon for v in path]
@@ -156,9 +166,10 @@ def update_mapa(n_clicks, orig_id, dest_id):
 
     # Informational text
     info_text = f"Rota de {orig.station_name} até {dest.station_name} com {len(path)-1} conexões. Distância total de {round(total_distance,2)} km."
-    proximo_trem_text = f"Chegada prevista à {dest.station_name} às {hora_formatada} (duração: {(minuto_formatado)} minutos)."
+    proximo_trem_text = f"Próximo trem saí ás {hora_saida.strftime("%H:%M")}."
+    chegada = f"Chegada prevista à {dest.station_name} às {hora_formatada} (duração: {(minuto_formatado)} minutos)."
 
-    return fig, info_text, proximo_trem_text
+    return fig, info_text, proximo_trem_text, chegada
 
 if __name__ == "__main__":
     """
